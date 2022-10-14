@@ -2,7 +2,7 @@
 
     namespace Models;
 
-    class Dog {
+    class Pet {
         private $race;
         private $vaccination;
         private $description;
