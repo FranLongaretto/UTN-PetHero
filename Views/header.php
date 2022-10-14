@@ -9,6 +9,6 @@
      <link rel="stylesheet" href="<?php echo CSS_PATH ?>bootstrap.min.css">
      <link rel="stylesheet" href="<?php echo CSS_PATH ?>estilos.css">
 
-     <title><?php echo APELLIDO ?> - Comision 5 - Parcial</title>
+     <title>- Pet Hero-</title>
 </head>
 <body>

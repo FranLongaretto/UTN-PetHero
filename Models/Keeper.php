@@ -2,19 +2,41 @@
     namespace Models;
 
     class Keeper{
-        private $userName;
+        private $id;
+        private $email;
         private $password;
+        private $typeOfDog; ///small, medium or big
+        private $salary; 
 
-        public funtion getUserName(){
-            return $this->userName;
+          /**
+         * Get the value of id
+         */ 
+        public function getId()
+        {
+                return $this->id;
         }
 
-        public function setRace($userName){
-            $this->userName = $userName;
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
+        public function setId($id)
+        {
+                $this->id = $id;
+
+                return $this;
+        }
+        public function getEmail(){
+            return $this->email;
+        }
+
+        public function setEmail($email){
+            $this->email = $email;
             return $this;
         }
 
-        public funtion getPassword(){
+        public function getPassword(){
             return $this->password;
         }
 
@@ -22,5 +44,29 @@
             $this->password = $password;
             return $this;
         }
+
+   
+        public function getTypeOfDog()
+        {
+                return $this->typeOfDog;
+        }
+
+        
+        public function setTypeOfDog($typeOfDog)
+        {
+                $this->typeOfDog = $typeOfDog;
+
+                return $this;
+        }
+
+     
+        public function setSalary($salary)
+        {
+                $this->salary = $salary;
+
+                return $this;
+        }
+
+      
     }
 ?>

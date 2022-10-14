@@ -2,19 +2,41 @@
     namespace Models;
 
     class Owner{
-        private $userName;
+        private $id;
+        private $email;
         private $password;
 
-        public funtion getUserName(){
-            return $this->userName;
+          /**
+         * Get the value of id
+         */ 
+        public function getId()
+        {
+                return $this->id;
         }
 
-        public function setRace($userName){
-            $this->userName = $userName;
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
+        public function setId($id)
+        {
+                $this->id = $id;
+
+                return $this;
+        }
+
+        public function getEmail(){
+            return $this->email;
+        }
+
+        public function setEmail($email){
+            $this->email = $email;
             return $this;
         }
 
-        public funtion getPassword(){
+
+        public function getPassword(){
             return $this->password;
         }
 

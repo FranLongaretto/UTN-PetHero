@@ -8,6 +8,10 @@
         {
             require_once(VIEWS_PATH."index.php");
         }
+        public function Home($message = "")
+        {
+            require_once(VIEWS_PATH."home.php");
+        }   
 
     }
 ?>

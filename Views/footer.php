@@ -1,2 +1,9 @@
-</body>
-</html>
+<footer id="footer" class="hoc clear"> 
+    <div class="center">
+      <h6 class="heading" align="center">Pet Hero</h6> 
+      <div id="copyright" class="hoc clear"> 
+        <p align="center">Copyright &copy; <?php echo date('Y'); ?> - All Rights Reserved - UTN Mar del Plata</p>
+        </div>
+    </div>
+  </footer>
+</div>
