@@ -68,5 +68,15 @@
         "lastName": "3655656",
         "dni": "223323",
         "phoneNumber": "Owner"
+    },
+    {
+        "id": 8,
+        "email": "franlongaretto@gmail.com",
+        "password": "asd1234",
+        "role": "Owner",
+        "firstName": "Franco",
+        "lastName": "Longaretto",
+        "dni": "40017532",
+        "phoneNumber": "02235804238"
     }
 ]

@@ -23,7 +23,7 @@
     <form action="<?php echo FRONT_ROOT?>User/Add" method="POST">
       <h2>REGISTRATION</h2>
       <input type="email" id="email" class="fadeIn second" name="email" placeholder="email" required>
-      <input type="password" id="password" class="fadeIn third" name="login" placeholder="password" required>
+      <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" required>
       <input type="text" id="firstName" class="fadeIn third" name="firstName" placeholder="first name" required>
       <input type="text" id="lastName" class="fadeIn third" name="lastName" placeholder="last name" required>
       <input type="text" id="dni" class="fadeIn third" name="dni" placeholder="dni" required>
