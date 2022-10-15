@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "race": "dogo",
+        "vaccination": "antirabica",
+        "description": "perro grande blanco",
+        "image": "falta imagen"
+    }
+]
