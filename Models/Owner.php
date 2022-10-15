@@ -1,10 +1,11 @@
 <?php
     namespace Models;
 
-    class Owner{
+    class Owner extends User{
         private $id;
         private $email;
         private $password;
+ 
 
           /**
          * Get the value of id

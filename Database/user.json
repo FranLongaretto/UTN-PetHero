@@ -3,70 +3,50 @@
         "id": 1,
         "email": "germa@gmail.com",
         "password": "123456",
-        "role": "german",
-        "firstName": "oyarz",
-        "lastName": "3655656",
-        "dni": "112232",
-        "phoneNumber": "Owner"
+        "role": "Owner",
+        "firstName": "german",
+        "lastName": "oyarzo",
+        "dni": "36363950",
+        "phoneNumber": "21223232"
     },
     {
         "id": 2,
-        "email": "santiago@gmail.com",
+        "email": "fran@gmail.com",
         "password": "123456",
-        "role": "santiago",
-        "firstName": "iba",
-        "lastName": "36355",
-        "dni": "22223223",
-        "phoneNumber": "Keeper"
+        "role": "Keeper",
+        "firstName": "fran",
+        "lastName": "logaretto",
+        "dni": "3555445",
+        "phoneNumber": "12323"
     },
     {
         "id": 3,
         "email": "santiago@gmail.com",
         "password": "123456",
-        "role": "santiago",
-        "firstName": "iba",
-        "lastName": "36355",
-        "dni": "22223223",
-        "phoneNumber": "Keeper"
+        "role": "Owner",
+        "firstName": "santiago",
+        "lastName": "lopez",
+        "dni": "35565656",
+        "phoneNumber": "22323"
     },
     {
         "id": 4,
-        "email": "fran@gmail.com",
+        "email": "pepe@gmail.com",
         "password": "123456",
-        "role": "fran",
+        "role": "Keeper",
         "firstName": "pepe",
-        "lastName": "3655656",
-        "dni": "223323",
-        "phoneNumber": "Owner"
+        "lastName": "argento",
+        "dni": "10566556",
+        "phoneNumber": "1132323"
     },
     {
         "id": 5,
-        "email": "fran@gmail.com",
+        "email": "pepe@gmail.com",
         "password": "123456",
-        "role": "fran",
+        "role": "Keeper",
         "firstName": "pepe",
-        "lastName": "3655656",
-        "dni": "223323",
-        "phoneNumber": "Owner"
-    },
-    {
-        "id": 6,
-        "email": "fran@gmail.com",
-        "password": "123456",
-        "role": "fran",
-        "firstName": "pepe",
-        "lastName": "3655656",
-        "dni": "223323",
-        "phoneNumber": "Owner"
-    },
-    {
-        "id": 7,
-        "email": "fran@gmail.com",
-        "password": "123456",
-        "role": "fran",
-        "firstName": "pepe",
-        "lastName": "3655656",
-        "dni": "223323",
-        "phoneNumber": "Owner"
+        "lastName": "argento",
+        "dni": "10566556",
+        "phoneNumber": "1132323"
     }
 ]

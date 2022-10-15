@@ -1,7 +1,7 @@
 <?php
     namespace Models;
 
-    class Keeper{
+    class Keeper extends User{
         private $id;
         private $email;
         private $password;

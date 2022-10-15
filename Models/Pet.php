@@ -8,7 +8,7 @@
         private $description;
         // imagen
 
-        public funtion getRace(){
+        public function getRace(){
             return $this->race;
         }
 

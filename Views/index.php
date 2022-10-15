@@ -1,7 +1,4 @@
-<?php
-  //include_once('header.php');
- // include_once('nav-bar.php'); 
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login and Register</title>
         <link rel="stylesheet" href="<?php echo CSS_PATH ?>style.css">
+        
     </head>
 
     <body>
@@ -20,13 +18,13 @@
 
     <!-- Icon -->
     <div class="fadeIn first">
-      <img src="Views/img/dogIcon.png" id="icon" alt="User Icon" />
+      <img src="<?php echo VIEWS_PATH?>img/dogIcon.png" id="icon" alt="User Icon" />
     </div>
 
     <!-- Login Form -->
     <form action="<?php echo FRONT_ROOT?>User/Login" method="POST">
       <input type="email" id="email" class="fadeIn second" name="email" placeholder="email">
-      <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
+      <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
 
@@ -46,5 +44,5 @@
 </html>
 <?php
 
-//include('footer.php');
+include('footer.php');
 ?>
