@@ -40,20 +40,6 @@
         "phoneNumber": "1132323"
     },
     {
-        "id": 5,
-        "email": "pepe@gmail.com",
-        "password": "123456",
-        "role": "Keeper",
-        "firstName": "pepe",
-
-        "lastName": "argento",
-        "dni": "10566556",
-        "phoneNumber": "1132323"
-        "lastName": "3655656",
-        "dni": "223323",
-        "phoneNumber": "Owner"
-    },
-    {
         "id": 8,
         "email": "franlongaretto@gmail.com",
         "password": "asd1234",
@@ -62,6 +48,5 @@
         "lastName": "Longaretto",
         "dni": "40017532",
         "phoneNumber": "02235804238"
-
     }
 ]

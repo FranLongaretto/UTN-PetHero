@@ -11,34 +11,34 @@
         
     </head>
 
-    <body>
-    <div class="wrapper fadeInDown">
-  <div id="formContent">
-    <!-- Tabs Titles -->
+    <body class="main">
+      <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
 
-    <!-- Icon -->
-    <div class="fadeIn first">
-      <img src="<?php echo VIEWS_PATH?>img/dogIcon.png" id="icon" alt="User Icon" />
-    </div>
+          <!-- Icon -->
+          <div class="fadeIn first">
+            <img src="<?php echo VIEWS_PATH?>img/dogIcon.png" id="icon" alt="User Icon" />
+          </div>
 
-    <!-- Login Form -->
-    <form action="<?php echo FRONT_ROOT?>User/Login" method="POST">
-      <input type="email" id="email" class="fadeIn second" name="email" placeholder="email">
-      <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
-    </form>
+          <!-- Login Form -->
+          <form action="<?php echo FRONT_ROOT?>User/Login" method="POST">
+            <input type="email" id="email" class="fadeIn second" name="email" placeholder="email">
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+            <input type="submit" class="fadeIn fourth" value="Log In">
+          </form>
 
-    <!-- Sing Up -->
-    <div id="formFooter">
-      <a class="underlineHover" href="<?php echo FRONT_ROOT?>User/SignUp">Sign Up</a>
-    </div>
-    <!-- Remind Passowrd -->
-    <div id="formFooter">
-      <a class="underlineHover" href="#">Forgot Password?</a>
-    </div>
-    
-  </div>
-</div>
+          <!-- Sing Up -->
+          <div id="formFooter">
+            <a class="underlineHover" href="<?php echo FRONT_ROOT?>User/SignUp">Sign Up</a>
+          </div>
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+            <a class="underlineHover" href="#">Forgot Password?</a>
+          </div>
+          
+        </div>
+      </div>
     </body>
 
 </html>

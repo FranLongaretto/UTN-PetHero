@@ -68,18 +68,18 @@
             $user->setDni($dni);
             $user->setPhoneNumber($phoneNumber);
 
-
             $this->userDAO->Add($user);
 
-            
             $validationUser = ($user != null) && ($user->getPassword() === $password);
             $validationRolKeeper= ($user->getRole() === "Keeper");
             $validationRolOwner= ($user->getRole() === "Owner");
 
             if($validationUser && $validationRolKeeper){
                 $this->HomeKeeper();
-            }else{
+            }else if($validationUser && $validationRolOwner){
                 $this->HomeOwner();
+            }else{
+                $this->Home();
             }
             
         }
@@ -122,20 +122,21 @@
             $validationRolOwner= ($user->getRole() === "Owner");
 
             if($validationUser && $validationRolKeeper)
-            {
+            {   //Entra a home Keeper
                 $_SESSION["loggedUser"] = $user;
                 $this->HomeKeeper();
                 
-            }elseif($validationUser && $validationRolOwner){
+            }else if($validationUser && $validationRolOwner){
+                //Entra a home Owner
                 $_SESSION["loggedUser"] = $user;
                 $this->HomeOwner();
-
                 
             }else{
+                //Devuelve al Login por error en validacion de datos.
                 echo "<script> if(confirm('Verify your information'));";
                 echo "window.location = '../index.php';
                     </script>";
-                //$this->Index("Usuario y/o Contraseña incorrecto");    
+                //$this->Index("Usuario y/o Contraseña incorrecto");
             }
         }
         public function Logout () {

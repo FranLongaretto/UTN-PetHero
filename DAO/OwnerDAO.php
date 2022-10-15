@@ -81,27 +81,27 @@
 
         private function RetrieveDataPet()
         {
-             $this->petList = array();
+            $this->petList = array();
 
-             if(file_exists($this->fileNamePet))
-             {
-                 $jsonToDecode = file_get_contents($this->fileNamePet);
+            if(file_exists($this->fileNamePet))
+            {
+                $jsonToDecode = file_get_contents($this->fileNamePet);
 
-                 $contentArray = ($jsonToDecode) ? json_decode($jsonToDecode, true) : array();
-                 
-                 foreach($contentArray as $content)
-                 
-                 {
-                     $pet = new Pet();
-                     $pet->setId($content["id"]);
-                     $pet->setRace($content["race"]);
-                     $pet->setVaccination($content["vaccination"]);
-                     $pet->setDescription($content["description"]);
-                     $pet->setImage($content["image"]);
+                $contentArray = ($jsonToDecode) ? json_decode($jsonToDecode, true) : array();
+                
+                foreach($contentArray as $content)
+                
+                {
+                    $pet = new Pet();
+                    $pet->setId($content["id"]);
+                    $pet->setRace($content["race"]);
+                    $pet->setVaccination($content["vaccination"]);
+                    $pet->setDescription($content["description"]);
+                    $pet->setImage($content["image"]);
 
-                     array_push($this->petList, $pet);
-                 }
-             }
+                    array_push($this->petList, $pet);
+                }
+            }
         }
 
         function Modify(Owner $owner)

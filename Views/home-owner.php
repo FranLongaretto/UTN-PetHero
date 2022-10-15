@@ -1,9 +1,10 @@
 <?php 
+    include_once('header.php');
     include_once('nav.php');
     require_once("validate-session.php"); 
 ?>
 <style>
-  input[type=button], input[type=submit], input[type=reset]  {
+  input[type=button], input[type=submit], input[type=reset], a  {
     background-color: #56baed;
     border: none;
     color: white;
@@ -24,30 +25,38 @@
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
   }
+  a{
+    margin: 0;
+  }
   
-  input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+  input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover, a:hover  {
     background-color: #39ace7;
   }
   
-  input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
+  input[type=button]:active, input[type=submit]:active, input[type=reset]:active, a:active  {
     -moz-transform: scale(0.95);
     -webkit-transform: scale(0.95);
     -o-transform: scale(0.95);
     -ms-transform: scale(0.95);
     transform: scale(0.95);
   }
+  
 </style>
-  <div align="center"  id="pageintro" class="hoc clear"> 
-    <article class="center">
-      <h3 class="heading underline">Pet Hero</h3>
-      <p>Bienvenido Owner!!!</p>
-      <div id="formFooter">
-      <form action="<?php echo FRONT_ROOT?>Owner/RegistrationPet" method="POST">
-        <input type="submit" class="fadeIn fourth" value="Add Pet">
-      </form>
+
+<div align="center"  id="pageintro" class="hoc clear"> 
+  <article class="center">
+    <h3 class="heading underline">Pet Hero</h3>
+
+    <p>Bienvenido Owner!!!</p>
+
+    <div id="formFooter" class="buttons-site">
+      <a class="underlineHover" href="<?php echo FRONT_ROOT?>Pet/SignUpPet">Add Pet</a>
     </div>
-    </article>
-  </div>
+
+    <div id="formFooter" class="buttons-site">
+      <a class="underlineHover" href="<?php echo FRONT_ROOT?>Pet/ShowListView">Show List of Pet's</a>
+    </div>
+  </article>
 </div>
 
 <?php 

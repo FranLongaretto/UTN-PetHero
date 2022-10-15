@@ -58,47 +58,38 @@
             require_once(VIEWS_PATH."add-pet.php");
         }
 
-        public function AddPet($race, $vaccination, $description, $image)
+        public function AddPet($race, $size, $vaccination, $description, $image)
         {
             $pet = new Pet();
             $pet->setRace($race);
+            $pet->setSize($size);
             $pet->setVaccination($vaccination);
             $pet->setDescription($description);
             $pet->setImage($image);
 
             $this->ownerDAO->AddPet($pet);
-
-
-            
         }
 
+        // public function Modify($email, $password, $id)
+        // {
+        //     require_once(VIEWS_PATH."validate-session.php");
 
-        public function Modify($email, $password, $id)
-        {
-            require_once(VIEWS_PATH."validate-session.php");
+        //     $user = new User();
+        //     $user->setId($id);
+        //     $user->setEmail($email);
+        //     $user->setPassword($password);
 
-            $user = new User();
-            $user->setId($id);
-            $user->setEmail($email);
-            $user->setPassword($password);
-
-            $this->userDAO->Modify($user);
+        //     $this->userDAO->Modify($user);
            
 
-            $this->ShowListView();
-        }
+        //     $this->ShowListView();
+        // }
 
+        // public function Delete($id)
+        // {
+        //     $this->userDAO->Delete($id);
 
-
-        public function Delete($id)
-        {
-            $this->userDAO->Delete($id);
-
-            $this->ShowListView();
-        }
-
-        
-
-      
+        //     $this->ShowListView();
+        // }
     }        
 ?>
