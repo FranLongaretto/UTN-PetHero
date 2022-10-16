@@ -5,7 +5,7 @@
         private $description;
         private $rating;
 
-        public funtion getDescription(){
+        public function getDescription(){
             return $this->description;
         }
 
@@ -14,7 +14,7 @@
             return $this;
         }
 
-        public funtion getRating(){
+        public function getRating(){
             return $this->rating;
         }
 

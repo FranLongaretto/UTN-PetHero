@@ -5,7 +5,7 @@
         private $totalAmount;
         private $date;
 
-        public funtion getTotalAmount(){
+        public function getTotalAmount(){
             return $this->totalAmount;
         }
 
@@ -14,7 +14,7 @@
             return $this;
         }
 
-        public funtion getDate(){
+        public function getDate(){
             return $this->date;
         }
 

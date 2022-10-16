@@ -1,9 +1,10 @@
 <?php
     namespace Models;
 
-    use Models\User as User;
-
     class Keeper extends User{
+        private $id;
+        private $email;
+        private $password;
         private $typeOfDog; ///small, medium or big
         private $salary; 
 

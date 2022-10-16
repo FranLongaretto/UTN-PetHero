@@ -21,6 +21,16 @@
         {
             require_once(VIEWS_PATH."home.php");
         }
+
+        public function HomeKeeper($message = "")
+        {
+            require_once(VIEWS_PATH."home-keeper.php");
+        }
+
+        public function HomeOwner($message = "")
+        {
+            require_once(VIEWS_PATH."home-owner.php");
+        }
         
         public function ShowAddView()
         {
@@ -48,6 +58,7 @@
 
         public function Add($email, $password, $role, $firstName, $lastName, $dni, $phoneNumber)
         {
+
             $user = new User();
             $user->setEmail($email);
             $user->setPassword($password);
@@ -57,10 +68,20 @@
             $user->setDni($dni);
             $user->setPhoneNumber($phoneNumber);
 
-
             $this->userDAO->Add($user);
 
-            $this->Home();
+            $validationUser = ($user != null) && ($user->getPassword() === $password);
+            $validationRolKeeper= ($user->getRole() === "Keeper");
+            $validationRolOwner= ($user->getRole() === "Owner");
+
+            if($validationUser && $validationRolKeeper){
+                $this->HomeKeeper();
+            }else if($validationUser && $validationRolOwner){
+                $this->HomeOwner();
+            }else{
+                $this->Home();
+            }
+            
         }
 
 
@@ -88,28 +109,44 @@
             $this->ShowListView();
         }
 
+        
+
         ///LOGEO 
         
         public function Login($email, $password) {
 
             $user = $this->userDAO->GetByEmail($email);
 
-            if(($user != null) && ($user->getPassword() === $password))
-            {
+            $validationUser = ($user != null) && ($user->getPassword() === $password);
+            $validationRolKeeper= ($user->getRole() === "Keeper");
+            $validationRolOwner= ($user->getRole() === "Owner");
+
+            if($validationUser && $validationRolKeeper)
+            {   //Entra a home Keeper
                 $_SESSION["loggedUser"] = $user;
-                $this->Home();
-               
+                $this->HomeKeeper();
+                
+            }else if($validationUser && $validationRolOwner){
+                //Entra a home Owner
+                $_SESSION["loggedUser"] = $user;
+                $this->HomeOwner();
                 
             }else{
-                echo "<script> if(confirm('Verifique que los datos ingresados sean correctos'));";
+                //Devuelve al Login por error en validacion de datos.
+                echo "<script> if(confirm('Verify your information'));";
                 echo "window.location = '../index.php';
                     </script>";
-                //$this->Index("Usuario y/o Contraseña incorrecto");    
+                //$this->Index("Usuario y/o Contraseña incorrecto");
             }
         }
         public function Logout () {
 			session_destroy();
-            $this->Index();
+            //$this->Index();
+            
+            //use javascript to redirect to index to show the icon.
+            echo "<script>window.location = '../index.php';
+                </script>";
+            
             
         }
     }        

@@ -1,0 +1,10 @@
+[
+    {
+        "id": 1,
+        "race": "Pastor Aleman",
+        "size": "grande",
+        "vaccination": "Todas",
+        "description": "Perro amigable y le gusta jugar",
+        "image": "cambiar type, type=file"
+    }
+]

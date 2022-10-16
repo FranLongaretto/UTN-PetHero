@@ -32,6 +32,10 @@
           <option value="Owner">Owner</option>
           <option value="Keeper">Keeper</option>
       </select>
+      <input type="text" id="firstName" class="fadeIn third" name="firstName" placeholder="first name" required>
+      <input type="text" id="lastName" class="fadeIn third" name="lastName" placeholder="last name" required>
+      <input type="text" id="dni" class="fadeIn third" name="dni" placeholder="dni" required>
+      <input type="text" id="phoneNumber" class="fadeIn third" name="phoneNumber" placeholder="phone number" required>
       <input type="submit" class="fadeIn fourth" value="Sign Up">
     </form>
 
