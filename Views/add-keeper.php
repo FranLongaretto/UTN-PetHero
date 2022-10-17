@@ -44,11 +44,8 @@
               <option value="false">Not Available</option>
             </select>
             <!-- Date input -->
-            <div class="form-group"> 
-                <input class="form-control" id="date" name="date" placeholder="Availability: DD/MM/YYY" type="text"/>
-            </div>
-            
-            </div>
+            <input class="form-control" id="date" name="date" placeholder="Availability: DD/MM/YYY" type="text"/>
+
             <input type="submit" class="fadeIn fourth" value="Add Keeper">
             <a href="<?php echo FRONT_ROOT ?>User/HomeKeeper" class="fadeIn third">Cancel</a>
           </form>
