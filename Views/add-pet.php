@@ -29,9 +29,24 @@
               <option value="mediano">Mediano</option>
               <option value="grande">Grande</option>
             </select>
-            <input type="text" id="vaccination" class="fadeIn third" name="vaccination" placeholder="Vaccination" required>
             <input type="text" id="description" class="fadeIn third" name="description" placeholder="Description" required>
-            <input type="text" id="image" class="fadeIn third" name="image" placeholder="Image" required>
+            
+            <!-- vacunacion -->
+            <div class="fadeIn third">
+            <t>Vaccination</t>
+            </div>
+            <form action="<?php echo FRONT_ROOT?>Pet/UploadImage" method="POST" enctype="multipart/form-data">
+                <input type="file" name="vaccination" accept="image/*" class="fadeIn second"/>
+                <button type="submit" class="fadeIn second">Upload</button>
+            </form>
+            <!-- imagen mascota -->
+            <div class="fadeIn third">
+            <t>Image</t>
+            </div>
+            <form action="<?php echo FRONT_ROOT?>Pet/UploadImage" method="POST" enctype="multipart/form-data">
+                <input type="file" name="imagePet" accept="image/*" class="fadeIn second"/>
+                <button type="submit" class="fadeIn second">Upload</button>
+            </form>
 
             <input type="submit" class="fadeIn fourth" value="Add Pet">
           </form>
