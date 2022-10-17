@@ -3,6 +3,7 @@
 
     use DAO\IUserDAO as IUserDAO;
     use Models\User as User;
+    use Models\Keeper as Keeper;
 
     class UserDAO implements IUserDAO
     {
@@ -19,7 +20,7 @@
 
             $this->SaveData();
         }
-
+   
         public function GetAll()
         {
             $this->RetrieveData();
@@ -64,6 +65,8 @@
                  }
              }
         }
+
+    
 
         function Modify(User $user)
         {
@@ -142,5 +145,6 @@
 
             return $id + 1;
         }
+     
     }
 ?>

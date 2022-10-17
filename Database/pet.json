@@ -14,5 +14,13 @@
         "vaccination": "antirabica",
         "description": "perro grande blanco",
         "image": "falta imagen"
+    },
+    {
+        "id": 3,
+        "race": "caniche",
+        "size": "peque\u00f1o",
+        "vaccination": "perro grande chico",
+        "description": "antirabica",
+        "image": "canichetoy.jpg"
     }
 ]

@@ -1,0 +1,22 @@
+
+  input[type=button], input[type=submit], input[type=reset], a  {
+    background-color: #56baed;
+    border: none;
+    color: white;
+    padding: 15px 80px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 13px;
+    width: 300px;
+    height: 50px;
+    margin: 2px;
+           
+    
+  }
+  a{
+    margin: 0;
+  }
+  
+

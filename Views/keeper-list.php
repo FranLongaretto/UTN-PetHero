@@ -10,26 +10,25 @@
     </div> 
         <!-- main body -->
         <div class="content">
-        
             <div class="scrollable">
                 <table style="text-align:center;">
                     <thead style="color:white">
-                        <tr>
-                            <th>Race</th>
+                        <tr> 
                             <th>Size</th>
-                            <th>Vaccination</th>
-                            <th>Description</th>
-                            <th>Image</th>
+                            <th>Salary</th>
+                            <th>Available</th>
+                            <th>Date</th>
+
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach($petList as $pet) { ?>
+                    <?php foreach($keeperList as $keeper) { ?>
                         <tr>
-                            <td><?php echo $pet->getRace() ?></td>
-                            <td><?php echo $pet->getSize() ?></td>
-                            <td><?php echo $pet->getVaccination() ?></td>
-                            <td><?php echo $pet->getDescription() ?></td>
-                            <td><?php echo $pet->getImage() ?></td>
+                            <td><?php echo $keeper->getSize() ?></td>
+                            <td><?php echo $keeper->getSalary() ?></td>
+                            <td><?php echo $keeper->getAvailable() ?></td>
+                            <td><?php echo $keeper->getDate() ?></td>
+                          
                         </tr>
                     <?php } ?>
                     </tbody>

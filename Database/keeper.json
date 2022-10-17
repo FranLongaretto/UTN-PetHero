@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "size": "medium",
+        "salary": "1000",
+        "available": "true",
+        "date": null
+    },
+    {
+        "id": 2,
+        "size": "big",
+        "salary": "3000",
+        "available": "true",
+        "date": null
+    },
+    {
+        "id": 3,
+        "size": "small",
+        "salary": "2000",
+        "available": "true",
+        "date": "10\/18\/2022"
+    },
+    {
+        "id": 4,
+        "size": "medium",
+        "salary": "3000",
+        "available": "false",
+        "date": "10\/19\/2022"
+    },
+    {
+        "id": 5,
+        "size": "medium",
+        "salary": "3000",
+        "available": "false",
+        "date": "10\/19\/2022"
+    }
+]
