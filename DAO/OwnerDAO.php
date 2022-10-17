@@ -3,11 +3,13 @@
 
     use DAO\IOwnerDAO as IOwnerDAO;
     use Models\Owner as Owner;
+    use Models\Keeper as Keeper;
     use Models\Pet as Pet;
 
     class OwnerDAO implements IOwnerDAO
     {
         private $ownerList = array();
+        private $keeperList = array();
         private $petList = array();
         private $fileName = ROOT."Database/owner.json";
         private $fileNamePet = ROOT."Database/pet.json";
