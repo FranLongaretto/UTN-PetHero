@@ -6,5 +6,13 @@
         "vaccination": "Todas",
         "description": "Perro amigable y le gusta jugar",
         "image": "cambiar type, type=file"
+    },
+    {
+        "id": 2,
+        "race": "dogo",
+        "size": "grande",
+        "vaccination": "antirabica",
+        "description": "perro grande blanco",
+        "image": "falta imagen"
     }
 ]

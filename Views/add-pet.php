@@ -1,6 +1,6 @@
 <?php
   //include_once('header.php');
- // include_once('nav-bar.php'); 
+ include_once('navOwner.php'); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +34,7 @@
             <input type="text" id="image" class="fadeIn third" name="image" placeholder="Image" required>
 
             <input type="submit" class="fadeIn fourth" value="Add Pet">
+            <a href="<?php echo FRONT_ROOT ?>User/HomeOwner" class="fadeIn third">Cancel</a>
           </form>
         </div>
       </div>
@@ -41,5 +42,5 @@
 
 </html>
 <?php
-//include('footer.php');
+include('footer.php');
 ?>

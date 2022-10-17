@@ -1,17 +1,20 @@
 <?php 
     include('header.php');
-    include('nav.php');
+    include('navOwner.php');
 ?>
 
 <div class="wrapper row4">
     <main class="hoc container clear"> 
+    <div align="left">
+        <a href="<?php echo FRONT_ROOT ?>User/HomeOwner" class="btn btn-outline-primary">Back to Menu</a>
+    </div> 
         <!-- main body -->
-        <div class="content"> 
+        <div class="content">
+        
             <div class="scrollable">
                 <table style="text-align:center;">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Race</th>
                             <th>Size</th>
                             <th>Vaccination</th>
@@ -22,7 +25,6 @@
                     <tbody>
                     <?php foreach($petList as $pet) { ?>
                         <tr>
-                            <td><?php echo $pet->getId() ?></td>
                             <td><?php echo $pet->getRace() ?></td>
                             <td><?php echo $pet->getSize() ?></td>
                             <td><?php echo $pet->getVaccination() ?></td>
