@@ -84,13 +84,13 @@
             }
         }
 
-        public function Add($race, $size, $vaccinationImg , $description, $petImage)
+        public function Add($race, $size, $description, $vaccinationImg, $petImage)
         {
             $pet = new Pet();
             $pet->setRace($race);
             $pet->setSize($size);
-            $pet->setVaccination($vaccinationImg );
             $pet->setDescription($description);
+            $pet->setVaccination($vaccinationImg);
             $pet->setImage($petImage);
 
             $this->PetDAO->Add($pet);

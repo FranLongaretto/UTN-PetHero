@@ -42,5 +42,25 @@
             "error": 0,
             "size": 18257
         }
+    },
+    {
+        "id": 3,
+        "race": "tre",
+        "size": "mediano",
+        "vaccination": {
+            "name": "cv.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\wamp64\\tmp\\php2F04.tmp",
+            "error": 0,
+            "size": 117227
+        },
+        "description": "reer",
+        "image": {
+            "name": "42ce3484e27a827f1b687024aa9e2439 (1).jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\wamp64\\tmp\\php2F05.tmp",
+            "error": 0,
+            "size": 12540
+        }
     }
 ]
