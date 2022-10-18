@@ -47,37 +47,52 @@
 
         public function UploadImage(){
             // Get reference to uploaded image
-            $image_file = $_FILES["imagePet"];
+            $vaccinationImg_file = $_FILES["vaccinationImg"];
+            $petImg_file = $_FILES["petImage"];
 
             // Exit if no file uploaded
-            if (!isset($image_file)) {
+            if (!isset($vaccinationImg_file) || !isset($petImg_file)) {
                 die('No file uploaded.');
             }
 
             // Exit if is not a valid image file
-            $image_type = exif_imagetype($image_file["tmp_name"]);
-            if (!$image_type) {
+            $vaccinationImg_type = exif_imagetype($vaccinationImg_file["tmp_name"]);
+            $petImg_type = exif_imagetype($petImg_file["tmp_name"]);
+            
+            if (!$vaccinationImg_type || !$petImg_type) {
                 die('Uploaded file is not an image.');
             }
 
             // Move the temp image file to the images/ directory
-            move_uploaded_file(
-                // Temp image location
-                $image_file["tmp_name"],
-
-                // New image location
-                IMG_PATH . "/img" . $image_file["name"]
-            );
+            $petImageNameNoExtension = substr($petImg_file["name"], 0, strpos($petImg_file["name"], "."));
+            if (isset($vaccinationImg_file)) {
+                move_uploaded_file(
+                    // Temp image location
+                    $vaccinationImg_file["tmp_name"],
+                    // New image location
+                    IMG_PATH . "/vaccination/". $petImageNameNoExtension . "_" . $vaccinationImg_file["name"]
+                );
+            }
+            if (isset($petImg_file)) {
+                move_uploaded_file(
+                    // Temp image location
+                    $petImg_file["tmp_name"],
+    
+                    // New image location
+                    IMG_PATH . "/pets/" . $petImg_file["name"]
+                );
+            }
         }
 
-        public function Add($race, $size, $vaccination, $description, $image)
+        public function Add($race, $size, $vaccinationImg , $description, $petImage)
         {
             $pet = new Pet();
             $pet->setRace($race);
             $pet->setSize($size);
-            $pet->setVaccination($vaccination);
+            $pet->setVaccination($vaccinationImg );
             $pet->setDescription($description);
-            $pet->setImage($image);
+            $pet->setImage($petImage);
+            $this->UploadImage();
 
             $this->PetDAO->Add($pet);
 

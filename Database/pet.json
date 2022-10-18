@@ -3,24 +3,22 @@
         "id": 1,
         "race": "Pastor Aleman",
         "size": "grande",
-        "vaccination": "Todas",
+        "vaccination": {
+            "name": "recetas.jpg",
+            "full_path": "recetas.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\php7F7B.tmp",
+            "error": 0,
+            "size": 66040
+        },
         "description": "Perro amigable y le gusta jugar",
-        "image": "cambiar type, type=file"
-    },
-    {
-        "id": 2,
-        "race": "dogo",
-        "size": "grande",
-        "vaccination": "antirabica",
-        "description": "perro grande blanco",
-        "image": "falta imagen"
-    },
-    {
-        "id": 3,
-        "race": "caniche",
-        "size": "peque\u00f1o",
-        "vaccination": "perro grande chico",
-        "description": "antirabica",
-        "image": "canichetoy.jpg"
+        "image": {
+            "name": "pastor.jpg",
+            "full_path": "pastor.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\php7F7C.tmp",
+            "error": 0,
+            "size": 9469
+        }
     }
 ]

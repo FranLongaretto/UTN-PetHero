@@ -19,37 +19,27 @@
           <!-- Tabs Titles -->
 
           <!-- Login Form -->
-          <form action="<?php echo FRONT_ROOT?>Pet/Add" method="POST">
+          <form action="<?php echo FRONT_ROOT?>Pet/Add" method="POST" enctype="multipart/form-data">
             <h2>Add Pet</h2>
   
             <input type="text" id="race" class="fadeIn second" name="race" placeholder="Race" required>
+
             <select class="fadeIn third" name="size" id="size" required>
               <option disabled selected>Seleccionar Size</option>
               <option value="pequeño">Pequeño</option>
               <option value="mediano">Mediano</option>
               <option value="grande">Grande</option>
             </select>
+
+            <input type="file" accept="image/*" id="vaccination" class="fadeIn third" name="vaccinationImg" required>
+
             <input type="text" id="description" class="fadeIn third" name="description" placeholder="Description" required>
-            
-            <!-- vacunacion -->
-            <div class="fadeIn third">
-            <t>Vaccination</t>
-            </div>
-            <form action="<?php echo FRONT_ROOT?>Pet/UploadImage" method="POST" enctype="multipart/form-data">
-                <input type="file" name="vaccination" accept="image/*" class="fadeIn second"/>
-                <button type="submit" class="fadeIn second">Upload</button>
-            </form>
-            <!-- imagen mascota -->
-            <div class="fadeIn third">
-            <t>Image</t>
-            </div>
-            <form action="<?php echo FRONT_ROOT?>Pet/UploadImage" method="POST" enctype="multipart/form-data">
-                <input type="file" name="imagePet" accept="image/*" class="fadeIn second"/>
-                <button type="submit" class="fadeIn second">Upload</button>
-            </form>
+
+            <input type="file" accept="image/*" id="image" class="fadeIn third" name="petImage" required>
 
             <input type="submit" class="fadeIn fourth" value="Add Pet">
-            <a href="<?php echo FRONT_ROOT ?>User/HomeOwner" class="fadeIn third">Cancel</a>
+
+            <a href="<?php echo FRONT_ROOT ?>User/HomeOwner" class="fadeIn second">Cancel</a>
           </form>
         </div>
       </div>
