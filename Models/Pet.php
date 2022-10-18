@@ -38,7 +38,9 @@
         }
 
         public function getVaccination(){
-            return $this->vaccination;
+            $petImageNameNoExtension = substr($this->image["name"], 0, strpos($this->image["name"], "."));
+            $imgVaccination = $petImageNameNoExtension . "_" . $this->vaccination["name"];
+            return $imgVaccination;
         }
 
         public function setVaccination($vaccination){
@@ -60,7 +62,7 @@
          */ 
         public function getImage()
         {
-                return $this->image;
+                return $this->image["name"];
         }
 
         /**
