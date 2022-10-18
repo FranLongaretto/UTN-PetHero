@@ -26,17 +26,17 @@
 
             <select class="fadeIn third" name="size" id="size" required>
               <option disabled selected>Seleccionar Size</option>
-              <option value="pequeño">Pequeño</option>
-              <option value="mediano">Mediano</option>
-              <option value="grande">Grande</option>
+              <option value="small">Small</option>
+              <option value="medium">Medium</option>
+              <option value="big">Big</option>
             </select>
-
-            <input type="file" accept="image/*" id="vaccination" class="fadeIn third" name="vaccinationImg" required>
-
+            <label class="btn btn-default btn-file">
+              Vaccination Image <input type="file" accept="image/*" id="vaccination" class="fadeIn third" name="vaccinationImg" required style="display: none;">
+            </label>
             <input type="text" id="description" class="fadeIn third" name="description" placeholder="Description" required>
-
-            <input type="file" accept="image/*" id="image" class="fadeIn third" name="petImage" required>
-
+            <label class="btn btn-default btn-file">
+              Pet Image<input type="file" accept="image/*" id="image" class="fadeIn third" name="petImage" required style="display: none;">
+            </label>
             <input type="submit" class="fadeIn fourth" value="Add Pet">
 
             <a href="<?php echo FRONT_ROOT ?>User/HomeOwner" class="fadeIn second">Cancel</a>
