@@ -12,8 +12,10 @@ main:after {
     height: 100px;
 }
 footer {
-    position: absolute;
-    bottom: 0;
+    width: 100%; 
+    background-color: #56baed;
+    position: relative;
     width: 100%;
-    height: 2.5rem;            /* Footer height */
-  }
+    margin-top: 40px;
+    padding: 15px 0;
+}

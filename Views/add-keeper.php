@@ -1,6 +1,7 @@
 <?php
   //include_once('header.php');
  include_once('navKeeper.php'); 
+ require_once("validate-session.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,6 +1,7 @@
 <?php
-  //include_once('header.php');
- include_once('navOwner.php'); 
+  require_once("validate-session.php");
+  include_once('header.php');
+  include_once('navOwner.php'); 
 ?>
 <!DOCTYPE html>
 <html lang="en">

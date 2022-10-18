@@ -1,13 +1,14 @@
 [
     {
         "id": 1,
+        "idOwner": 8,
         "race": "Pastor Aleman",
-        "size": "grande",
+        "size": "big",
         "vaccination": {
             "name": "recetas.jpg",
             "full_path": "recetas.jpg",
             "type": "image\/jpeg",
-            "tmp_name": "C:\\xampp\\tmp\\php7BF.tmp",
+            "tmp_name": "C:\\xampp\\tmp\\php2014.tmp",
             "error": 0,
             "size": 66040
         },
@@ -16,51 +17,78 @@
             "name": "pastor.jpg",
             "full_path": "pastor.jpg",
             "type": "image\/jpeg",
-            "tmp_name": "C:\\xampp\\tmp\\php7C0.tmp",
+            "tmp_name": "C:\\xampp\\tmp\\php2015.tmp",
+            "error": 0,
+            "size": 9469
+        }
+    },
+    {
+        "id": 1,
+        "idOwner": 4,
+        "race": "Pastor Aleman",
+        "size": "big",
+        "vaccination": {
+            "name": "recetas.jpg",
+            "full_path": "recetas.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\php2014.tmp",
+            "error": 0,
+            "size": 66040
+        },
+        "description": "Perro amigable y le gusta jugar",
+        "image": {
+            "name": "pastor.jpg",
+            "full_path": "pastor.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\php2015.tmp",
+            "error": 0,
+            "size": 9469
+        }
+    },
+    {
+        "id": 1,
+        "idOwner": 2,
+        "race": "Pastor Aleman",
+        "size": "big",
+        "vaccination": {
+            "name": "recetas.jpg",
+            "full_path": "recetas.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\php2014.tmp",
+            "error": 0,
+            "size": 66040
+        },
+        "description": "Perro amigable y le gusta jugar",
+        "image": {
+            "name": "pastor.jpg",
+            "full_path": "pastor.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\php2015.tmp",
             "error": 0,
             "size": 9469
         }
     },
     {
         "id": 2,
-        "race": "Snoop",
-        "size": "mediano",
+        "idOwner": 9,
+        "race": "Pastor Aleman",
+        "size": "big",
         "vaccination": {
             "name": "recetas.jpg",
             "full_path": "recetas.jpg",
             "type": "image\/jpeg",
-            "tmp_name": "C:\\xampp\\tmp\\php826F.tmp",
+            "tmp_name": "C:\\xampp\\tmp\\php27C2.tmp",
             "error": 0,
             "size": 66040
         },
-        "description": "Doggy Dog",
+        "description": "Perro amigable y le gusta jugar",
         "image": {
-            "name": "snoop.jpg",
-            "full_path": "snoop.jpg",
+            "name": "pastor.jpg",
+            "full_path": "pastor.jpg",
             "type": "image\/jpeg",
-            "tmp_name": "C:\\xampp\\tmp\\php8270.tmp",
+            "tmp_name": "C:\\xampp\\tmp\\php27C3.tmp",
             "error": 0,
-            "size": 18257
-        }
-    },
-    {
-        "id": 3,
-        "race": "caniche",
-        "size": "small",
-        "vaccination": {
-            "name": "vacunacioncaniche.jpg",
-            "type": "image\/jpeg",
-            "tmp_name": "C:\\xampp\\tmp\\phpB6D6.tmp",
-            "error": 0,
-            "size": 37606
-        },
-        "description": "caniche blanco",
-        "image": {
-            "name": "canichetoy.jpg",
-            "type": "image\/jpeg",
-            "tmp_name": "C:\\xampp\\tmp\\phpB6D7.tmp",
-            "error": 0,
-            "size": 119240
+            "size": 9469
         }
     }
 ]

@@ -48,5 +48,15 @@
         "lastName": "Longaretto",
         "dni": "40017532",
         "phoneNumber": "02235804238"
+    },
+    {
+        "id": 9,
+        "email": "franco@gmail.com",
+        "password": "asd1234",
+        "role": "Keeper",
+        "firstName": "Fran",
+        "lastName": "Test",
+        "dni": "40017532",
+        "phoneNumber": "02235804238"
     }
 ]

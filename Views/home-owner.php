@@ -20,6 +20,7 @@
     </div>
 
     <div id="formFooter" class="buttons-site">
+      <!-- deberia llamar a la controladora de Keepper -> Keeper/ShowListView -->
       <a class="underlineHover" href="<?php echo FRONT_ROOT?>Owner/ShowListKeeperView">Show Keeper's List</a>
     </div>
   </article>

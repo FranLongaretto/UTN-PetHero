@@ -52,6 +52,7 @@
                 {
                     $pet = new Pet();
                     $pet->setId($content["id"]);
+                    $pet->setIdOwner($content["idOwner"]);
                     $pet->setRace($content["race"]);
                     $pet->setSize($content["size"]);
                     $pet->setVaccination($content["vaccination"]);
@@ -97,6 +98,7 @@
             {
                 $valuesArray = array();
                 $valuesArray["id"] = $pet->getId();
+                $valuesArray["idOwner"] = $pet->getIdOwner();
                 $valuesArray["race"] = $pet->getRace();
                 $valuesArray["size"] = $pet->getSize();
                 $valuesArray["vaccination"] = $pet->getVaccination();

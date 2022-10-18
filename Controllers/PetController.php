@@ -92,6 +92,7 @@
             $pet->setVaccination($vaccinationImg );
             $pet->setDescription($description);
             $pet->setImage($petImage);
+            $pet->setIdOwner($_SESSION["loggedUser"]->id);
 
             $this->PetDAO->Add($pet);
             

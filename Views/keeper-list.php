@@ -1,4 +1,5 @@
 <?php 
+    require_once("validate-session.php");
     include('header.php');
     include('navOwner.php');
 ?>

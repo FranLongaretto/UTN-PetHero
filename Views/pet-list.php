@@ -1,4 +1,5 @@
 <?php 
+    require_once("validate-session.php");
     include('header.php');
     include('navOwner.php');
 ?>
@@ -23,7 +24,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach($petList as $pet) { ?>
+                    <?php foreach($petList as $pet) { 
+                        if($_SESSION["loggedUser"]->id == $pet->getIdOwner()){
+                    ?>
                         <tr>
                             <td><?php echo $pet->getRace() ?></td>
                             <td><?php echo $pet->getSize() ?></td>
@@ -31,7 +34,7 @@
                             <td><?php echo $pet->getDescription() ?></td>
                             <td><img src="<?php echo FRONT_ROOT.IMG_PATH."pets/".$pet->getImageFront() ?>" alt="Pet" style="max-width: 200px;"></td>
                         </tr>
-                    <?php } ?>
+                    <?php } }?>
                     </tbody>
                 </table>
             </div>
