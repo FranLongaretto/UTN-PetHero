@@ -7,7 +7,7 @@
             "name": "recetas.jpg",
             "full_path": "recetas.jpg",
             "type": "image\/jpeg",
-            "tmp_name": "C:\\xampp\\tmp\\php7F7B.tmp",
+            "tmp_name": "C:\\xampp\\tmp\\php7BF.tmp",
             "error": 0,
             "size": 66040
         },
@@ -16,9 +16,31 @@
             "name": "pastor.jpg",
             "full_path": "pastor.jpg",
             "type": "image\/jpeg",
-            "tmp_name": "C:\\xampp\\tmp\\php7F7C.tmp",
+            "tmp_name": "C:\\xampp\\tmp\\php7C0.tmp",
             "error": 0,
             "size": 9469
+        }
+    },
+    {
+        "id": 2,
+        "race": "Snoop",
+        "size": "mediano",
+        "vaccination": {
+            "name": "recetas.jpg",
+            "full_path": "recetas.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\php826F.tmp",
+            "error": 0,
+            "size": 66040
+        },
+        "description": "Doggy Dog",
+        "image": {
+            "name": "snoop.jpg",
+            "full_path": "snoop.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\php8270.tmp",
+            "error": 0,
+            "size": 18257
         }
     }
 ]

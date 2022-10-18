@@ -92,9 +92,10 @@
             $pet->setVaccination($vaccinationImg );
             $pet->setDescription($description);
             $pet->setImage($petImage);
-            $this->UploadImage();
 
             $this->PetDAO->Add($pet);
+            
+            $this->UploadImage();
 
             $validationPet = ($pet != null);
 
