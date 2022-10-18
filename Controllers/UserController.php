@@ -115,11 +115,17 @@
         
         public function Login($email, $password) {
 
-            $user = $this->userDAO->GetByEmail($email);
+            if($email){
+                $user = $this->userDAO->GetByEmail($email);
+            }else{
+                $this->Index("Email no válido");
+            }
 
-            $validationUser = ($user != null) && ($user->getPassword() === $password);
-            $validationRolKeeper= ($user->getRole() === "Keeper");
-            $validationRolOwner= ($user->getRole() === "Owner");
+            if($user != null && $user->getPassword() === $password){
+                $validationUser = ($user->getPassword() === $password);
+                $validationRolKeeper= ($user->getRole() === "Keeper");
+                $validationRolOwner= ($user->getRole() === "Owner");
+            }
 
             if($validationUser && $validationRolKeeper)
             {   //Entra a home Keeper
@@ -133,10 +139,8 @@
                 
             }else{
                 //Devuelve al Login por error en validacion de datos.
-                echo "<script> if(confirm('Verify your information'));";
-                echo "window.location = '../index.php';
-                    </script>";
-                //$this->Index("Usuario y/o Contraseña incorrecto");
+                $errorMessage = "Usuario y/o Contraseña incorrecto";
+                $this->Index($errorMessage);
             }
         }
         public function Logout () {
