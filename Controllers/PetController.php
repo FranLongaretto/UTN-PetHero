@@ -84,7 +84,7 @@
             }
         }
 
-        public function Add($race, $size, $vaccinationImg , $description, $petImage)
+        public function Add($race, $size,$description,  $vaccinationImg , $petImage)
         {
             $pet = new Pet();
             $pet->setRace($race);
