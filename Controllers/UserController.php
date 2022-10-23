@@ -15,20 +15,24 @@
 
         public function Index($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."index.php");
         }
         public function Home($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."home.php");
         }
 
         public function HomeKeeper($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."home-keeper.php");
         }
 
         public function HomeOwner($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."home-owner.php");
         }
         
@@ -69,19 +73,6 @@
             $user->setPhoneNumber($phoneNumber);
 
             $this->userDAO->Add($user);
-
-            $validationUser = ($user != null) && ($user->getPassword() === $password);
-            $validationRolKeeper= ($user->getRole() === "Keeper");
-            $validationRolOwner= ($user->getRole() === "Owner");
-
-            if($validationUser && $validationRolKeeper){
-                $this->HomeKeeper();
-            }else if($validationUser && $validationRolOwner){
-                $this->HomeOwner();
-            }else{
-                $this->Home();
-            }
-            
         }
 
 
@@ -115,6 +106,10 @@
         
         public function Login($email, $password) {
 
+            $validationUser = false;
+            $validationRolKeeper= false;
+            $validationRolOwner= false;
+
             if($email){
                 $user = $this->userDAO->GetByEmail($email);
             }else{
@@ -139,19 +134,16 @@
                 
             }else{
                 //Devuelve al Login por error en validacion de datos.
-                $errorMessage = "Usuario y/o Contraseña incorrecto";
+                $errorMessage = $user != null ? "Contraseña incorrecta" : "Usuario incorrecto";
                 $this->Index($errorMessage);
             }
         }
+
         public function Logout () {
 			session_destroy();
-            //$this->Index();
-            
             //use javascript to redirect to index to show the icon.
             echo "<script>window.location = '../index.php';
                 </script>";
-            
-            
         }
     }        
 ?>
