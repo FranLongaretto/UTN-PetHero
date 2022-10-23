@@ -18,7 +18,7 @@
 
           <!-- Icon -->
           <div class="fadeIn first">
-            <img src="<?php echo VIEWS_PATH?>img/dogIcon.png" id="icon" alt="User Icon" />
+            <img src="<?php echo FRONT_ROOT.VIEWS_PATH?>img/dogIcon.png" id="icon" alt="User Icon" />
           </div>
 
           <!-- Login Form -->
@@ -26,6 +26,9 @@
             <input type="email" id="email" class="fadeIn second" name="email" placeholder="email">
             <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
             <input type="submit" class="fadeIn fourth" value="Log In">
+            <?php if($frontMessage){?>
+              <p class="error__message"><?php echo $frontMessage?></p>
+            <?php }?>
           </form>
 
           <!-- Sing Up -->

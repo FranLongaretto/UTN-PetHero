@@ -15,20 +15,24 @@
 
         public function Index($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."index.php");
         }
         public function Home($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."home.php");
         }
 
         public function HomeKeeper($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."home-keeper.php");
         }
 
         public function HomeOwner($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."home-owner.php");
         }
         
@@ -87,6 +91,7 @@
                 $this->SignUp("Email already exists in database");
             }
             
+
         }
 
 
@@ -120,6 +125,10 @@
         
         public function Login($email, $password) {
 
+            $validationUser = false;
+            $validationRolKeeper= false;
+            $validationRolOwner= false;
+
             if($email){
                 $user = $this->userDAO->GetByEmail($email);
             }else{
@@ -144,19 +153,16 @@
                 
             }else{
                 //Devuelve al Login por error en validacion de datos.
-                $errorMessage = "Usuario y/o Contraseña incorrecto";
+                $errorMessage = $user != null ? "Contraseña incorrecta" : "Usuario incorrecto";
                 $this->Index($errorMessage);
             }
         }
+
         public function Logout () {
 			session_destroy();
-            //$this->Index();
-            
             //use javascript to redirect to index to show the icon.
             echo "<script>window.location = '../index.php';
                 </script>";
-            
-            
         }
     }        
 ?>
