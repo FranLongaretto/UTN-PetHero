@@ -56,23 +56,42 @@
             
         }
 
-        public function SignUp(){
+        public function SignUp($message = ""){
             require_once(VIEWS_PATH."add-user.php");
         }
 
         public function Add($email, $password, $role, $firstName, $lastName, $dni, $phoneNumber)
         {
+            $emailCheck= $this->userDAO->GetByEmail($email);
 
-            $user = new User();
-            $user->setEmail($email);
-            $user->setPassword($password);
-            $user->setRole($role);
-            $user->setFirstName($firstName);
-            $user->setLastName($lastName);
-            $user->setDni($dni);
-            $user->setPhoneNumber($phoneNumber);
+            if(!$emailCheck){ /// if the email doestn exist in the json.. add user
+                $user = new User();
+                $user->setEmail($email);
+                $user->setPassword($password);
+                $user->setRole($role);
+                $user->setFirstName($firstName);
+                $user->setLastName($lastName);
+                $user->setDni($dni);
+                $user->setPhoneNumber($phoneNumber);
 
-            $this->userDAO->Add($user);
+                $this->userDAO->Add($user);
+
+                $validationUser = ($user != null) && ($user->getPassword() === $password);
+                $validationRolKeeper= ($user->getRole() === "Keeper");
+                $validationRolOwner= ($user->getRole() === "Owner");
+    
+                if($validationUser && $validationRolKeeper){
+                    $this->HomeKeeper();
+                }else if($validationUser && $validationRolOwner){
+                    $this->HomeOwner();
+                }else{
+                    $this->Home();
+                }
+            }else{
+                $this->SignUp("Email already exists in database");
+            }
+            
+
         }
 
 
