@@ -1,52 +1,6 @@
 [
     {
         "id": 1,
-        "idOwner": 8,
-        "race": "Pastor Aleman",
-        "size": "big",
-        "vaccination": {
-            "name": "recetas.jpg",
-            "full_path": "recetas.jpg",
-            "type": "image\/jpeg",
-            "tmp_name": "C:\\xampp\\tmp\\php2014.tmp",
-            "error": 0,
-            "size": 66040
-        },
-        "description": "Perro amigable y le gusta jugar",
-        "image": {
-            "name": "pastor.jpg",
-            "full_path": "pastor.jpg",
-            "type": "image\/jpeg",
-            "tmp_name": "C:\\xampp\\tmp\\php2015.tmp",
-            "error": 0,
-            "size": 9469
-        }
-    },
-    {
-        "id": 1,
-        "idOwner": 4,
-        "race": "Pastor Aleman",
-        "size": "big",
-        "vaccination": {
-            "name": "recetas.jpg",
-            "full_path": "recetas.jpg",
-            "type": "image\/jpeg",
-            "tmp_name": "C:\\xampp\\tmp\\php2014.tmp",
-            "error": 0,
-            "size": 66040
-        },
-        "description": "Perro amigable y le gusta jugar",
-        "image": {
-            "name": "pastor.jpg",
-            "full_path": "pastor.jpg",
-            "type": "image\/jpeg",
-            "tmp_name": "C:\\xampp\\tmp\\php2015.tmp",
-            "error": 0,
-            "size": 9469
-        }
-    },
-    {
-        "id": 1,
         "idOwner": 2,
         "race": "Pastor Aleman",
         "size": "big",
@@ -89,6 +43,27 @@
             "tmp_name": "C:\\xampp\\tmp\\php27C3.tmp",
             "error": 0,
             "size": 9469
+        }
+    },
+    {
+        "id": 3,
+        "idOwner": 1,
+        "race": "caniche",
+        "size": "small",
+        "vaccination": {
+            "name": "vacunacioncaniche.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\php55A4.tmp",
+            "error": 0,
+            "size": 37606
+        },
+        "description": "caniche blanco",
+        "image": {
+            "name": "canichetoy.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\php55B4.tmp",
+            "error": 0,
+            "size": 119240
         }
     }
 ]
