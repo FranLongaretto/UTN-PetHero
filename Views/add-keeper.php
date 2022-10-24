@@ -38,14 +38,15 @@
               <option value="medium">Medium</option>
               <option value="big">Big</option>
             </select>
-            <input type="text" id="salary" class="fadeIn third" name="salary" placeholder="Salary per hour $" min="0" oninput="validity.valid||(value='');" required>
+            <input type="number" id="salary" class="fadeIn third" name="salary" placeholder="Salary per hour $" min="0" oninput="validity.valid||(value='');" required>
             <select class="fadeIn third" name="available" id="available" required>
               <option disabled selected>Select Availability</option>
               <option value="true">Available</option>
               <option value="false">Not Available</option>
             </select>
             <!-- Date input -->
-            <input class="form-control" id="date" name="date" placeholder="Availability: DD/MM/YYY" type="text"/>
+            <!--<input class="form-control" id="date" name="date" placeholder="Availability: DD/MM/YYY" type="text" min=""/>-->
+            <input type="date" name="arrival_date" id="arrival_date" class="form-control" aria-label="...">
 
             <input type="submit" class="fadeIn fourth" value="Add Keeper">
             <a href="<?php echo FRONT_ROOT ?>User/HomeKeeper" class="fadeIn third">Cancel</a>
@@ -59,7 +60,7 @@
 include('footer.php');
 ?>
 <script>
-  $(document).ready(function(){
+ /* $(document).ready(function(){
     var date_input=$('input[name="date"]'); //our date input has the name "date"
     var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
     var options={
@@ -69,5 +70,7 @@ include('footer.php');
       autoclose: true,
     };
     date_input.datepicker(options);
-  })  
+  })  */
+
+  document.getElementById('arrival_date').setAttribute('min', new Date().toISOString().split('T')[0])  
 </script>
