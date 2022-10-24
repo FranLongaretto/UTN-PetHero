@@ -38,7 +38,7 @@
               <option value="medium">Medium</option>
               <option value="big">Big</option>
             </select>
-            <input type="text" id="salary" class="fadeIn third" name="salary" placeholder="Salary per hour $" required>
+            <input type="text" id="salary" class="fadeIn third" name="salary" placeholder="Salary per hour $" min="0" oninput="validity.valid||(value='');" required>
             <select class="fadeIn third" name="available" id="available" required>
               <option disabled selected>Select Availability</option>
               <option value="true">Available</option>
