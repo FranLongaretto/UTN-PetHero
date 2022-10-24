@@ -45,15 +45,12 @@
         public function ShowListView()
         {
             $userList = $this->userDAO->getAll();
-            
             require_once(VIEWS_PATH."user-list.php");
         }
 
         public function ShowModifyView($id) {
             $user = $this->userDAO->GetById($id);
-           
             require_once(VIEWS_PATH."modify-user.php");
-            
         }
 
         public function SignUp(){
@@ -75,7 +72,6 @@
             $this->userDAO->Add($user);
         }
 
-
         public function Modify($email, $password, $id)
         {
             require_once(VIEWS_PATH."validate-session.php");
@@ -86,12 +82,9 @@
             $user->setPassword($password);
 
             $this->userDAO->Modify($user);
-           
 
             $this->ShowListView();
         }
-
-       
 
         public function Delete($id)
         {
@@ -102,10 +95,8 @@
 
         
 
-        ///LOGEO 
-        
+        ///LOGEO
         public function Login($email, $password) {
-
             $validationUser = false;
             $validationRolKeeper= false;
             $validationRolOwner= false;

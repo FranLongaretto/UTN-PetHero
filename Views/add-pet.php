@@ -1,8 +1,9 @@
 <?php
   require_once("validate-session.php");
-  include_once('header.php');
-  include_once('navOwner.php'); 
+  include_once("header.php");
+  include_once("navOwner.php"); 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +22,7 @@
 
           <!-- Login Form -->
           <form action="<?php echo FRONT_ROOT?>Pet/Add" method="POST" enctype="multipart/form-data">
-            <h2>Add Pet</h2>
+            <h2 class="formTitle">Add Pet</h2>
   
             <input type="text" id="race" class="fadeIn second" name="race" placeholder="Race" required>
 
@@ -31,22 +32,23 @@
               <option value="medium">Medium</option>
               <option value="big">Big</option>
             </select>
-            <label class="btn btn-default btn-file">
-              Vaccination Image <input type="file" accept="image/*" id="vaccination" class="fadeIn third" name="vaccinationImg" required style="display: none;">
-            </label>
-            <input type="text" id="description" class="fadeIn third" name="description" placeholder="Description" required>
-            <label class="btn btn-default btn-file">
-              Pet Image<input type="file" accept="image/*" id="image" class="fadeIn third" name="petImage" required style="display: none;">
-            </label>
-            <input type="submit" class="fadeIn fourth" value="Add Pet">
 
-            <a href="<?php echo FRONT_ROOT ?>User/HomeOwner" class="fadeIn second">Cancel</a>
+            <input type="file" accept="image/*" id="vaccination" class="inputImgVaccine" name="vaccinationImg" required>
+
+            <input type="text" id="description" class="fadeIn third" name="description" placeholder="Description" required>
+
+            <input type="file" accept="image/*" id="image" class="inputImgPet" name="petImage" required>
+
+            <div class="formSend">
+              <input type="submit" class="fadeIn fourth formSend__cancel" value="Add Pet">
+              <a href="<?php echo FRONT_ROOT ?>User/HomeOwner" class="formSend__cancel">Cancel</a>
+            </div>
           </form>
         </div>
       </div>
     </body>
-
 </html>
+
 <?php
-include('footer.php');
+  include('footer.php');
 ?>

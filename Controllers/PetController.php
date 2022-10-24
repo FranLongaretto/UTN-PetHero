@@ -41,7 +41,8 @@
             require_once(VIEWS_PATH."modify-pet.php");
         }
 
-        public function SignUpPet(){
+        public function SignUpPet($message = ""){
+            $frontMessage = $message;
             require_once(VIEWS_PATH."add-pet.php");
         }
 
@@ -84,7 +85,7 @@
             }
         }
 
-        public function Add($race, $size,$description,  $vaccinationImg , $petImage)
+        public function Add($race, $size, $description, $vaccinationImg, $petImage)
         {
             $pet = new Pet();
             $pet->setRace($race);
@@ -94,7 +95,12 @@
             $pet->setImage($petImage);
             $pet->setIdOwner($_SESSION["loggedUser"]->id);
 
-            $this->PetDAO->Add($pet);
+            if($pet != null){
+                $this->PetDAO->Add($pet);
+            }else{
+                $errorMessage = "";
+                $this->SignUpPet($errorMessage);
+            }
             
             $this->UploadImage();
 
