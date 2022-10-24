@@ -8,6 +8,7 @@
     class KeeperDAO implements IKeeperDAO
     {
         private $keeperList = array();
+        private $keeperListFilter = array();
         private $fileName = ROOT."Database/keeper.json";
 
         public function Add(Keeper $keeper)
@@ -28,6 +29,14 @@
 
             return $this->keeperList;
         }
+
+        public function GetAllFilter($dateStart, $dateEnd)
+        {
+            $this->RetrieveDataFilter($dateStart, $dateEnd);
+
+            return $this->keeperListFilter;
+        }
+        
 
         public function Delete($id)
         {            
@@ -57,9 +66,40 @@
                      $keeper->setSize($content["size"]);
                      $keeper->setSalary($content["salary"]);
                      $keeper->setAvailable($content["available"]);
-                     $keeper->setDate($content["date"]);
+                     $keeper->setDateStart($content["dateStart"]);
+                     $keeper->setDateEnd($content["dateEnd"]);
 
                      array_push($this->keeperList, $keeper);
+                 }
+             }
+        }
+
+        private function RetrieveDataFilter($dateStart, $dateEnd)
+        {
+             $this->keeperListFilter = array();
+
+             if(file_exists($this->fileName))
+             {
+                 $jsonToDecode = file_get_contents($this->fileName);
+
+                 $contentArray = ($jsonToDecode) ? json_decode($jsonToDecode, true) : array();
+                 
+                 foreach($contentArray as $content)
+                 {
+                     $keeper = new Keeper();
+                     $keeper->setId($content["id"]);
+                     $keeper->setSize($content["size"]);
+                     $keeper->setSalary($content["salary"]);
+                     $keeper->setAvailable($content["available"]);
+                     $keeper->setDateStart($content["dateStart"]);
+                     $keeper->setDateEnd($content["dateEnd"]);
+
+                     //validation to filter´s date
+                     if(($keeper->getDateStart()>= $dateStart) && ($keeper->getDateEnd()<= $dateEnd)){
+                        array_push($this->keeperListFilter, $keeper);
+                     }   
+
+                     
                  }
              }
         }
@@ -120,7 +160,8 @@
                 $valuesArray["size"] = $keeper->getSize();
                 $valuesArray["salary"] = $keeper->getSalary();
                 $valuesArray["available"] = $keeper->getAvailable();
-                $valuesArray["date"] = $keeper->getDate();
+                $valuesArray["dateStart"] = $keeper->getDateStart();
+                $valuesArray["dateEnd"] = $keeper->getDateEnd();
              
                 array_push($arrayToEncode, $valuesArray);
             }

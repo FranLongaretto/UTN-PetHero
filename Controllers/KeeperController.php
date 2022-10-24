@@ -42,6 +42,13 @@
             require_once(VIEWS_PATH."keeper-list.php");
         }
 
+        public function ShowListViewFilter($dateStart, $dateEnd)
+        {
+            $keeperListFilter = $this->keeperDAO->getAllFilter($dateStart, $dateEnd);
+            
+            require_once(VIEWS_PATH."keeper-listfilter.php");
+        }
+
         public function ShowModifyView($id) {
             $keeper = $this->keeperDAO->GetById($id);
            
@@ -55,13 +62,14 @@
         }
        
 
-        public function Add($size,$salary, $available,$date)
+        public function Add($size,$salary, $available,$dateStart, $dateEnd)
         {
             $keeper = new Keeper();
             $keeper->setSize($size);
             $keeper->setSalary($salary);
             $keeper->setAvailable($available);
-            $keeper->setDate($date);
+            $keeper->setDateStart($dateStart);
+            $keeper->setDateEnd($dateEnd);
 
             $this->keeperDAO->Add($keeper);
 
@@ -75,6 +83,11 @@
                 $this->Index();
             }*/
             
+        }
+
+        public function CheckAvailability($dateStart, $dateEnd){
+            $this->ShowListViewFilter($dateStart, $dateEnd);
+
         }
 
         // public function Modify($email, $password, $id)

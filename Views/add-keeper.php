@@ -46,7 +46,8 @@
             </select>
             <!-- Date input -->
             <!--<input class="form-control" id="date" name="date" placeholder="Availability: DD/MM/YYY" type="text" min=""/>-->
-            <input type="date" name="arrival_date" id="arrival_date" class="form-control" aria-label="...">
+            <input type="date" name="dateStart" id="dateStart" class="form-control" aria-label="...">
+            <input type="date" name="dateEnd" id="dateEnd" class="form-control" aria-label="...">
 
             <input type="submit" class="fadeIn fourth" value="Add Keeper">
             <a href="<?php echo FRONT_ROOT ?>User/HomeKeeper" class="fadeIn third">Cancel</a>
@@ -72,5 +73,5 @@ include('footer.php');
     date_input.datepicker(options);
   })  */
 
-  document.getElementById('arrival_date').setAttribute('min', new Date().toISOString().split('T')[0])  
+  document.getElementById('dateStart').setAttribute('min', new Date().toISOString().split('T')[0])  
 </script>
