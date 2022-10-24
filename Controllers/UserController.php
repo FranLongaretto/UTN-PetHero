@@ -54,6 +54,7 @@
         }
 
         public function SignUp($message = ""){
+            $frontMessage = $message;
             require_once(VIEWS_PATH."add-user.php");
         }
 

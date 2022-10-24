@@ -45,6 +45,14 @@ body, .main {
      margin: 15px 0;
 }
 
+/* -------------- HOME OWNER -------------- */
+.check__message{
+     margin: 0;
+     font-weight: bold;
+     color: #3cff00;
+     padding: 10px 20px;
+}
+
 /* tables Site */
 table{
      width: 100%;

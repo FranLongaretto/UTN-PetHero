@@ -15,16 +15,19 @@
 
         public function Index($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."index.php");
         }
 
         public function HomeOwner($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."home-owner.php");
         }
 
         public function HomeKeeper($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."home-keeper.php");
         }
 
@@ -97,17 +100,11 @@
 
             if($pet != null){
                 $this->PetDAO->Add($pet);
+                $this->UploadImage();
+                $this->HomeOwner("&#x2705; Pet created correctly");
             }else{
                 $errorMessage = "";
                 $this->SignUpPet($errorMessage);
-            }
-            
-            $this->UploadImage();
-
-            $validationPet = ($pet != null);
-
-            if($validationPet){
-                $this->HomeOwner();
             }
         }
 

@@ -23,6 +23,12 @@
       <!-- deberia llamar a la controladora de Keepper -> Keeper/ShowListView -->
       <a class="underlineHover" href="<?php echo FRONT_ROOT?>Owner/ShowListKeeperView">Show Keeper's List</a>
     </div>
+
+    <?php if($frontMessage){?>
+      <div class="box__message">
+        <p class="check__message"><?php echo $frontMessage?></p>
+      </div>
+    <?php }?>
   </article>
 </div>
 

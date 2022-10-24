@@ -77,6 +77,16 @@ h2.active {
   border-bottom: 2px solid #5fbae9;
 }
 
+
+/* -------------- HOME OWNER -------------- */
+.check__message{
+  margin: 0;
+  font-weight: bold;
+  color: #3cff00;
+  padding: 10px 20px;
+}
+
+
 /* -------------- FORM TYPOGRAPHY --------------*/
 
 input[type=button], input[type=submit], input[type=reset]  {
@@ -237,6 +247,7 @@ label{
 .error__message{
   font-weight: bold;
   color: red;
+  margin-bottom: 20px;
 }
 
 /* Add Images Pet */

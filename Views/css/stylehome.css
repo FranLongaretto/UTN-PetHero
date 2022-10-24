@@ -19,3 +19,11 @@
     margin: 0;
   }
  
+  
+
+  .check__message{
+    margin: 0;
+    font-weight: bold;
+    color: #3ebb17;
+    padding: 10px 20px;
+}

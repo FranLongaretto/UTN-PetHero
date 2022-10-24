@@ -65,5 +65,28 @@
             "error": 0,
             "size": 119240
         }
+    },
+    {
+        "id": 4,
+        "idOwner": 8,
+        "race": "Breton",
+        "size": "medium",
+        "vaccination": {
+            "name": "recetas.jpg",
+            "full_path": "recetas.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\phpF498.tmp",
+            "error": 0,
+            "size": 66040
+        },
+        "description": "Cazador",
+        "image": {
+            "name": "breton.jpg",
+            "full_path": "breton.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\phpF4F7.tmp",
+            "error": 0,
+            "size": 252305
+        }
     }
 ]
