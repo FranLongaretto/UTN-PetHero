@@ -23,8 +23,8 @@
 
           <!-- Login Form -->
           <form action="<?php echo FRONT_ROOT?>User/Login" method="POST">
-            <input type="email" id="email" class="fadeIn second" name="email" placeholder="email">
-            <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+            <input type="email" id="email" class="fadeIn second" name="email" placeholder="Email">
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
             <input type="submit" class="fadeIn fourth" value="Log In">
             <?php if($frontMessage){?>
               <p class="error__message"><?php echo $frontMessage?></p>
