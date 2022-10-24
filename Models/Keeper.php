@@ -6,7 +6,8 @@
         private $size; ///small, medium or big
         private $salary; 
         private $available; 
-        private $date; ///availabity date
+        private $dateStart; ///availabity date
+        private $dateEnd; ///availabity date
 
         
           /**
@@ -83,15 +84,12 @@
                 return $this;
         }
 
-      
-
-
-        /**
+       /**
          * Get the value of date
          */ 
-        public function getDate()
+        public function getDateStart()
         {
-                return $this->date;
+                return $this->dateStart;
         }
 
         /**
@@ -99,9 +97,30 @@
          *
          * @return  self
          */ 
-        public function setDate($date)
+        public function setDateStart($dateStart)
         {
-                $this->date = $date;
+                $this->dateStart = $dateStart;
+
+                return $this;
+        }
+
+
+        /**
+         * Get the value of date
+         */ 
+        public function getDateEnd()
+        {
+                return $this->dateEnd;
+        }
+
+        /**
+         * Set the value of date
+         *
+         * @return  self
+         */ 
+        public function setDateEnd($dateEnd)
+        {
+                $this->dateEnd = $dateEnd;
 
                 return $this;
         }
