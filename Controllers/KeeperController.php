@@ -38,6 +38,7 @@
         public function ShowListView($message = "")
         {
             $errorMessage = $message;
+            
             $keeperList = $this->keeperDAO->getAll();
             
             require_once(VIEWS_PATH."keeper-list.php");

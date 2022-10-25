@@ -18,6 +18,7 @@
             $frontMessage = $message;
             require_once(VIEWS_PATH."index.php");
         }
+        
         public function Home($message = "")
         {
             $frontMessage = $message;
