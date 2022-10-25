@@ -24,7 +24,7 @@
     },
     {
         "id": 2,
-        "idOwner": 9,
+        "idOwner": 8,
         "race": "Pastor Aleman",
         "size": "big",
         "vaccination": {
@@ -47,7 +47,7 @@
     },
     {
         "id": 3,
-        "idOwner": 1,
+        "idOwner": 8,
         "race": "caniche",
         "size": "small",
         "vaccination": {
