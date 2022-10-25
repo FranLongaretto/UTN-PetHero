@@ -7,7 +7,7 @@
   <div class="mainForm__container">
     <!-- Login Form -->
     <form action="<?php echo FRONT_ROOT?>Pet/Add" method="POST" enctype="multipart/form-data" class="mainForm__form">
-      <h2 class="mainForm__form--title">Add Pet</h2>
+      <h2 class="mainForm__form--title">ADD PET</h2>
 
       <input type="text" id="race" class="mainForm__form--input fadeIn second" name="race" placeholder="Race" required>
 

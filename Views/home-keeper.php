@@ -2,19 +2,24 @@
     include_once('navKeeper.php');
     require_once("validate-session.php"); 
 ?>
+<div class="homeOwner"> 
+  <div class="homeOwner__header">
+    <h1 class="homeOwner__title">PET HERO</h1>
+    <p class="homeOwner__subtitle">welcome keeper!!!</p>
+  </div>
 
-<link rel="stylesheet" href="<?php echo CSS_PATH ?>stylehome.css">
-  <div align="center"  id="pageintro" class="hoc clear"> 
-    <article class="center">
-      <h3 class="heading underline">Pet Hero</h3>
-      <p>Welcome Keeper!!!</p>
-      <div id="formFooter" class="buttons-site">
-        <a class="underlineHover" href="<?php echo FRONT_ROOT?>Keeper/RegistrationKeeper">Add Keeper</a>
+  <div class="homeOwner__menu">
+    <div class="homeOwner__menu--item">
+      <a class="underlineHover" href="<?php echo FRONT_ROOT?>Keeper/RegistrationKeeper">Add Keeper</a>
+    </div>
+  
+    <?php if($frontMessage){?>
+      <div class="homeOwner__menu--message">
+        <p class="check__message"><?php echo $frontMessage?></p>
       </div>
-    </article>
+    <?php }?>
   </div>
 </div>
-
 <?php 
   include_once('footer.php');
 ?> 

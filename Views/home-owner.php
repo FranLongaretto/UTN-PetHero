@@ -5,8 +5,8 @@
 
 <div class="homeOwner"> 
   <div class="homeOwner__header">
-    <h1 class="homeOwner__title">Pet Hero</h1>
-    <p class="homeOwner__subtitle">Welcome Owner!!!</p>
+    <h1 class="homeOwner__title">PET HERO</h1>
+    <p class="homeOwner__subtitle">welcome owner!!!</p>
   </div>
 
   <div class="homeOwner__menu">
