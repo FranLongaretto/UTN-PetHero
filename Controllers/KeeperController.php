@@ -35,8 +35,9 @@
             require_once(VIEWS_PATH."add-keeper.php");
         }
 
-        public function ShowListView()
+        public function ShowListView($message = "")
         {
+            $errorMessage = $message;
             $keeperList = $this->keeperDAO->getAll();
             
             require_once(VIEWS_PATH."keeper-list.php");
@@ -87,6 +88,11 @@
 
         public function CheckAvailability($dateStart, $dateEnd){
             $this->ShowListViewFilter($dateStart, $dateEnd);
+
+        }
+
+        public function Reservation($size,$salary, $available,$dateStart, $dateEnd)
+        {
 
         }
 

@@ -25,8 +25,8 @@
                                     <th>Size</th>
                                     <th>Salary</th>
                                     <th>Available</th>
-                                    <th>DateStart</th>
-                                    <th>DateEnd</th>
+                                    <th>Date Start</th>
+                                    <th>Date End</th>
 
                                 </tr>
                             </thead>
@@ -48,6 +48,13 @@
                 <!-- / main body -->
             </main>
             <div>
+                <?php
+                if($errorMessage){
+                    ?>
+                    <p><?php echo $errorMessage ?></p>
+                    <?php 
+                }
+                ?>
             <link rel="stylesheet" href="<?php echo CSS_PATH ?>styleDateFilter.css">
                 <h5 align="center">
                     APPLY FILTER DATE
