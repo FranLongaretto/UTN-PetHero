@@ -5,6 +5,7 @@
 ?>
 
 <div id="formContent">
+    <form action="<?php echo FRONT_ROOT?>Book/Reservation" method="POST">
         <div class="wrapper row4">
             <main style="background-color:white;"> 
             <div align="left">
@@ -22,20 +23,24 @@
                                     <th>Size</th>
                                     <th>Salary</th>
                                     <th>Available</th>
-                                    <th>DateStart</th>
-                                    <th>DateEnd</th>
+                                    <th>Date Start</th>
+                                    <th>Date End</th>
+                                    <th>Book</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                             <?php foreach($keeperListFilter as $keeper) { ?>
                                 <tr>
+                                    <input id="keeperId" name="keeperId" type="hidden" value="<?php echo $keeper->getId()?>">
                                     <td><?php echo $keeper->getSize() ?></td>
                                     <td><?php echo $keeper->getSalary() ?></td>
                                     <td><?php echo $keeper->getAvailable() ?></td>
                                     <td><?php echo $keeper->getDateStart() ?></td>
                                     <td><?php echo $keeper->getDateEnd() ?></td>
-                                
+                                    <td>
+                                        <input type="submit" class="fadeIn fourth" value="Reservation" >
+                                    </td>
                                 </tr>
                             <?php } ?>
                             </tbody>
@@ -44,8 +49,9 @@
                 </div>
                 <!-- / main body -->
             </main>
+           
         </div>
-
+    </form>   
 <?php 
     include('footer.php');
 ?>
