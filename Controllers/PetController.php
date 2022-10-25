@@ -15,16 +15,19 @@
 
         public function Index($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."index.php");
         }
 
         public function HomeOwner($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."home-owner.php");
         }
 
         public function HomeKeeper($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."home-keeper.php");
         }
 
@@ -41,7 +44,8 @@
             require_once(VIEWS_PATH."modify-pet.php");
         }
 
-        public function SignUpPet(){
+        public function SignUpPet($message = ""){
+            $frontMessage = $message;
             require_once(VIEWS_PATH."add-pet.php");
         }
 
@@ -92,15 +96,15 @@
             $pet->setDescription($description);
             $pet->setVaccination($vaccinationImg);
             $pet->setImage($petImage);
+            $pet->setIdOwner($_SESSION["loggedUser"]->id);
 
-            $this->PetDAO->Add($pet);
-            
-            $this->UploadImage();
-
-            $validationPet = ($pet != null);
-
-            if($validationPet){
-                $this->HomeOwner();
+            if($pet != null){
+                $this->PetDAO->Add($pet);
+                $this->UploadImage();
+                $this->HomeOwner("&#x2705; Pet created correctly");
+            }else{
+                $errorMessage = "";
+                $this->SignUpPet($errorMessage);
             }
         }
 

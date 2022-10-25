@@ -1,51 +1,33 @@
 <?php
-  //include_once('header.php');
- include_once('navOwner.php'); 
+  require_once("validate-session.php");
+  include_once("navOwner.php"); 
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Add Pet</title>
-        <link rel="stylesheet" href="<?php echo CSS_PATH ?>style.css">
-    </head>
+<div class="mainForm fadeInDown">
+  <div class="mainForm__container">
+    <!-- Login Form -->
+    <form action="<?php echo FRONT_ROOT?>Pet/Add" method="POST" enctype="multipart/form-data" class="mainForm__form">
+      <h2 class="mainForm__form--title">Add Pet</h2>
 
-    <body>
-      <div class="wrapper fadeInDown">
-        <div id="formContent">
-          <!-- Tabs Titles -->
+      <input type="text" id="race" class="mainForm__form--input fadeIn second" name="race" placeholder="Race" required>
 
-          <!-- Login Form -->
-          <form action="<?php echo FRONT_ROOT?>Pet/Add" method="POST" enctype="multipart/form-data">
-            <h2>Add Pet</h2>
-  
-            <input type="text" id="race" class="fadeIn second" name="race" placeholder="Race" required>
+      <select class="fadeIn third" name="size" id="size" required>
+        <option disabled selected>Seleccionar Size</option>
+        <option value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="big">Big</option>
+      </select>
 
-            <select class="fadeIn third" name="size" id="size" required>
-              <option disabled selected>Seleccionar Size</option>
-              <option value="pequeño">Pequeño</option>
-              <option value="mediano">Mediano</option>
-              <option value="grande">Grande</option>
-            </select>
+      <input type="file" accept="image/*" id="vaccination" class="inputImgVaccine fadeIn second" name="vaccinationImg" required>
 
-            <input type="file" accept="image/*" id="vaccination" class="fadeIn third" name="vaccinationImg" required>
+      <input type="text" id="description" class="mainForm__form--input fadeIn second" name="description" placeholder="Description" required>
 
-            <input type="text" id="description" class="fadeIn third" name="description" placeholder="Description" required>
+      <input type="file" accept="image/*" id="image" class="inputImgPet fadeIn second" name="petImage" required>
 
-            <input type="file" accept="image/*" id="image" class="fadeIn third" name="petImage" required>
-
-            <input type="submit" class="fadeIn fourth" value="Add Pet">
-
-            <a href="<?php echo FRONT_ROOT ?>User/HomeOwner" class="fadeIn second">Cancel</a>
-          </form>
-        </div>
+      <div class="formSend">
+        <input type="submit" class="mainForm__form--submit fadeIn third" value="Add Pet">
+        <a href="<?php echo FRONT_ROOT ?>User/HomeOwner" class="formSend__cancel">Cancel</a>
       </div>
-    </body>
-
-</html>
-<?php
-include('footer.php');
-?>
+    </form>
+  </div>
+</div>

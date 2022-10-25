@@ -1,19 +1,20 @@
-html, body {
-    height: 100%;
+.footer {
+    width: 100%; 
+    background-color: #39ace7;
+    padding: 15px 0;
+    font-weight: 700;
 }
-main {
-    min-height: 100%;
-    margin-bottom: -100px;
-    background: #ddd;
+
+.footer__container{
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
 }
-main:after {
-    content: "";
-    display: block;
-    height: 100px;
+
+.footer__title{
+    color: white;
 }
-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 2.5rem;            /* Footer height */
-  }
+
+.footer__copyright--item{
+    color: white;
+}

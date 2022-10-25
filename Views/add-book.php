@@ -1,16 +1,15 @@
 <?php
   //include_once('header.php');
- include_once('navKeeper.php'); 
+ include_once('navOwner.php'); 
  require_once("validate-session.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Add Keeper</title>
+        <title>Reservation</title>
         <link rel="stylesheet" href="<?php echo CSS_PATH ?>style.css">
         <!--  jQuery -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -30,14 +29,8 @@
           <!-- Tabs Titles -->
 
           <!-- Form -->
-          <form action="<?php echo FRONT_ROOT?>Keeper/Add" method="POST">
-            <h2>Add Keeper</h2>
-            <select class="fadeIn third" name="size" id="size" required>
-              <option disabled selected>Select Size</option>
-              <option value="small">Small</option>
-              <option value="medium">Medium</option>
-              <option value="big">Big</option>
-            </select>
+          <form action="<?php echo FRONT_ROOT?>Book/Add" method="POST">
+            <h2>Add Book</h2>
             <input type="number" id="salary" class="fadeIn third" name="salary" placeholder="Salary per hour $" min="0" oninput="validity.valid||(value='');" required>
             <select class="fadeIn third" name="available" id="available" required>
               <option disabled selected>Select Availability</option>
@@ -49,8 +42,8 @@
             <input type="date" name="dateStart" id="dateStart" class="form-control" aria-label="...">
             <input type="date" name="dateEnd" id="dateEnd" class="form-control" aria-label="...">
 
-            <input type="submit" class="fadeIn fourth" value="Add Keeper">
-            <a href="<?php echo FRONT_ROOT ?>User/HomeKeeper" class="fadeIn third">Cancel</a>
+            <input type="submit" class="fadeIn fourth" value="Confirm Book">
+             <a href="<?php echo FRONT_ROOT ?>Owner/ShowListKeeperView" class="btn btn-outline-primary">Cancel</a>
           </form>
         </div>
       </div>
@@ -61,17 +54,6 @@
 include('footer.php');
 ?>
 <script>
- /* $(document).ready(function(){
-    var date_input=$('input[name="date"]'); //our date input has the name "date"
-    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-    var options={
-      format: 'dd/mm/yyyy',
-      container: container,
-      todayHighlight: true,
-      autoclose: true,
-    };
-    date_input.datepicker(options);
-  })  */
 
   document.getElementById('dateStart').setAttribute('min', new Date().toISOString().split('T')[0])  
 </script>

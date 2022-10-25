@@ -15,20 +15,25 @@
 
         public function Index($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."index.php");
         }
+        
         public function Home($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."home.php");
         }
 
         public function HomeKeeper($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."home-keeper.php");
         }
 
         public function HomeOwner($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."home-owner.php");
         }
         
@@ -41,49 +46,52 @@
         public function ShowListView()
         {
             $userList = $this->userDAO->getAll();
-            
             require_once(VIEWS_PATH."user-list.php");
         }
 
         public function ShowModifyView($id) {
             $user = $this->userDAO->GetById($id);
-           
             require_once(VIEWS_PATH."modify-user.php");
-            
         }
 
-        public function SignUp(){
+        public function SignUp($message = ""){
+            $frontMessage = $message;
             require_once(VIEWS_PATH."add-user.php");
         }
 
         public function Add($email, $password, $role, $firstName, $lastName, $dni, $phoneNumber)
         {
+            $emailCheck= $this->userDAO->GetByEmail($email);
 
-            $user = new User();
-            $user->setEmail($email);
-            $user->setPassword($password);
-            $user->setRole($role);
-            $user->setFirstName($firstName);
-            $user->setLastName($lastName);
-            $user->setDni($dni);
-            $user->setPhoneNumber($phoneNumber);
+            if(!$emailCheck){ /// if the email doestn exist in the json.. add user
+                $user = new User();
+                $user->setEmail($email);
+                $user->setPassword($password);
+                $user->setRole($role);
+                $user->setFirstName($firstName);
+                $user->setLastName($lastName);
+                $user->setDni($dni);
+                $user->setPhoneNumber($phoneNumber);
 
-            $this->userDAO->Add($user);
+                $this->userDAO->Add($user);
 
-            $validationUser = ($user != null) && ($user->getPassword() === $password);
-            $validationRolKeeper= ($user->getRole() === "Keeper");
-            $validationRolOwner= ($user->getRole() === "Owner");
-
-            if($validationUser && $validationRolKeeper){
-                $this->HomeKeeper();
-            }else if($validationUser && $validationRolOwner){
-                $this->HomeOwner();
+                $validationUser = ($user != null) && ($user->getPassword() === $password);
+                $validationRolKeeper= ($user->getRole() === "Keeper");
+                $validationRolOwner= ($user->getRole() === "Owner");
+    
+                if($validationUser && $validationRolKeeper){
+                    $this->HomeKeeper();
+                }else if($validationUser && $validationRolOwner){
+                    $this->HomeOwner();
+                }else{
+                    $this->Home();
+                }
             }else{
-                $this->Home();
+                $this->SignUp("Email already exists in database");
             }
             
-        }
 
+        }
 
         public function Modify($email, $password, $id)
         {
@@ -95,12 +103,9 @@
             $user->setPassword($password);
 
             $this->userDAO->Modify($user);
-           
 
             $this->ShowListView();
         }
-
-       
 
         public function Delete($id)
         {
@@ -111,15 +116,23 @@
 
         
 
-        ///LOGEO 
-        
+        ///LOGEO
         public function Login($email, $password) {
+            $validationUser = false;
+            $validationRolKeeper= false;
+            $validationRolOwner= false;
 
-            $user = $this->userDAO->GetByEmail($email);
+            if($email){
+                $user = $this->userDAO->GetByEmail($email);
+            }else{
+                $this->Index("Email no válido");
+            }
 
-            $validationUser = ($user != null) && ($user->getPassword() === $password);
-            $validationRolKeeper= ($user->getRole() === "Keeper");
-            $validationRolOwner= ($user->getRole() === "Owner");
+            if($user != null && $user->getPassword() === $password){
+                $validationUser = ($user->getPassword() === $password);
+                $validationRolKeeper= ($user->getRole() === "Keeper");
+                $validationRolOwner= ($user->getRole() === "Owner");
+            }
 
             if($validationUser && $validationRolKeeper)
             {   //Entra a home Keeper
@@ -133,21 +146,16 @@
                 
             }else{
                 //Devuelve al Login por error en validacion de datos.
-                echo "<script> if(confirm('Verify your information'));";
-                echo "window.location = '../index.php';
-                    </script>";
-                //$this->Index("Usuario y/o Contraseña incorrecto");
+                $errorMessage = $user != null ? "Contraseña incorrecta" : "Usuario incorrecto";
+                $this->Index($errorMessage);
             }
         }
+
         public function Logout () {
 			session_destroy();
-            //$this->Index();
-            
             //use javascript to redirect to index to show the icon.
             echo "<script>window.location = '../index.php';
                 </script>";
-            
-            
         }
     }        
 ?>

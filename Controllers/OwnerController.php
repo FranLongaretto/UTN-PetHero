@@ -51,8 +51,9 @@
             
             require_once(VIEWS_PATH."owner-list.php");
         }
-        public function ShowListKeeperView()
+        public function ShowListKeeperView($message = "")
         {
+            $errorMessage = $message;
             $keeperList = $this->keeperDAO->getAll();
             require_once(VIEWS_PATH."keeper-list.php");
         }

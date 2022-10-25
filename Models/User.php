@@ -3,10 +3,10 @@
     namespace Models;
 
     class User {
-        private $id;
+        public $id;
         private $email;
         private $password;
-        private $role; //Owner or Keeper
+        private $role;  //Owner or Keeper
         private $firstName;
         private $lastName;
         private $dni;

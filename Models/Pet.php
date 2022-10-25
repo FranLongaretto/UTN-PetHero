@@ -4,11 +4,12 @@
 
     class Pet {
         private $id;
+        private $idOwner;
         private $race;
         private $size;
-        private $vaccination; // esto creo que es imagen de vacunacion
+        private $vaccination; // Imagen de vacunacion
         private $description;
-        private $image; // esto no iria por lo de arriba
+        private $image; // Imagen de Mascota
 
         public function getId(){
             return $this->id;
@@ -16,6 +17,15 @@
 
         public function setId($id){
             $this->id = $id;
+            return $this;
+        }
+
+        public function getIdOwner(){
+            return $this->idOwner;
+        }
+
+        public function setIdOwner($idOwner){
+            $this->idOwner = $idOwner;
             return $this;
         }
 

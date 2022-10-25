@@ -1,48 +1,29 @@
+<div class="mainForm fadeInDown">
+  <div class="mainForm__container">
+    <!-- Icon -->
+    <div class="mainForm__header fadeIn first">
+      <img class="mainForm__header--img" src="<?php echo FRONT_ROOT.VIEWS_PATH?>img/dogIcon.png" id="icon" alt="User Icon" />
+    </div>
 
-<!DOCTYPE html>
-<html lang="en">
+    <!-- Login Form -->
+    <form action="<?php echo FRONT_ROOT?>User/Login" method="POST" class="mainForm__form">
+      <input type="email" id="email" class="mainForm__form--input fadeIn second" name="email" placeholder="Email">
+      <input type="password" id="password" class="mainForm__form--input fadeIn second" name="password" placeholder="Password">
+      <input type="submit" class="mainForm__form--submit fadeIn second" value="Log In">
+      <?php if($frontMessage){?>
+        <p class="error__message"><?php echo $frontMessage?></p>
+      <?php }?>
+    </form>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login and Register</title>
-        <link rel="stylesheet" href="<?php echo CSS_PATH ?>style.css">
-        
-    </head>
+    <!-- Sing Up -->
+    <div class="mainForm__SignUp">
+      <a class="mainForm__SignUp--item" href="<?php echo FRONT_ROOT?>User/SignUp">Sign Up</a>
+    </div>
 
-    <body class="main">
-      <div class="wrapper fadeInDown">
-        <div id="formContent">
-          <!-- Tabs Titles -->
-
-          <!-- Icon -->
-          <div class="fadeIn first">
-            <img src="<?php echo VIEWS_PATH?>img/dogIcon.png" id="icon" alt="User Icon" />
-          </div>
-
-          <!-- Login Form -->
-          <form action="<?php echo FRONT_ROOT?>User/Login" method="POST">
-            <input type="email" id="email" class="fadeIn second" name="email" placeholder="email">
-            <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
-            <input type="submit" class="fadeIn fourth" value="Log In">
-          </form>
-
-          <!-- Sing Up -->
-          <div id="formFooter">
-            <a class="underlineHover" href="<?php echo FRONT_ROOT?>User/SignUp">Sign Up</a>
-          </div>
-          <!-- Remind Passowrd -->
-          <div id="formFooter">
-            <a class="underlineHover" href="#">Forgot Password?</a>
-          </div>
-          
-        </div>
-      </div>
-    </body>
-
-</html>
-<?php
-
-include('footer.php');
-?>
+    <!-- Remind Passowrd -->
+    <div class="mainForm__Forgot">
+      <a class="mainForm__Forgot--item" href="#">Forgot Password?</a>
+    </div>
+    
+  </div>
+</div>

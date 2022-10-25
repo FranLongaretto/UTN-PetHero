@@ -29,9 +29,17 @@
               <input type="text" id="dni" class="fadeIn third" name="dni" placeholder="dni" required>
               <input type="text" id="phoneNumber" class="fadeIn third" name="phoneNumber" placeholder="phone number" required>
               <input type="submit" class="fadeIn fourth" value="Sign Up">
+              <a href="<?php echo FRONT_ROOT ?>User/Index" class="fadeIn third">Cancel</a>
+              <div>
+               <?php
+                    if($message != "") {
+                         echo "<div class='container alert alert-danger mt-3 p-3 text-center'>
+                         <p><strong>" . $message . "</strong></p>
+                         </div>";
+                    }
+               ?>
+               </div>
             </form>
-
-
           </div>
       </div>
     </body>
