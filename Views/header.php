@@ -15,6 +15,7 @@
      <link rel="stylesheet" href="<?php echo CSS_PATH ?>navbar.css">
      <link rel="stylesheet" href="<?php echo CSS_PATH ?>styleDateFilter.css">
 
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body class="main">
      <div class="main__container">

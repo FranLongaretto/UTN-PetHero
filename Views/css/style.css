@@ -427,6 +427,56 @@ h2.active {
 
 
 /* -------------- HOME OWNER -------------- */
+.homeOwner{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 300px;
+  margin: 100px auto 0;
+  background: #fff;
+  padding: 50px 30px;
+  border-radius: 20px;
+  -webkit-box-shadow: 0 30px 30px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 30px 0 rgba(0,0,0,0.3);
+}
+
+.homeOwner__header{
+  text-align: center;
+  color: #39ace7;
+  margin-bottom: 40px;
+}
+
+.homeOwner__title{
+  font-size: 45px;
+}
+
+.homeOwner__subtitle{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.homeOwner__menu{
+  text-align: center;
+}
+
+.homeOwner__menu--item{
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  background: #00000017;
+  border-radius: 20px;
+  padding: 5px 20px;
+}
+
+.homeOwner__menu--item a{
+  text-decoration: none;
+}
+
+.homeOwner__menu--item a:hover{
+  color: #39ace7;
+}
+
 .check__message{
   margin: 0;
   font-weight: bold;
