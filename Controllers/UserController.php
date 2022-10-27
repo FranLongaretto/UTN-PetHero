@@ -2,15 +2,18 @@
     namespace Controllers;
 
     use DAO\UserDAO as UserDAO;
+    use DAO\UserDAOBD as UserDAOBD;
     use Models\User as User;
 
     class UserController
     {
         private $userDAO;
+        private $userDAOBD;
 
         public function __construct()
         {
             $this->userDAO = new UserDAO();
+            $this->userDAOBD = new UserDAOBD();
         }
 
         public function Index($message = "")
@@ -61,7 +64,10 @@
 
         public function Add($email, $password, $role, $firstName, $lastName, $dni, $phoneNumber)
         {
-            $emailCheck= $this->userDAO->GetByEmail($email);
+            /*JSON/
+           // $emailCheck= $this->userDAO->GetByEmail($email);
+           /*BD*/
+            $emailCheck= $this->userDAOBD->GetByEmailPDO($email, $password);
 
             if(!$emailCheck){ /// if the email doestn exist in the json.. add user
                 $user = new User();
@@ -73,15 +79,16 @@
                 $user->setDni($dni);
                 $user->setPhoneNumber($phoneNumber);
 
-                $this->userDAO->Add($user);
-
+                $this->userDAOBD->Add($user);
                 $validationUser = ($user != null) && ($user->getPassword() === $password);
                 $validationRolKeeper= ($user->getRole() === "Keeper");
                 $validationRolOwner= ($user->getRole() === "Owner");
     
                 if($validationUser && $validationRolKeeper){
+                    $_SESSION["loggedUser"] = $user;
                     $this->HomeKeeper();
                 }else if($validationUser && $validationRolOwner){
+                    $_SESSION["loggedUser"] = $user;
                     $this->HomeOwner();
                 }else{
                     $this->Home();
@@ -123,23 +130,29 @@
             $validationRolOwner= false;
 
             if($email){
-                $user = $this->userDAO->GetByEmail($email);
+                /*Get in JSON*/
+                //$user = $this->userDAO->GetByEmail($email);
+                $user = $this->userDAOBD->GetByEmailPDO($email, $password);
+                ///descryp password
+                $hash= $user->getPassword();
+                $verify = password_verify($password, $hash);
             }else{
                 $this->Index("Email no válido");
             }
-
-            if($user != null && $user->getPassword() === $password){
+            
+            if($user != null && $verify){
+               
                 $validationUser = ($user->getPassword() === $password);
                 $validationRolKeeper= ($user->getRole() === "Keeper");
                 $validationRolOwner= ($user->getRole() === "Owner");
             }
 
-            if($validationUser && $validationRolKeeper)
+            if($verify && $validationRolKeeper)
             {   //Entra a home Keeper
                 $_SESSION["loggedUser"] = $user;
                 $this->HomeKeeper();
                 
-            }else if($validationUser && $validationRolOwner){
+            }else if($verify && $validationRolOwner){
                 //Entra a home Owner
                 $_SESSION["loggedUser"] = $user;
                 $this->HomeOwner();
