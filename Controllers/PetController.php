@@ -2,6 +2,7 @@
     namespace Controllers;
 
     use DAO\PetDAO as PetDAO;
+    use DAO\PetDAOBD as PetDAOBD;
     use Models\Pet as Pet;
 
     class PetController
@@ -39,7 +40,8 @@
         }
 
         public function ShowModifyView($id) {
-            $pet = $this->petDAO->GetById($id);
+            //$pet = $this->petDAO->GetById($id);
+            $pet = $this->petDAOBD->GetById($id);
         
             require_once(VIEWS_PATH."modify-pet.php");
         }
@@ -99,7 +101,8 @@
             $pet->setIdOwner($_SESSION["loggedUser"]->id);
 
             if($pet != null){
-                $this->PetDAO->Add($pet);
+                //$this->PetDAO->Add($pet);
+                $this->PetDAOBD->Add($pet);
                 $this->UploadImage();
                 $this->HomeOwner("&#x2705; Pet created correctly");
             }else{

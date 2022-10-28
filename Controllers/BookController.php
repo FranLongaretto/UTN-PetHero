@@ -5,10 +5,8 @@
     use DAO\UserDAO as UserDAO;
     use DAO\BookDAO as BookDAO;
     use DAO\KeeperDAO as KeeperDAO;
-    use DAO\OwnerDAO as OwnerDAO;
     use Models\Book as Book;
     use Models\Keeper as Keeper;
-    use Models\Owner as Owner;
     use Models\User as User;
    
 
@@ -16,14 +14,12 @@
     {
         private $bookDAO;
         private $keeperDAO;
-        private $ownerDAO;
         private $keeperController;
 
         public function __construct()
         {
             $this->bookDAO = new BookDAO();
             $this->keeperDAO = new KeeperDAO();
-            $this->ownerDAO = new OwnerDAO();
             $this->keeperController = new KeeperController();
         }
 
