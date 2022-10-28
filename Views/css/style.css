@@ -32,6 +32,7 @@ a {
   text-decoration: none;
   font-weight: 600;
 }
+
 a:hover {
   color: #39ace7;
   text-decoration: none;
@@ -594,8 +595,8 @@ td, th {
   border-radius: 5px;
 }
 
-/* -------------- HOME OWNER -------------- */
-.homeOwner{
+/* -------------- HOME USER -------------- */
+.homeUser{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -609,27 +610,27 @@ td, th {
   box-shadow: 0 30px 30px 0 rgba(0,0,0,0.3);
 }
 
-.homeOwner__header{
+.homeUser__header{
   text-align: center;
   color: #39ace7;
   margin-bottom: 40px;
 }
 
-.homeOwner__title{
+.homeUser__title{
   font-family: 'Impact'; 
   font-size: 45px;
 }
 
-.homeOwner__subtitle{
+.homeUser__subtitle{
   font-size: 20px;
   font-weight: 600;
 }
 
-.homeOwner__menu{
+.homeUser__menu{
   text-align: center;
 }
 
-.homeOwner__menu--item{
+.homeUser__menu--item{
   font-size: 20px;
   text-transform: uppercase;
   margin-bottom: 10px;
@@ -638,7 +639,7 @@ td, th {
   padding: 5px 20px;
 }
 
-.homeOwner__menu--item a{
+.homeUser__menu--item a{
   text-decoration: none;
 }
 
