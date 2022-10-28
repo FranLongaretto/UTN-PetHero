@@ -4,7 +4,6 @@
     use DAO\IBookDAO as IBookDAO;
     use Models\Book as Book;
     use Models\Keeper as Keeper;
-    use Models\Owner as Owner;
 
     class BookDAO implements IBookDAO {
         private $fileName = ROOT."Database/books.json";
