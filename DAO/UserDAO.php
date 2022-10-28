@@ -9,6 +9,8 @@
     {
         private $userList = array();
         private $fileName = ROOT."Database/user.json";
+        private $connection;
+        private $tableName = "user";
 
         public function Add(User $user)
         {
@@ -41,29 +43,29 @@
 
         private function RetrieveData()
         {
-             $this->userList = array();
+            $this->userList = array();
 
-             if(file_exists($this->fileName))
-             {
-                 $jsonToDecode = file_get_contents($this->fileName);
+            if(file_exists($this->fileName))
+            {
+                $jsonToDecode = file_get_contents($this->fileName);
 
-                 $contentArray = ($jsonToDecode) ? json_decode($jsonToDecode, true) : array();
-                 
-                 foreach($contentArray as $content)
-                 {
-                     $user = new User();
-                     $user->setId($content["id"]);
-                     $user->setEmail($content["email"]);
-                     $user->setPassword($content["password"]);
-                     $user->setRole($content["role"]);
-                     $user->setFirstName($content["firstName"]);
-                     $user->setLastName($content["lastName"]);
-                     $user->setDni($content["dni"]);
-                     $user->setPhoneNumber($content["phoneNumber"]);
+                $contentArray = ($jsonToDecode) ? json_decode($jsonToDecode, true) : array();
+                
+                foreach($contentArray as $content)
+                {
+                    $user = new User();
+                    $user->setId($content["id"]);
+                    $user->setEmail($content["email"]);
+                    $user->setPassword($content["password"]);
+                    $user->setRole($content["role"]);
+                    $user->setFirstName($content["firstName"]);
+                    $user->setLastName($content["lastName"]);
+                    $user->setDni($content["dni"]);
+                    $user->setPhoneNumber($content["phoneNumber"]);
 
-                     array_push($this->userList, $user);
-                 }
-             }
+                    array_push($this->userList, $user);
+                }
+            }
         }
 
     
@@ -145,6 +147,6 @@
 
             return $id + 1;
         }
-     
+       
     }
 ?>
