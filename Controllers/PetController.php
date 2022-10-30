@@ -2,15 +2,19 @@
     namespace Controllers;
 
     use DAO\PetDAO as PetDAO;
+    use DAO\PetDAOBD as PetDAOBD;
     use Models\Pet as Pet;
+    use DAO\Connection as Connection;
 
     class PetController
     {
         private $PetDAO;
+        private $PetDAOBD;
 
         public function __construct()
         {
             $this->PetDAO = new PetDAO();
+            $this->PetDAOBD = new PetDAOBD();
         }
 
         public function Index($message = "")
@@ -33,13 +37,15 @@
 
         public function ShowListView()
         {
-            $petList = $this->PetDAO->getAll();
+           // $petList = $this->PetDAO->getAll();
+            $petList = $this->PetDAOBD->GetAllPDO();
             
             require_once(VIEWS_PATH."pet-list.php");
         }
 
         public function ShowModifyView($id) {
-            $pet = $this->petDAO->GetById($id);
+            //$pet = $this->petDAO->GetById($id);
+            $pet = $this->petDAOBD->GetById($id);
         
             require_once(VIEWS_PATH."modify-pet.php");
         }
@@ -88,19 +94,64 @@
             }
         }
 
+        public function UploadImageBD()
+        {
+            var_dump("entro al upload image db");
+            $targetDir = IMG_PATH . "/vaccination/";
+            $fileName = basename($_FILES["vaccinationImg"]["name"]);
+            $targetFilePath = $targetDir . $fileName;
+            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+
+            if(isset($_POST["submit"]) && !empty($_FILES["vaccinationImg"]["name"])){
+                // Allow certain file formats
+                $allowTypes = array('jpg','png','jpeg','gif','pdf');
+                if(in_array($fileType, $allowTypes)){
+                    // Upload file to server
+                    if(move_uploaded_file($_FILES["vaccinationImg"]["tmp_name"], $targetFilePath)){
+                        // Insert image file name into database
+                        
+                        $insert = "INSERT into pet (vaccination VALUES ('".$fileName."')";
+                        var_dump($insert);
+                        $connection = Connection::getInstance();
+                        $resultSet = $connection->Execute($insert);
+                        if($resultSet){
+                            $statusMsg = "The file ".$fileName. " has been uploaded successfully.";
+                        }else{
+                            $statusMsg = "File upload failed, please try again.";
+                        } 
+                    }else{
+                        $statusMsg = "Sorry, there was an error uploading your file.";
+                    }
+                }else{
+                    $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
+                }
+            }else{
+                $statusMsg = 'Please select a file to upload.';
+            }
+
+
+        }
+
         public function Add($race, $size, $description, $vaccinationImg, $petImage)
         {
+            //var_dump($vaccinationImg["name"]);
             $pet = new Pet();
             $pet->setRace($race);
             $pet->setSize($size);
+            //$pet->setVaccination($vaccinationImg);//JSON
+            $pet->setVaccination($vaccinationImg["name"]);
             $pet->setDescription($description);
             $pet->setVaccination($vaccinationImg);
-            $pet->setImage($petImage);
-            $pet->setIdOwner($_SESSION["loggedUser"]->id);
+            //$pet->setImage($petImage); //JSON
+            $pet->setImage($petImage["name"]);
+            $pet->setIdUser($_SESSION["loggedUser"]->id);
 
             if($pet != null){
-                $this->PetDAO->Add($pet);
+                //$this->PetDAO->Add($pet);
+                var_dump($pet);
+                $this->PetDAOBD->Add($pet);
                 $this->UploadImage();
+                //$this->UploadImageBD();
                 $this->HomeOwner("&#x2705; Pet created correctly");
             }else{
                 $errorMessage = "";

@@ -28,10 +28,11 @@ p{
 }
 
 a {
-  color: #005e8f;
+  color: #2392ce;
   text-decoration: none;
   font-weight: 600;
 }
+
 a:hover {
   color: #39ace7;
   text-decoration: none;
@@ -490,6 +491,44 @@ label{
 
 /* -------------- TABLES -------------- */
 
+#idKeeper {
+  background-color: #39ace7;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center; 
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  margin: 10px auto 20px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#idKeeper:hover  {
+  background-color: #39ace7;
+  border: none;
+}
+
+#idKeeper:active  {
+  border: none;
+  -moz-transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+
+
 h2.inactive {
   color: #ccc;
 }
@@ -510,6 +549,7 @@ table img{
   height: 200px;
   object-fit: contain;
 }
+
 
 tr { 
 	background: #eee; 
@@ -555,8 +595,8 @@ td, th {
   border-radius: 5px;
 }
 
-/* -------------- HOME OWNER -------------- */
-.homeOwner{
+/* -------------- HOME USER -------------- */
+.homeUser{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -570,26 +610,27 @@ td, th {
   box-shadow: 0 30px 30px 0 rgba(0,0,0,0.3);
 }
 
-.homeOwner__header{
+.homeUser__header{
   text-align: center;
   color: #39ace7;
   margin-bottom: 40px;
 }
 
-.homeOwner__title{
+.homeUser__title{
+  font-family: 'Impact'; 
   font-size: 45px;
 }
 
-.homeOwner__subtitle{
+.homeUser__subtitle{
   font-size: 20px;
   font-weight: 600;
 }
 
-.homeOwner__menu{
+.homeUser__menu{
   text-align: center;
 }
 
-.homeOwner__menu--item{
+.homeUser__menu--item{
   font-size: 20px;
   text-transform: uppercase;
   margin-bottom: 10px;
@@ -598,7 +639,7 @@ td, th {
   padding: 5px 20px;
 }
 
-.homeOwner__menu--item a{
+.homeUser__menu--item a{
   text-decoration: none;
 }
 

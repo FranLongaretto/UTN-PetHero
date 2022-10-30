@@ -2,16 +2,19 @@
     namespace Controllers;
 
     use DAO\KeeperDAO as KeeperDAO;
+    use DAO\KeeperDAOBD as KeeperDAOBD;
     use Models\Keeper as Keeper;
    
 
     class KeeperController
     {
         private $keeperDAO;
+        private $keeperDAOBD;
 
         public function __construct()
         {
             $this->keeperDAO = new KeeperDAO();
+            $this->keeperDAOBD = new KeeperDAOBD();
         }
 
         public function Index($message = "")
@@ -25,6 +28,7 @@
 
         public function HomeKeeper($message = "")
         {
+            $frontMessage = $message;
             require_once(VIEWS_PATH."home-keeper.php");
         }
 
@@ -39,7 +43,8 @@
         {
             $errorMessage = $message;
             
-            $keeperList = $this->keeperDAO->getAll();
+            //$keeperList = $this->keeperDAO->getAll();
+            $keeperList = $this->keeperDAOBD->GetAllPDO();
             
             require_once(VIEWS_PATH."keeper-list.php");
         }
@@ -47,6 +52,7 @@
         public function ShowListViewFilter($dateStart, $dateEnd)
         {
             $keeperListFilter = $this->keeperDAO->getAllFilter($dateStart, $dateEnd);
+            //$keeperListFilter = $this->keeperDAOBD->GetAllFilterPDO($dateStart, $dateEnd);
             
             require_once(VIEWS_PATH."keeper-listfilter.php");
         }
@@ -73,17 +79,12 @@
             $keeper->setDateStart($dateStart);
             $keeper->setDateEnd($dateEnd);
 
-            $this->keeperDAO->Add($keeper);
+            //$this->keeperDAO->Add($keeper);
+            $this->keeperDAOBD->Add($keeper);
 
             $this->HomeKeeper();
 
-            /*$validationUser = ($keeper != null) && ($keeper->getPassword() === $password);
-    
-            if($validationUser){
-                $this->HomeKeeper();
-            }else{
-                $this->Index();
-            }*/
+            
             
         }
 

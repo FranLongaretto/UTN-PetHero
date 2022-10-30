@@ -88,5 +88,26 @@
             "error": 0,
             "size": 252305
         }
+    },
+    {
+        "id": 5,
+        "idOwner": 1,
+        "race": "caniche",
+        "size": "small",
+        "vaccination": {
+            "name": "vacunacioncaniche.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\php552A.tmp",
+            "error": 0,
+            "size": 37606
+        },
+        "description": "caniche blanco",
+        "image": {
+            "name": "canichetoy.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\php552B.tmp",
+            "error": 0,
+            "size": 119240
+        }
     }
 ]

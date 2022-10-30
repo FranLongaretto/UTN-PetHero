@@ -11,7 +11,7 @@
 
         function Add(Book $book)
         {
-            var_dump($book);
+            //var_dump($book);
             $this->RetrieveData();
 
             $book->setId($this->GetNextId());
@@ -53,9 +53,10 @@
             $arrayEncode = array();
 
             foreach($this->bookList as $Book) {
+                
                 $value["id"] = $Book->getId();
-                $value["keeperId"] = $Book->getKeeperId();
-                $value["ownerId"] = $Book->getOwnerId();
+                $value["idKeeper"] = $Book->getIdKeeper();
+                $value["idOwner"] = $Book->getIdOwner();
                // $value["dateBook"] = $Book->getDateBook();
            
                 array_push($arrayEncode, $value);
@@ -74,21 +75,27 @@
                  $arrayDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
                  
                  foreach($arrayDecode as $value) {
-                    $keeper = new Keeper();
-                    $keeper->setId($value["id"]);
-
-                    $owner = new Owner();
-                    $owner->setId($value["id"]);
-
-
+                   
                     $Book = new Book();
                     $Book->setId($value["id"]);
-                    $Book->setKeeper($keeper);
-                    $Book->setOwner($owner);
+                    $Book->setIdKeeper($value["idKeeper"]);
+                    $Book->setIdOwner($value["idOwner"]);
                     //$Book->setDateBook($value["dateKeeper"]);
 
                     array_push($this->bookList, $Book);
                  }
              }
+        }
+
+        private function GetNextId()
+        {
+            $id = 0;
+
+            foreach($this->bookList as $book)
+            {
+                $id = ($book->getId() > $id) ? $book->getId() : $id;
+            }
+
+            return $id + 1;
         }
     }
