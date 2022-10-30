@@ -15,19 +15,23 @@
 
         public function GetAllPDO() {
             try {
-                $keeperList = array();
+                
+                
+                $petList = array();
                 $query = "SELECT * FROM " . $this->tableName;
                 $this->connection = Connection::getInstance();
                 $resultSet = $this->connection->Execute($query);
                 foreach($resultSet as $row) {
                     $pet = new Pet();
                     $pet->setId($row["id"]);
-                    $pet->setIdOwner($row["idOwner"]);
+                    $pet->setIdUser($row["idUser"]);
                     $pet->setRace($row["race"]);
                     $pet->setSize($row["size"]);
                     $pet->setVaccination($row["vaccination"]);
                     $pet->setDescription($row["description"]);
-                    $pet->setImage($row["image"]);
+                    $pet->setImage($row["image"]); 
+                
+                    
 
                     array_push($petList, $pet);
                 }
@@ -42,7 +46,7 @@
         {
             try
             {
-                $keeperList = array();
+                $petList = array();
     
                 $query = "SELECT * FROM ".$this->tableName." WHERE (id = :id);";
     
@@ -57,7 +61,7 @@
 
                     $pet = new Pet();
                     $pet->setId($row["id"]);
-                    $pet->setIdOwner($row["idOwner"]);
+                    $pet->setIdUser($row["idUser"]);
                     $pet->setRace($row["race"]);
                     $pet->setSize($row["size"]);
                     $pet->setVaccination($row["vaccination"]);
@@ -78,11 +82,11 @@
         {
             try
             {
-    
-                $query = "INSERT INTO ".$this->tableName." (id,idOwner,race ,size ,vaccination , description, image ) VALUES (:id, :idOwner, :race, :size, :vaccination, :description, :image);";
+                var_dump($pet);
+                $query = "INSERT INTO ".$this->tableName." (id,idUser,race ,size ,vaccination , description, image ) VALUES (:id, :idUser, :race, :size, :vaccination, :description, :image);";
                 
                 $parameters["id"] = $pet->getId();
-                $parameters["idOwner"] = $pet->getIdOwner();
+                $parameters["idUser"] = $pet->getIdUser();
                 $parameters["race"] = $pet->getRace();
                 $parameters["size"] = $pet->getSize();
                 $parameters["vaccination"] = $pet->getVaccination();
