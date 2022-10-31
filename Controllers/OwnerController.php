@@ -3,16 +3,19 @@
 
     use Models\Pet as Pet;
     use DAO\KeeperDAO as KeeperDAO;
+    use DAO\KeeperDAOBD as KeeperDAOBD;
     use Models\Keeper as Keeper;
    
 
     class OwnerController
     {
         private $keeperDAO;
+        private $keeperDAOBD;
 
         public function __construct()
         {
             $this->keeperDAO = new keeperDAO();
+            $this->keeperDAOBD = new keeperDAOBD();
         }
 
         public function Index($message = "")
@@ -29,7 +32,8 @@
         public function ShowListKeeperView($message = "")
         {
             $errorMessage = $message;
-            $keeperList = $this->keeperDAO->getAll();
+            //$keeperList = $this->keeperDAO->getAll();
+            $keeperList = $this->keeperDAOBD->GetAllPDO();
             require_once(VIEWS_PATH."keeper-list.php");
         }
 

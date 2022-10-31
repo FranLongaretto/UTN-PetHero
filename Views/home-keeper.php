@@ -13,6 +13,9 @@
     <div class="homeUser__menu--item">
       <a href="<?php echo FRONT_ROOT?>Keeper/RegistrationKeeper">Add Keeper</a>
     </div>
+    <div class="homeUser__menu--item">
+      <a href="<?php echo FRONT_ROOT?>Book/ShowListView">Show List Book</a>
+    </div>
   
     <?php if($frontMessage){?>
       <div class="homeUser__menu--message">
