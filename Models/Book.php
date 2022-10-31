@@ -4,7 +4,7 @@
     class Book{
         private $id;
         private $idKeeper; 
-        private $idOwner; 
+        private $idUser; 
         //private $dateBook;
 
         
@@ -51,21 +51,21 @@
        
 
         /**
-         * Get the value of idOwner
+         * Get the value of idUser
          */ 
-        public function getIdOwner()
+        public function getIdUser()
         {
-                return $this->idOwner;
+                return $this->idUser;
         }
 
         /**
-         * Set the value of idOwner
+         * Set the value of idUser
          *
          * @return  self
          */ 
-        public function setIdOwner($idOwner)
+        public function setIdUser($idUser)
         {
-                $this->idOwner = $idOwner;
+                $this->idUser = $idUser;
 
                 return $this;
         }

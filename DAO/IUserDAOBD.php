@@ -7,5 +7,6 @@ interface IUserDAOBD{
     function Add(User $newUser);
     function GetAllPDO();
     function GetByEmailPDO($email, $password);
+    function GetById($id);
 }
 ?>
