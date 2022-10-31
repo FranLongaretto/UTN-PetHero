@@ -16,7 +16,7 @@
         <option value="big">Big</option>
       </select>
 
-      <input type="number" id="salary" class="mainForm__form--input fadeIn second" name="salary" placeholder="Salary per hour $" min="0" oninput="validity.valid||(value='');" required>
+      <input type="number" id="salary" class="mainForm__form--input fadeIn second" name="salary" placeholder="Salary per day $" min="0" oninput="validity.valid||(value='');" required>
       
       <select class="mainForm__form--input fadeIn third" name="available" id="available" required>
         <option disabled selected>Select Availability</option>
