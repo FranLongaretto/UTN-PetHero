@@ -30,6 +30,7 @@
                     $keeper->setDateStart($row["dateStart"]);
                     $keeper->setDateEnd($row["dateEnd"]);
 
+
                     array_push($keeperList, $keeper);
                 }
                 return $keeperList;
@@ -41,20 +42,14 @@
         public function GetAllFilterPDO($dateStart, $dateEnd) {
             try {
                 $keeperList = array();
-                /* $dateStart = date_create();
-                $dateStartFormat = date_format($dateStart, 'Y-m-d');
-                var_dump($dateStartFormat);
-                $dateEnd = date_create();
-                $dateEndFormat = date_format($dateEnd, 'Y-m-d');
-                var_dump($dateEndFormat);
-                */
-                $query = "SELECT * FROM " . $this->tableName." WHERE (dateStart = :dateStart, dateEnd = :dateEnd);";
-                $parameters['dateStart'] = $dateStart;
+                //$query = "SELECT * FROM " . $this->tableName." WHERE (dateStart = :dateStart and dateEnd = :dateEnd);";
+                $query = "SELECT * FROM " . $this->tableName." WHERE ( dateEnd = :dateEnd) ;";
+                //$parameters['dateStart'] = $dateStart;
                 $parameters['dateEnd'] = $dateEnd;
              
                 $this->connection = Connection::getInstance();
                 $resultSet = $this->connection->Execute($query, $parameters);
-                var_dump($resultSet);
+
                 foreach($resultSet as $row) {
                     $keeper = new Keeper();
                     $keeper->setId($row["id"]);

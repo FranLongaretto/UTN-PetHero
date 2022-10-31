@@ -79,6 +79,50 @@ class UserDAOBD implements IUserDAOBD{
             throw $ex;
         }
     }    
+
+    public function GetById($id) 
+    {
+        try
+        {
+            $userList = array();
+
+            $query = "SELECT * FROM ".$this->tableName." WHERE (id = :id);";
+
+            $parameters['id'] = $id;
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query, $parameters);
+            
+            foreach ($resultSet as $row)
+            {      
+                 ///validation for descrypt password
+               // $hash= $row["password"];
+               // $verify = password_verify($password, $hash);
+                
+              
+                    $user = new User();
+                    $user->setId($row["id"]);
+                    $user->setEmail($row["email"]);
+                    $user->setPassword($row["password"]);
+                    $user->setRole($row["role"]);
+                    $user->setFirstName($row["firstName"]);
+                    $user->setLastName($row["lastName"]);
+                    $user->setDni($row["dni"]);
+                    $user->setPhoneNumber($row["phoneNumber"]);
+
+                    array_push($userList, $user);
+                
+                
+            }
+
+                ///return the array in position 0
+                return (count($userList) > 0) ? $userList[0] : null;
+        }catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+    }    
     public function Add(User $user)
     {
         

@@ -51,8 +51,8 @@
 
         public function ShowListViewFilter($dateStart, $dateEnd)
         {
-            $keeperListFilter = $this->keeperDAO->getAllFilter($dateStart, $dateEnd);
-            //$keeperListFilter = $this->keeperDAOBD->GetAllFilterPDO($dateStart, $dateEnd);
+            //$keeperListFilter = $this->keeperDAO->getAllFilter($dateStart, $dateEnd);
+            $keeperListFilter = $this->keeperDAOBD->GetAllFilterPDO($dateStart, $dateEnd);
             
             require_once(VIEWS_PATH."keeper-listfilter.php");
         }
@@ -93,10 +93,6 @@
 
         }
 
-        public function Reservation($size,$salary, $available,$dateStart, $dateEnd)
-        {
-
-        }
 
         // public function Modify($email, $password, $id)
         // {

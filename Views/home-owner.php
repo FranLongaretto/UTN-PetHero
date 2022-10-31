@@ -21,6 +21,10 @@
     <div class="homeUser__menu--item">
       <a href="<?php echo FRONT_ROOT?>Owner/ShowListKeeperView">Show Keeper's List</a>
     </div>
+
+    <div class="homeUser__menu--item">
+      <a href="<?php echo FRONT_ROOT?>Book/ShowListView">Show My Books</a>
+    </div>
   
     <?php if($frontMessage){?>
       <div class="homeUser__menu--message">
