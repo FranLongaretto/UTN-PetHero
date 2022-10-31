@@ -92,7 +92,7 @@
             $idUser = $_SESSION["loggedUser"]->getId();
             $book->setIdUser($idUser);
 
-           $book->setDateBook($dateBook);
+           //$book->setDateBook($dateBook);
             if($book !=null){
                 //$this->bookDAO->Add($book);
                 $this->bookDAOBD->Add($book);

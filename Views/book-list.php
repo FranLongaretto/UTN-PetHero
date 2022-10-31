@@ -1,6 +1,11 @@
 <?php 
     require_once("validate-session.php");
-    include('navKeeper.php');
+    if($_SESSION["loggedUser"]->getRole() === "Owner")
+    {
+        include('navOwner.php');
+    }else{
+        include('navKeeper.php');
+    }
     use DAO\UserDAOBD as UserDAOBD;
     use DAO\KeeperDAOBD as KeeperDAOBD;
 ?>
@@ -21,7 +26,8 @@
                             <th>DATE END</th>
                             <th>OWNER NAME</th>
                             <th>OWNER LAST NAME</th>
-
+                            <th>Total Days</th>
+                            <th>Total $</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,6 +47,25 @@
                             <td><?php echo $keeperId->getDateEnd() ?></td>
                             <td><?php echo $userId->getFirstName()?></td>
                             <td><?php echo $userId->getLastName() ?></td>
+                            <td>
+                                <?php
+                                    //***total days */
+                                    $datetime1 = strtotime($keeperId->getDateStart());
+                                    $datetime2 = strtotime($keeperId->getDateEnd());
+                                    $difference = $datetime2 - $datetime1;
+                                    // 1 day = 24 hours
+                                    // 24 * 60 * 60 = 86400 seconds
+                                    $result = abs(round($difference / 86400));
+                                    echo $result;
+                                    
+                                ?>
+                            </td>   
+                            <td>
+                                <?php
+                                    $amount= $result * $keeperId->getSalary();
+                                    echo $amount;
+                                ?>
+                            </td> 
                         </tr>
                     <?php } ?>
                     </tbody>

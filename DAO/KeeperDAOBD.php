@@ -30,6 +30,7 @@
                     $keeper->setDateStart($row["dateStart"]);
                     $keeper->setDateEnd($row["dateEnd"]);
 
+
                     array_push($keeperList, $keeper);
                 }
                 return $keeperList;
