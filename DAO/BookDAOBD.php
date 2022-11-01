@@ -26,10 +26,18 @@
                 foreach($resultSet as $row) {
                     $book = new book();
                     $book->setId($row["id"]);
-                    $book->setIdKeeper($row["idKeeper"]);
-                    $book->setIdUser($row["idUser"]);
+
+                    $keeper = new Keeper();
+                    $keeper->setId($row["idKeeper"]);
+
+                    $user = new User();
+                    $user->setId($row["idUser"]);
+                
+                    $book->setKeeper($keeper);
+                    $book->setUser($user);
 
                     array_push($bookList, $book);
+                    
                 }
                 return $bookList;
             } catch(Exception $ex) {
@@ -55,6 +63,7 @@
                 
                 foreach ($resultSet as $row)
                 {      
+                    
                     $book = new Book();
                     $book->setId($row["id"]);
                     $book->setKeeper($row["idKeeper"]);

@@ -22,10 +22,8 @@
                 <tr>
                     <td><?php echo $pet->getRace() ?></td>
                     <td><?php echo $pet->getSize() ?></td>
-                    <!--<td><img src="<?php echo FRONT_ROOT.IMG_PATH."vaccination/".$pet->getVaccinationFront() ?>" alt="Pet Vaccination"></td>JSON-->
                     <td><img src="<?php echo FRONT_ROOT.IMG_PATH."vaccination/".$pet->getVaccination() ?>" alt="Pet Vaccination"></td>
                     <td><?php echo $pet->getDescription() ?></td>
-                    <!--<td><img src="<?php echo FRONT_ROOT.IMG_PATH."pets/".$pet->getImageFront() ?>" alt="Pet"></td> JSON-->
                     <td><img src="<?php echo FRONT_ROOT.IMG_PATH."pets/".$pet->getImage() ?>" alt="Pet"></td>
                 </tr>
             <?php } }?>

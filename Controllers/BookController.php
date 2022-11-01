@@ -3,6 +3,7 @@
 
     use Controllers\KeeperController as KeeperController;
     use DAO\UserDAO as UserDAO;
+    use DAO\UserDAOBD as UserDAOBD;
     use DAO\BookDAO as BookDAO;
     use DAO\BookDAOBD as BookDAOBD;
     use DAO\KeeperDAO as KeeperDAO;
@@ -18,6 +19,7 @@
         private $bookDAOBD;
         private $keeperDAO;
         private $keeperDAOBD;
+        private $userDAOBD;
         private $keeperController;
 
         public function __construct()
@@ -26,6 +28,7 @@
             $this->bookDAOBD = new BookDAOBD();
             $this->keeperDAO = new KeeperDAO();
             $this->keeperDAOBD = new KeeperDAOBD();
+            $this->userDAOBD = new UserDAOBD();
             $this->keeperController = new KeeperController();
         }
 
@@ -44,22 +47,55 @@
             require_once(VIEWS_PATH."home-owner.php");
         }
 
-        
-        public function ShowAddView()
-        {
-            //require_once("validate-session.php");
-            require_once(VIEWS_PATH."add-book.php");
-        }
+
 
         public function ShowListView($message = "")
         {
             $frontMessage = $message;
             //$bookList = $this->bookDAO->getAll();
             $bookList = $this->bookDAOBD->GetAllPDO();
-            
+
+            foreach($bookList as $book)
+            {
+                $userId = $book->getUser()->getId();
+                $user = $this->userDAOBD->GetById($userId);
+                //var_dump($user);
+
+                $keeperId = $book->getKeeper()->getId();
+                $keeper = $this->keeperDAOBD->GetById($keeperId);
+
+                $book->setUser($user);
+                $book->setKeeper($keeper);
+
+                $countDays = $this->CountDays($keeper);
+                $book->setCountDays($countDays);
+                
+                $amount = $this->GetAmount($keeper, $countDays);
+                $book->setAmount($amount);
+                
+
+            }
             require_once(VIEWS_PATH."book-list.php");
         }
 
+        public function CountDays($keeperId)
+        {
+            //***total days */
+            $datetime1 = strtotime($keeperId->getDateStart());
+            $datetime2 = strtotime($keeperId->getDateEnd());
+            $difference = $datetime2 - $datetime1;
+            // 1 day = 24 hours
+            // 24 * 60 * 60 = 86400 seconds
+            $result = abs(round($difference / 86400));
+            return $result;
+        }
+
+        //recieve CountDays Result
+        public function GetAmount($keeperId, $result)
+        {
+            $amount= $result * $keeperId->getSalary();
+            return $amount; 
+        }
 
         public function ShowModifyView($keeperId) {
             
@@ -73,13 +109,24 @@
         public function Reservation($keeperId){
             //$keeper = $this->keeperDAO->GetById($keeperId);
             $keeper = $this->keeperDAOBD->GetById($keeperId);
+            
             if($keeper!=NULL){
                 $_SESSION["keeperAvailable"]= $keeper;
 
                 require_once(VIEWS_PATH."add-book.php");
-            }else{
-               $this->keeperController->ShowListView("Keeper doest´n exist");
+                //$this->keeperController->ShowListView("Keeper has to accept the reservation");
             }
+        }
+
+        public function ConfirmReservation()
+        {
+            $keeper = $this->keeperDAOBD->GetById($_SESSION["loggedUser"]->getId());
+            var_dump($keeper);
+            if($keeper!=NULL){
+                $_SESSION["keeperAvailable"]= $keeper;
+                
+                require_once(VIEWS_PATH."add-book.php");
+            }    
         }
        
 
