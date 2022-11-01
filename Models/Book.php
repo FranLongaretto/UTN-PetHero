@@ -3,8 +3,10 @@
 
     class Book{
         private $id;
-        private $idKeeper; 
-        private $idUser; 
+        private $keeper; 
+        private $user; 
+        private $countDays;
+        private $amount;
         //private $dateBook;
 
         
@@ -29,21 +31,21 @@
         }
 
         /**
-         * Get the value of idKeeper
+         * Get the value of Keeper
          */ 
-        public function getIdKeeper()
+        public function getKeeper()
         {
-                return $this->idKeeper;
+                return $this->keeper;
         }
 
         /**
-         * Set the value of idKeeper
+         * Set the value of Keeper
          *
          * @return  self
          */ 
-        public function setIdKeeper($idKeeper)
+        public function setKeeper(Keeper $keeper)
         {
-                $this->idKeeper = $idKeeper;
+                $this->keeper = $keeper;
 
                 return $this;
         }
@@ -51,21 +53,61 @@
        
 
         /**
-         * Get the value of idUser
+         * Get the value of User
          */ 
-        public function getIdUser()
+        public function getUser()
         {
-                return $this->idUser;
+                return $this->user;
         }
 
         /**
-         * Set the value of idUser
+         * Set the value of User
          *
          * @return  self
          */ 
-        public function setIdUser($idUser)
+        public function setUser(User $user)
         {
-                $this->idUser = $idUser;
+                $this->user = $user;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of countDays
+         */ 
+        public function getCountDays()
+        {
+                return $this->countDays;
+        }
+
+        /**
+         * Set the value of countDays
+         *
+         * @return  self
+         */ 
+        public function setCountDays($countDays)
+        {
+                $this->countDays = $countDays;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of amount
+         */ 
+        public function getAmount()
+        {
+                return $this->amount;
+        }
+
+        /**
+         * Set the value of amount
+         *
+         * @return  self
+         */ 
+        public function setAmount($amount)
+        {
+                $this->amount = $amount;
 
                 return $this;
         }
