@@ -33,39 +33,16 @@
                     <tbody>
                     <?php 
                     foreach($bookList as $book) {
-                        $userDAOBD= new UserDAOBD();
-                        $userId=$userDAOBD->GetById($book->getIdUser());
-
-                        $keeperDAOBD= new KeeperDAOBD();
-                        $keeperId=$keeperDAOBD->GetById($book->getIdKeeper());
-
                         ?>
                         <tr>
                             <td><?php echo $book->getId() ?></td>
-                            <td><?php echo $keeperId->getSize() ?></td>
-                            <td><?php echo $keeperId->getDateStart() ?></td>
-                            <td><?php echo $keeperId->getDateEnd() ?></td>
-                            <td><?php echo $userId->getFirstName()?></td>
-                            <td><?php echo $userId->getLastName() ?></td>
-                            <td>
-                                <?php
-                                    //***total days */
-                                    $datetime1 = strtotime($keeperId->getDateStart());
-                                    $datetime2 = strtotime($keeperId->getDateEnd());
-                                    $difference = $datetime2 - $datetime1;
-                                    // 1 day = 24 hours
-                                    // 24 * 60 * 60 = 86400 seconds
-                                    $result = abs(round($difference / 86400));
-                                    echo $result;
-                                    
-                                ?>
-                            </td>   
-                            <td>
-                                <?php
-                                    $amount= $result * $keeperId->getSalary();
-                                    echo $amount;
-                                ?>
-                            </td> 
+                            <td><?php echo $book->getKeeper()->getSize() ?></td>
+                            <td><?php echo $book->getKeeper()->getDateStart() ?></td>
+                            <td><?php echo $book->getKeeper()->getDateEnd() ?></td>
+                            <td><?php echo $book->getUser()->getFirstName()?></td>
+                            <td><?php echo $book->getUser()->getLastName() ?></td>
+                            <td><?php echo $book->getCountDays()?></td>   
+                            <td><?php echo $book->getAmount()?></td>   
                         </tr>
                     <?php } ?>
                     </tbody>
