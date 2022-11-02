@@ -33,6 +33,7 @@
                     <tbody>
                     <?php 
                     foreach($bookList as $book) {
+                        if($_SESSION["loggedUser"]->id == $book->getUser()->getId()){
                         ?>
                         <tr>
                             <td><?php echo $book->getId() ?></td>
@@ -44,7 +45,7 @@
                             <td><?php echo $book->getCountDays()?></td>   
                             <td><?php echo $book->getAmount()?></td>   
                         </tr>
-                    <?php } ?>
+                    <?php }} ?>
                     </tbody>
                 </table>
             </div>

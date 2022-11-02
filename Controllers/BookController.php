@@ -118,12 +118,15 @@
             }
         }
 
-        public function ConfirmReservation()
+        public function ConfirmReservation($idKeeper)
         {
-            $keeper = $this->keeperDAOBD->GetById($_SESSION["loggedUser"]->getId());
-            var_dump($keeper);
-            if($keeper!=NULL){
-                $_SESSION["keeperAvailable"]= $keeper;
+            $book = $this->bookDAOBD->GetBookByKeeper($idKeeper);
+            $keeper = $this->keeperDAOBD->GetById($idKeeper);
+            //var_dump($idKeeper);
+           
+            //var_dump("book: ",$book[0][0]);
+            if($book!=NULL){
+                $_SESSION["bookAvailable"]= $book;
                 
                 require_once(VIEWS_PATH."add-book.php");
             }    
@@ -134,10 +137,18 @@
         {
             $book = new Book();
             //$book->setId($id);
-            $book->setIdKeeper($idKeeper);
+
+            $keeper= new Keeper();
+            $keeper->setId($idKeeper);
+
+            $book->setKeeper($keeper);
             //$idOwner = $_SESSION["loggedUser"]->getId();
+
+            $user = new User();
             $idUser = $_SESSION["loggedUser"]->getId();
-            $book->setIdUser($idUser);
+            $user->setId($idUser);
+            
+            $book->setUser($user);
 
            //$book->setDateBook($dateBook);
             if($book !=null){
@@ -148,6 +159,7 @@
                 $errorMessage = "";
                 $this->HomeOwner($errorMessage);
             }
+            
         }
 
         

@@ -27,7 +27,7 @@
       <?php ?>
       <a id="idKeeper" href="<?php echo FRONT_ROOT."Book/Add/".$keeper->getId();?>" class="fadeIn fourth" value="Reservation">Confirm</a>
       <!--<input type="submit" class="fadeIn fourth" value="Confirm Book">-->
-        <a href="<?php echo FRONT_ROOT ?>Owner/ShowListKeeperView" class="btn btn-outline-primary">Cancel</a>
+        <a href="<?php echo FRONT_ROOT ?>Owner/ShowListFilterView" class="btn btn-outline-primary">Cancel</a>
     </form>
   </div>
 </div>
