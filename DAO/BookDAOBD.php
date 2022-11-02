@@ -15,6 +15,8 @@
         private $bookList = array();
         private $connection;
         private $tableName = "book";
+        private $tableNameUser = "user";
+        private $tableNameKeeper = "keeper";
 
     
         public function GetAllPDO() {
@@ -45,7 +47,34 @@
             }
         }
 
-        
+          public function GetBookByKeeper($idKeeper) {
+            try {
+                $bookList = array();
+
+                $query = "SELECT * FROM ". $this->tableName. " bo INNER JOIN ". $this->tableNameKeeper. " k on k.id = bo.idKeeper WHERE '".$idKeeper."'=k.id";
+
+                $parameters['idKeeper'] = $idKeeper;
+                $this->connection = Connection::GetInstance();
+                //$resultSet = $this->connection->Execute($query, $parameters);
+                $bookList = $this->connection->Execute($query, $parameters);
+               // var_dump("book: ",$bookList);
+                //var_dump("bookList: ",$bookList[0][0]);
+                foreach ($bookList as $row) {     
+                    //$book['id'] = $row["id"];           
+                    $book['id'] = $row[0];           
+                    $book['idUser'] = $row["idUser"];
+                    $book['idKeeper'] = $row["idKeeper"];
+                
+                    array_push($bookList, $book);
+
+                    var_dump("bookList: ",$bookList[1]);
+
+                }
+                return $bookList[1];
+            } catch(\PDOException $ex) {
+                throw $ex;
+            }
+        }
     
         public function GetById($id) 
         {
@@ -87,9 +116,8 @@
                 $query = "INSERT INTO ".$this->tableName." (id,idKeeper,idUser) VALUES (:id, :idKeeper, :idUser);";
                 
                 $parameters["id"] = $book->getId();
-                $parameters["idKeeper"] = $book->getIdKeeper();
-                $parameters["idUser"] = $book->getIdUser();
-                
+                $parameters["idKeeper"] = $book->getKeeper()->getId();
+                $parameters["idUser"] = $book->getUser()->getId();
     
                 $this->connection = Connection::GetInstance();
     
