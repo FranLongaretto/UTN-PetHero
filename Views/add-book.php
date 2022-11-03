@@ -1,6 +1,7 @@
 <?php
   include_once('navOwner.php'); 
   require_once("validate-session.php");
+  var_dump($_SESSION["loggedUser"]->getRole());
 ?>
 
 <div class="mainForm fadeInDown">
@@ -27,7 +28,12 @@
       <?php ?>
       <a id="idKeeper" href="<?php echo FRONT_ROOT."Book/Add/".$keeper->getId();?>" class="fadeIn fourth" value="Reservation">Confirm</a>
       <!--<input type="submit" class="fadeIn fourth" value="Confirm Book">-->
-        <a href="<?php echo FRONT_ROOT ?>Owner/ShowListFilterView" class="btn btn-outline-primary">Cancel</a>
+      <?php if($_SESSION["loggedUser"]->getRole()=="Owner"){ ?>
+        <a href="<?php echo FRONT_ROOT ?>Owner/ShowListKeeperView" class="btn btn-outline-primary">Cancel</a>
+        <?php }else{?>
+          <a href="<?php echo FRONT_ROOT ?>User/HomeKeeper" class="btn btn-outline-primary">Cancel</a>
+        <?php
+          }?>
     </form>
   </div>
 </div>

@@ -47,6 +47,12 @@
             require_once(VIEWS_PATH."home-owner.php");
         }
 
+        public function HomeKeeper($message = "")
+        {
+            $frontMessage = $message;
+            require_once(VIEWS_PATH."home-keeper.php");
+        }
+
 
 
         public function ShowListView($message = "")
@@ -57,23 +63,29 @@
 
             foreach($bookList as $book)
             {
-                $userId = $book->getUser()->getId();
-                $user = $this->userDAOBD->GetById($userId);
-                //var_dump($user);
-
-                $keeperId = $book->getKeeper()->getId();
-                $keeper = $this->keeperDAOBD->GetById($keeperId);
-
-                $book->setUser($user);
-                $book->setKeeper($keeper);
-
-                $countDays = $this->CountDays($keeper);
-                $book->setCountDays($countDays);
+                if($book->getStatus() =="confirmed")
+                {
+                    $userId = $book->getUser()->getId();
+                    $user = $this->userDAOBD->GetById($userId);
+                    //var_dump($user);
+    
+                    $keeperId = $book->getKeeper()->getId();
+                    $keeper = $this->keeperDAOBD->GetById($keeperId);
+    
+                    $book->setUser($user);
+                    $book->setKeeper($keeper);
+    
+                    $countDays = $this->CountDays($keeper);
+                    $book->setCountDays($countDays);
+                    
+                    $amount = $this->GetAmount($keeper, $countDays);
+                    $book->setAmount($amount);  
+                  
+                }/*else{
+                    $this->HomeKeeper("You don't have confirmed book");
+                }*/
                 
-                $amount = $this->GetAmount($keeper, $countDays);
-                $book->setAmount($amount);
                 
-
             }
             require_once(VIEWS_PATH."book-list.php");
         }
@@ -127,8 +139,15 @@
             //var_dump("book: ",$book[0][0]);
             if($book!=NULL){
                 $_SESSION["bookAvailable"]= $book;
+                if($book["status"] !="confirmed")
+                {
+                    var_dump($book["status"] );
+                    require_once(VIEWS_PATH."add-book.php");
+                }else{
+                    $this->HomeKeeper("You don't have pending's book");
+                }
                 
-                require_once(VIEWS_PATH."add-book.php");
+                
             }    
         }
        
@@ -149,7 +168,7 @@
             $user->setId($idUser);
             
             $book->setUser($user);
-
+            
            //$book->setDateBook($dateBook);
             if($book !=null){
                 //$this->bookDAO->Add($book);
