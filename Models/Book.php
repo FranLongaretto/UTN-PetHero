@@ -7,6 +7,7 @@
         private $user; 
         private $countDays;
         private $amount;
+        private $status; 
         //private $dateBook;
 
         
@@ -108,6 +109,26 @@
         public function setAmount($amount)
         {
                 $this->amount = $amount;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of status
+         */ 
+        public function getStatus()
+        {
+                return $this->status;
+        }
+
+        /**
+         * Set the value of status
+         *
+         * @return  self
+         */ 
+        public function setStatus($status)
+        {
+                $this->status = $status;
 
                 return $this;
         }

@@ -37,6 +37,7 @@
                 
                     $book->setKeeper($keeper);
                     $book->setUser($user);
+                    $book->setStatus($row["status"]);
 
                     array_push($bookList, $book);
                     
@@ -64,10 +65,9 @@
                     $book['id'] = $row[0];           
                     $book['idUser'] = $row["idUser"];
                     $book['idKeeper'] = $row["idKeeper"];
+                    $book['status'] = $row["status"];
                 
                     array_push($bookList, $book);
-
-                    var_dump("bookList: ",$bookList[1]);
 
                 }
                 return $bookList[1];
@@ -97,6 +97,7 @@
                     $book->setId($row["id"]);
                     $book->setKeeper($row["idKeeper"]);
                     $book->setUser($row["idUser"]);
+                    $book->setStatus($row["status"]);
                     
                     array_push($bookList, $book);
                 }
@@ -112,16 +113,28 @@
         {
             try
             {
+                if($_SESSION["loggedUser"]->getRole()=="Owner")
+                {
+                    $query = "INSERT INTO ".$this->tableName." (id,idKeeper,idUser, status) VALUES (:id, :idKeeper, :idUser, :status);";
+                    
+                    $parameters["id"] = $book->getId();
+                    $parameters["idKeeper"] = $book->getKeeper()->getId();
+                    $parameters["idUser"] = $book->getUser()->getId();
+                    $parameters["status"] = "pending";
+
+                    $this->connection = Connection::GetInstance();
+                    $this->connection->ExecuteNonQuery($query, $parameters);
+                    
+                }else{
+                    $query= "UPDATE ".$this->tableName." SET status=:status WHERE status='pending';";
+
+                    $parameters["status"] = "confirmed";
+                    $this->connection = Connection::GetInstance();
     
-                $query = "INSERT INTO ".$this->tableName." (id,idKeeper,idUser) VALUES (:id, :idKeeper, :idUser);";
+                    $this->connection->ExecuteNonQuery($query, $parameters);
+                }
                 
-                $parameters["id"] = $book->getId();
-                $parameters["idKeeper"] = $book->getKeeper()->getId();
-                $parameters["idUser"] = $book->getUser()->getId();
-    
-                $this->connection = Connection::GetInstance();
-    
-                $this->connection->ExecuteNonQuery($query, $parameters);
+                
             }
             catch(Exception $ex)
             {
