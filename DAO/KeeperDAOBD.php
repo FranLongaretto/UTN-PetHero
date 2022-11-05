@@ -43,7 +43,7 @@
             try {
                 $keeperList = array();
                 $query = "SELECT * FROM ".$this->tableName." k WHERE '".$dateStart."'<=k.dateStart AND '".$dateEnd."'>=k.dateEnd;";
-             
+                var_dump($query);
                 $this->connection = Connection::getInstance();
                 // $resultSet = $this->connection->Execute($query, $parameters);
                 $resultSet = $this->connection->Execute($query);

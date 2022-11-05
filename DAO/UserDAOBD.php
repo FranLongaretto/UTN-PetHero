@@ -52,7 +52,7 @@ class UserDAOBD implements IUserDAOBD{
             
             foreach ($resultSet as $row)
             {      
-                 ///validation for descrypt password
+                ///validation for descrypt password
                 $hash= $row["password"];
                 $verify = password_verify($password, $hash);
                 
@@ -72,8 +72,8 @@ class UserDAOBD implements IUserDAOBD{
                 
             }
 
-                ///return the array in position 0
-                return (count($userList) > 0) ? $userList[0] : null;
+            ///return the array in position 0
+            return (count($userList) > 0) ? $userList[0] : null;
         }catch(\PDOException $ex)
         {
             throw $ex;
