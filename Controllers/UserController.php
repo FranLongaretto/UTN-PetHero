@@ -121,47 +121,56 @@
             $this->ShowListView();
         }
 
-        
-
         ///LOGEO
         public function Login($email, $password) {
-            $validationUser = false;
             $validationRolKeeper= false;
-            $validationRolOwner= false;
 
             if($email){
                 /*Get in JSON*/
                 //$user = $this->userDAO->GetByEmail($email);
                 $user = $this->userDAOBD->GetByEmailPDO($email, $password);
-                ///descryp password
-                $hash= $user->getPassword();
-                $verify = password_verify($password, $hash);
+
+                // La funcion GetByEmailPDO ya corrobora mail y password.
+                // descryp password
+                // $hash = $user->getPassword();
+                // $verify = password_verify($password, $hash);
+
+                if($user != null){
+                    $validationRolKeeper = ($user->getRole() === "Keeper");
+                    $_SESSION["loggedUser"] = $user;
+                    if ($validationRolKeeper){
+                        $this->HomeKeeper();
+                    }else{
+                        $this->HomeOwner();
+                    }
+                }else{
+                    $this->Index("Datos Incorrectos!");
+                }
             }else{
-                $this->Index("Email no válido");
+                $this->Index("Email incorrecto!");
             }
             
-            if($user != null && $verify){
-               
-                $validationUser = ($user->getPassword() === $password);
-                $validationRolKeeper= ($user->getRole() === "Keeper");
-                $validationRolOwner= ($user->getRole() === "Owner");
-            }
+            // if($user != null && $verify){
+            //     $validationUser = ($user->getPassword() === $password);
+            //     $validationRolKeeper= ($user->getRole() === "Keeper");
+            //     $validationRolOwner= ($user->getRole() === "Owner");
+            // }
 
-            if($verify && $validationRolKeeper)
-            {   //Entra a home Keeper
-                $_SESSION["loggedUser"] = $user;
-                $this->HomeKeeper();
+            // if($verify && $validationRolKeeper)
+            // {   //Entra a home Keeper
+            //     $_SESSION["loggedUser"] = $user;
+            //     $this->HomeKeeper();
                 
-            }else if($verify && $validationRolOwner){
-                //Entra a home Owner
-                $_SESSION["loggedUser"] = $user;
-                $this->HomeOwner();
+            // }else if($verify && $validationRolOwner){
+            //     //Entra a home Owner
+            //     $_SESSION["loggedUser"] = $user;
+            //     $this->HomeOwner();
                 
-            }else{
-                //Devuelve al Login por error en validacion de datos.
-                $errorMessage = $user != null ? "Contraseña incorrecta" : "Usuario incorrecto";
-                $this->Index($errorMessage);
-            }
+            // }else{
+            //     //Devuelve al Login por error en validacion de datos.
+            //     $errorMessage = $user != null ? "Contraseña incorrecta" : "Usuario incorrecto";
+            //     $this->Index($errorMessage);
+            // }
         }
 
         public function Logout () {

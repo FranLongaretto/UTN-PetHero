@@ -55,5 +55,6 @@
     date_input.datepicker(options);
   })  */
 
-  document.getElementById('dateStart').setAttribute('min', new Date().toISOString().split('T')[0])  
+  document.getElementById('dateStart').setAttribute('min', new Date().toISOString().split('T')[0])
+  document.getElementById('dateEnd').setAttribute('min', new Date().toISOString().split('T')[0])
 </script>
