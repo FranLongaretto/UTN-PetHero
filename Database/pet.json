@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "idOwner": 2,
+        "idOwner": 1,
         "race": "Pastor Aleman",
         "size": "big",
         "vaccination": {
