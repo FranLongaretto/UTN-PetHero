@@ -8,6 +8,7 @@
     use DAO\BookDAOBD as BookDAOBD;
     use DAO\KeeperDAO as KeeperDAO;
     use DAO\KeeperDAOBD as KeeperDAOBD;
+    use DAO\PetDAOBD as PetDAOBD;
     use Models\Book as Book;
     use Models\Keeper as Keeper;
     use Models\User as User;
@@ -20,6 +21,7 @@
         private $keeperDAO;
         private $keeperDAOBD;
         private $userDAOBD;
+        private $petDAOBD;
         private $keeperController;
 
         public function __construct()
@@ -29,6 +31,7 @@
             $this->keeperDAO = new KeeperDAO();
             $this->keeperDAOBD = new KeeperDAOBD();
             $this->userDAOBD = new UserDAOBD();
+            $this->petDAOBD = new PetDAOBD();
             $this->keeperController = new KeeperController();
         }
 
@@ -52,8 +55,39 @@
             $frontMessage = $message;
             require_once(VIEWS_PATH."home-keeper.php");
         }
+        
+        public function ShowStartBooking($message = "")
+        {
+            $frontMessage = $message;
+            $petList = $this->petDAOBD->GetAllPDO();
+            require_once(VIEWS_PATH."startBooking.php");
+        }
 
-
+        public function StartBooking($petsId)
+        {
+            $arrayPets = [];
+            $catTrue = false;
+            $dogTrue = false;
+            if($petsId != null){
+                foreach ($petsId as $key => $value) {
+                    $pet = $this->petDAOBD->GetById($value);
+                    if($pet && $pet->getType() == "Cat"){
+                        $catTrue = true;
+                    }else{
+                        $dogTrue = true;
+                    }
+                    array_push($arrayPets, $pet);
+                }
+                if($catTrue && $dogTrue){
+                    $this->ShowStartBooking("Debe seleccionar mascotas del mismo tipo");
+                }else{
+                    // $_SESSION["arrayPetsForBooking"] = $arrayPets;
+                    $this->keeperController->ShowListView();
+                }
+            }else{
+                require_once(VIEWS_PATH."home-keeper.php");
+            }
+        }
 
         public function ShowListView($message = "")
         {

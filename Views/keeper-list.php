@@ -52,7 +52,6 @@
                                     // 24 * 60 * 60 = 86400 seconds
                                     $result = abs(round($difference / 86400));
                                     echo $result;
-                                    
                                 ?>
                             </td>   
                             <td>

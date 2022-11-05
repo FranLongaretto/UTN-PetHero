@@ -326,8 +326,9 @@ label{
 
 /* -------------- FORM FORM KEEPER --------------*/
 .mainFormKeeper .mainForm__container{
-  max-width: 800px;
+  max-width: 1000px;
 }
+
 .mainFormKeeper .mainForm__form--submit {
   max-width: 250px;
 }

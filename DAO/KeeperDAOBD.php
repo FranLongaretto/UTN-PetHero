@@ -42,8 +42,7 @@
         public function GetAllFilterPDO($dateStart, $dateEnd) {
             try {
                 $keeperList = array();
-                $query = "SELECT * FROM ".$this->tableName." k WHERE '".$dateStart."'<=k.dateStart AND '".$dateEnd."'>=k.dateEnd;";
-                var_dump($query);
+                $query = "SELECT * FROM ".$this->tableName." k WHERE '".$dateStart."'>=k.dateStart AND '".$dateEnd."'<=k.dateEnd;";
                 $this->connection = Connection::getInstance();
                 // $resultSet = $this->connection->Execute($query, $parameters);
                 $resultSet = $this->connection->Execute($query);
@@ -67,7 +66,6 @@
     
         public function GetById($id) 
         {
-
             try
             {
                 $keeperList = array();

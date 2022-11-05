@@ -32,7 +32,6 @@
                                 <th>Total Days</th>
                                 <th>Total $</th>
                                 <th>Book</th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -65,7 +64,6 @@
                                     <!--<input type="submit" class="fadeIn fourth" value="Reservation" >-->
                                     <a id="idKeeper" href="<?php echo FRONT_ROOT."Book/Reservation/".$keeper->getId();?>" class="fadeIn fourth" value="Reservation">Reservation</a>
                                 </td>
-                           
                             </tr>
                         <?php } ?>
                         </tbody>
