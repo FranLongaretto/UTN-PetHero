@@ -15,6 +15,8 @@
         private $bookList = array();
         private $connection;
         private $tableName = "book";
+        private $tableNameUser = "user";
+        private $tableNameKeeper = "keeper";
 
     
         public function GetAllPDO() {
@@ -35,6 +37,7 @@
                 
                     $book->setKeeper($keeper);
                     $book->setUser($user);
+                    $book->setStatus($row["status"]);
 
                     array_push($bookList, $book);
                     
@@ -45,7 +48,33 @@
             }
         }
 
-        
+          public function GetBookByKeeper($idKeeper) {
+            try {
+                $bookList = array();
+
+                $query = "SELECT * FROM ". $this->tableName. " bo INNER JOIN ". $this->tableNameKeeper. " k on k.id = bo.idKeeper WHERE '".$idKeeper."'=k.id";
+
+                $parameters['idKeeper'] = $idKeeper;
+                $this->connection = Connection::GetInstance();
+                //$resultSet = $this->connection->Execute($query, $parameters);
+                $bookList = $this->connection->Execute($query, $parameters);
+               // var_dump("book: ",$bookList);
+                //var_dump("bookList: ",$bookList[0][0]);
+                foreach ($bookList as $row) {     
+                    //$book['id'] = $row["id"];           
+                    $book['id'] = $row[0];           
+                    $book['idUser'] = $row["idUser"];
+                    $book['idKeeper'] = $row["idKeeper"];
+                    $book['status'] = $row["status"];
+                
+                    array_push($bookList, $book);
+
+                }
+                return $bookList[1];
+            } catch(\PDOException $ex) {
+                throw $ex;
+            }
+        }
     
         public function GetById($id) 
         {
@@ -68,6 +97,7 @@
                     $book->setId($row["id"]);
                     $book->setKeeper($row["idKeeper"]);
                     $book->setUser($row["idUser"]);
+                    $book->setStatus($row["status"]);
                     
                     array_push($bookList, $book);
                 }
@@ -83,17 +113,28 @@
         {
             try
             {
+                if($_SESSION["loggedUser"]->getRole()=="Owner")
+                {
+                    $query = "INSERT INTO ".$this->tableName." (id,idKeeper,idUser, status) VALUES (:id, :idKeeper, :idUser, :status);";
+                    
+                    $parameters["id"] = $book->getId();
+                    $parameters["idKeeper"] = $book->getKeeper()->getId();
+                    $parameters["idUser"] = $book->getUser()->getId();
+                    $parameters["status"] = "pending";
+
+                    $this->connection = Connection::GetInstance();
+                    $this->connection->ExecuteNonQuery($query, $parameters);
+                    
+                }else{
+                    $query= "UPDATE ".$this->tableName." SET status=:status WHERE status='pending';";
+
+                    $parameters["status"] = "confirmed";
+                    $this->connection = Connection::GetInstance();
     
-                $query = "INSERT INTO ".$this->tableName." (id,idKeeper,idUser) VALUES (:id, :idKeeper, :idUser);";
+                    $this->connection->ExecuteNonQuery($query, $parameters);
+                }
                 
-                $parameters["id"] = $book->getId();
-                $parameters["idKeeper"] = $book->getIdKeeper();
-                $parameters["idUser"] = $book->getIdUser();
                 
-    
-                $this->connection = Connection::GetInstance();
-    
-                $this->connection->ExecuteNonQuery($query, $parameters);
             }
             catch(Exception $ex)
             {

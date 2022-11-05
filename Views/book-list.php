@@ -33,7 +33,21 @@
                     <tbody>
                     <?php 
                     foreach($bookList as $book) {
-                        ?>
+                        
+                        if($_SESSION["loggedUser"]->id == $book->getUser()->getId() && ($book->getStatus()=="confirmed")){
+
+                            ?>
+                            <tr>
+                                <td><?php echo $book->getId() ?></td>
+                                <td><?php echo $book->getKeeper()->getSize() ?></td>
+                                <td><?php echo $book->getKeeper()->getDateStart() ?></td>
+                                <td><?php echo $book->getKeeper()->getDateEnd() ?></td>
+                                <td><?php echo $book->getUser()->getFirstName()?></td>
+                                <td><?php echo $book->getUser()->getLastName() ?></td>
+                                <td><?php echo $book->getCountDays()?></td>   
+                                <td><?php echo $book->getAmount()?></td>   
+                            </tr>
+                    <?php }elseif($_SESSION["loggedUser"]->getRole()=="Keeper" && ($book->getStatus()=="confirmed")){?>
                         <tr>
                             <td><?php echo $book->getId() ?></td>
                             <td><?php echo $book->getKeeper()->getSize() ?></td>
@@ -44,7 +58,7 @@
                             <td><?php echo $book->getCountDays()?></td>   
                             <td><?php echo $book->getAmount()?></td>   
                         </tr>
-                    <?php } ?>
+                        <?php }}?>
                     </tbody>
                 </table>
             </div>
