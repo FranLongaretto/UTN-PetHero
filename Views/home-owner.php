@@ -18,8 +18,12 @@
       <a href="<?php echo FRONT_ROOT?>Pet/ShowListView">Show Pet's List</a>
     </div>
   
-    <div class="homeUser__menu--item">
+    <!-- <div class="homeUser__menu--item">
       <a href="<?php echo FRONT_ROOT?>Owner/ShowListKeeperView">Show Keeper's List</a>
+    </div> -->
+
+    <div class="homeUser__menu--item">
+      <a href="<?php echo FRONT_ROOT?>Owner/StartBooking">Start Booking</a>
     </div>
 
     <div class="homeUser__menu--item">

@@ -8,6 +8,7 @@
         <table class="mainListPet__table" style="text-align:center;">
             <thead>
                 <tr>
+                    <th>Pet</th>
                     <th>Race</th>
                     <th>Size</th>
                     <th>Vaccination</th>
@@ -20,6 +21,7 @@
                 if($_SESSION["loggedUser"]->id == $pet->getIdUser()){
             ?>
                 <tr>
+                    <td><?php echo $pet->getType() ?></td>
                     <td><?php echo $pet->getRace() ?></td>
                     <td><?php echo $pet->getSize() ?></td>
                     <td><img src="<?php echo FRONT_ROOT.IMG_PATH."vaccination/".$pet->getVaccination() ?>" alt="Pet Vaccination"></td>

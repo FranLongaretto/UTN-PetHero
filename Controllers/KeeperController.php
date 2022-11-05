@@ -83,14 +83,10 @@
             $this->keeperDAOBD->Add($keeper);
 
             $this->HomeKeeper();
-
-            
-            
         }
 
         public function CheckAvailability($dateStart, $dateEnd){
             $this->ShowListViewFilter($dateStart, $dateEnd);
-
         }
 
 
