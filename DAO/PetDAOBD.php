@@ -82,11 +82,12 @@
         {
             try
             {
-                var_dump($pet);
-                $query = "INSERT INTO ".$this->tableName." (id,idUser,race ,size ,vaccination , description, image ) VALUES (:id, :idUser, :race, :size, :vaccination, :description, :image);";
+                //var_dump($pet);
+                $query = "INSERT INTO ".$this->tableName." (id,idUser, type, race, size ,vaccination , description, image ) VALUES (:id, :idUser, :type, :race, :size, :vaccination, :description, :image);";
                 
                 $parameters["id"] = $pet->getId();
                 $parameters["idUser"] = $pet->getIdUser();
+                $parameters["type"] = $pet->getType();
                 $parameters["race"] = $pet->getRace();
                 $parameters["size"] = $pet->getSize();
                 $parameters["vaccination"] = $pet->getVaccination();
