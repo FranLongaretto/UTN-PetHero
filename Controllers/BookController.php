@@ -198,25 +198,49 @@
             }
         }
 
-        public function ConfirmReservation($idKeeper)
+        public function ShowListViewKeeper()
         {
-            $book = $this->bookDAOBD->GetBookByKeeper($idKeeper);
-            $keeper = $this->keeperDAOBD->GetById($idKeeper);
-            //var_dump($idKeeper);
+            $frontMessage = '';
+            $bookListFront = array();
+            $idKeeper = $_SESSION["loggedUser"]->getId();
+            $bookList = $this->bookDAOBD->GetBookByKeeper($idKeeper);
+            // $keeper = $this->keeperDAOBD->GetById($idKeeper);
 
-            //var_dump("book: ",$book[0][0]);
-            if($book!=NULL){
-                $_SESSION["bookAvailable"]= $book;
-                if($book["status"] !="confirmed")
-                {
-                    var_dump($book["status"] );
-                    require_once(VIEWS_PATH."add-book.php");
-                }else{
-                    $this->HomeKeeper("You don't have pending's book");
+            if($bookList != NULL){
+                // $_SESSION["bookAvailable"] = $book;
+                foreach ($bookList as $book) {
+                    if($book->getStatus() != "confirmed"){
+                        array_push($bookListFront, $book);
+                    }
                 }
-                
-                
-            }    
+
+                // if($bookList["status"] != "confirmed")
+                // {
+                //     var_dump($bookList["status"] );
+                //     require_once(VIEWS_PATH."add-book.php");
+                // }else{
+                //     $this->HomeKeeper("You don't have pending's book");
+                // }
+                require_once(VIEWS_PATH."book-list.php");
+            }else{
+                $this->HomeKeeper("You don't have pending's book");
+            }  
+        }
+
+        public function ConfirmReservation($idBook)
+        {
+            $book = $this->bookDAOBD->GetById($idBook);
+
+            if($book)
+            {
+                $frontKeeper = $_SESSION["loggedUser"];
+                $frontDateStart = $book->getDateStart();
+                $frontDateEnd = $book->getDateEnd();
+                $frontPrice = $book->getBookPrice();
+                require_once(VIEWS_PATH."confirm-book-keeper.php");
+            }else{
+                $this->HomeKeeper("You don't have pending's book");
+            }
         }
 
         public function Add($idKeeper, $idOwner, $idKeeperBook, $dateStart, $dateEnd, $bookPrice)
@@ -250,6 +274,16 @@
                 $this->HomeOwner("Book error, please try again");
             }
             
+        }
+
+        public function UpdateBook($idBook)
+        {
+            if($idBook != null){
+                $this->bookDAOBD->UpdateBook($idBook);
+                $this->HomeKeeper("&#x2705; Book confirm correctly");  
+            }else{
+                $this->HomeKeeper("Confirm error, please try again");
+            }
         }
     }        
 ?>

@@ -14,7 +14,7 @@
       <a href="<?php echo FRONT_ROOT?>Keeper/RegistrationKeeper">Add Keeper</a>
     </div>
     <div class="homeUser__menu--item">
-      <a  href="<?php echo FRONT_ROOT."Book/ConfirmReservation/".$_SESSION["loggedUser"]->getId();?>">Book´s Pending</a>
+      <a  href="<?php echo FRONT_ROOT."Book/ShowListViewKeeper" ?>">Book´s Pending</a>
     </div>
 
     <div class="homeUser__menu--item">
