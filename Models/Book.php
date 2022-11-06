@@ -6,10 +6,10 @@ class Book{
         private $idKeeper;
         private $idOwner;
         private $idKeeperBook;
-        private $dateStart;
-        private $dateEnd; 
-        private $bookPrice;
-        private $status;
+        public $dateStart;
+        public $dateEnd; 
+        public $bookPrice;
+        public $status;
 
         public function getId()
         {
