@@ -55,11 +55,6 @@
             return $this;
         }
 
-      
-        
-
-      
-
         /**
          * Get the value of role
          */ 

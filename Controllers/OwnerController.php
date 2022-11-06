@@ -33,7 +33,7 @@
     
         public function ShowListKeeperView($message = "")
         {
-            $errorMessage = $message;
+            $frontMessage  = $message;
             //$keeperList = $this->keeperDAO->getAll();
             $keeperList = $this->keeperDAOBD->GetAllPDO();
             require_once(VIEWS_PATH."keeper-list.php");

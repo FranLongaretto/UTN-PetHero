@@ -26,17 +26,27 @@
                 $this->connection = Connection::getInstance();
                 $resultSet = $this->connection->Execute($query);
                 foreach($resultSet as $row) {
-                    $book = new book();
-                    $book->setId($row["id"]);
+                    // $book = new book();
+                    // $book->setId($row["id"]);
 
-                    $keeper = new Keeper();
-                    $keeper->setId($row["idKeeper"]);
+                    // $keeper = new Keeper();
+                    // $keeper->setId($row["idKeeper"]);
 
-                    $user = new User();
-                    $user->setId($row["idUser"]);
+                    // $user = new User();
+                    // $user->setId($row["idUser"]);
                 
-                    $book->setKeeper($keeper);
-                    $book->setUser($user);
+                    // $book->setKeeper($keeper);
+                    // $book->setUser($user);
+                    // $book->setStatus($row["status"]);
+
+                    $book = new Book();
+                    $book->setId($row["id"]);
+                    $book->setIdKeeper($row["idKeeper"]);
+                    $book->setIdOwner($row["idOwner"]);
+                    $book->setIdKeeperBook($row["idKeeperBook"]);
+                    $book->setDateStart($row["dateStart"]);
+                    $book->setDateEnd($row["dateEnd"]);
+                    $book->setBookPrice($row["bookPrice"]);
                     $book->setStatus($row["status"]);
 
                     array_push($bookList, $book);
@@ -48,7 +58,7 @@
             }
         }
 
-          public function GetBookByKeeper($idKeeper) {
+        public function GetBookByKeeper($idKeeper) {
             try {
                 $bookList = array();
 
@@ -58,19 +68,31 @@
                 $this->connection = Connection::GetInstance();
                 //$resultSet = $this->connection->Execute($query, $parameters);
                 $bookList = $this->connection->Execute($query, $parameters);
-               // var_dump("book: ",$bookList);
-                //var_dump("bookList: ",$bookList[0][0]);
-                foreach ($bookList as $row) {     
-                    //$book['id'] = $row["id"];           
-                    $book['id'] = $row[0];           
-                    $book['idUser'] = $row["idUser"];
+                // var_dump("book: ",$bookList);
+                // var_dump("bookList: ",$bookList[0][0]);
+                foreach ($bookList as $row) {         
+                    $book['id'] = $row['id'];
                     $book['idKeeper'] = $row["idKeeper"];
+                    $book['idOwner'] = $row["idOwner"];
+                    $book['idKeeperBook'] = $row["idKeeperBook"];
+                    $book['dateStart'] = $row["dateStart"];
+                    $book['dateEnd'] = $row["dateEnd"];
+                    $book['bookPrice'] = $row["bookPrice"];
                     $book['status'] = $row["status"];
+
+                    // $book = new Book();
+                    // $book->setId($row["id"]);
+                    // $book->setIdKeeper($row["idKeeper"]);
+                    // $book->setIdOwner($row["idOwner"]);
+                    // $book->setIdKeeperBook($row["idKeeperBook"]);
+                    // $book->setDateStart($row["dateStart"]);
+                    // $book->setDateEnd($row["dateEnd"]);
+                    // $book->setBookPrice($row["bookPrice"]);
+                    // $book->setStatus($row["status"]);
                 
                     array_push($bookList, $book);
-
                 }
-                return $bookList[1];
+                return $bookList;
             } catch(\PDOException $ex) {
                 throw $ex;
             }
@@ -95,15 +117,19 @@
                     
                     $book = new Book();
                     $book->setId($row["id"]);
-                    $book->setKeeper($row["idKeeper"]);
-                    $book->setUser($row["idUser"]);
+                    $book->setIdKeeper($row["idKeeper"]);
+                    $book->setIdOwner($row["idOwner"]);
+                    $book->setIdKeeperBook($row["idKeeperBook"]);
+                    $book->setDateStart($row["dateStart"]);
+                    $book->setDateEnd($row["dateEnd"]);
+                    $book->setBookPrice($row["bookPrice"]);
                     $book->setStatus($row["status"]);
                     
                     array_push($bookList, $book);
                 }
     
-                    ///return the array in position 0
-                    return (count($bookList) > 0) ? $bookList[0] : null;
+                ///return the array in position 0
+                return (count($bookList) > 0) ? $bookList[0] : null;
             }catch(\PDOException $ex)
             {
                 throw $ex;
@@ -113,18 +139,22 @@
         {
             try
             {
-                if($_SESSION["loggedUser"]->getRole()=="Owner")
+                if($_SESSION["loggedUser"]->getRole() == "Owner")
                 {
-                    $query = "INSERT INTO ".$this->tableName." (id,idKeeper,idUser, status) VALUES (:id, :idKeeper, :idUser, :status);";
+                    $query = "INSERT INTO ".$this->tableName." (id, idKeeper, idOwner, idKeeperBook, dateStart, dateEnd, bookPrice, status) VALUES (:id, :idKeeper, :idOwner, :idKeeperBook, :dateStart, :dateEnd, :bookPrice, :status);";
                     
                     $parameters["id"] = $book->getId();
-                    $parameters["idKeeper"] = $book->getKeeper()->getId();
-                    $parameters["idUser"] = $book->getUser()->getId();
+                    $parameters["idKeeper"] = $book->getIdKeeper();
+                    $parameters["idOwner"] = $book->getIdOwner();
+                    $parameters["idKeeperBook"] = $book->getIdKeeperBook();
+                    $parameters["dateStart"] = $book->getDateStart();
+                    $parameters["dateEnd"] = $book->getDateEnd();
+                    $parameters["bookPrice"] = $book->getBookPrice();
                     $parameters["status"] = "pending";
 
                     $this->connection = Connection::GetInstance();
                     $this->connection->ExecuteNonQuery($query, $parameters);
-                    
+
                 }else{
                     $query= "UPDATE ".$this->tableName." SET status=:status WHERE status='pending';";
 
@@ -133,14 +163,12 @@
     
                     $this->connection->ExecuteNonQuery($query, $parameters);
                 }
-                
-                
             }
             catch(Exception $ex)
             {
                 throw $ex;
             }
         }
-       
+
     }
 ?>

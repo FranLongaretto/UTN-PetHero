@@ -67,7 +67,7 @@
             /*JSON/
            // $emailCheck= $this->userDAO->GetByEmail($email);
            /*BD*/
-            $emailCheck= $this->userDAOBD->GetByEmailPDO($email, $password);
+            $emailCheck = $this->userDAOBD->GetByEmailPDO($email, $password);
 
             if(!$emailCheck){ /// if the email doestn exist in the json.. add user
                 $user = new User();

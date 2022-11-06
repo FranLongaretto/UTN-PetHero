@@ -1,29 +1,21 @@
 <?php
-    namespace Models;
+namespace Models;
 
-    class Book{
+class Book{
         private $id;
-        private $keeper; 
-        private $user; 
-        private $countDays;
-        private $amount;
-        private $status; 
-        //private $dateBook;
+        private $idKeeper;
+        private $idOwner;
+        private $idKeeperBook;
+        private $dateStart;
+        private $dateEnd; 
+        private $bookPrice;
+        private $status;
 
-        
-          /**
-         * Get the value of id
-         */ 
         public function getId()
         {
                 return $this->id;
         }
 
-        /**
-         * Set the value of id
-         *
-         * @return  self
-         */ 
         public function setId($id)
         {
                 $this->id = $id;
@@ -31,106 +23,87 @@
                 return $this;
         }
 
-        /**
-         * Get the value of Keeper
-         */ 
-        public function getKeeper()
+        public function getIdKeeper()
         {
-                return $this->keeper;
+                return $this->idKeeper;
         }
 
-        /**
-         * Set the value of Keeper
-         *
-         * @return  self
-         */ 
-        public function setKeeper(Keeper $keeper)
+        public function setIdKeeper($idKeeper)
         {
-                $this->keeper = $keeper;
+                $this->idKeeper = $idKeeper;
+                return $this;
+        }
+
+        public function getIdOwner()
+        {
+                return $this->idOwner;
+        }
+
+        public function setIdOwner($idOwner)
+        {
+                $this->idOwner = $idOwner;
 
                 return $this;
         }
 
-       
-
-        /**
-         * Get the value of User
-         */ 
-        public function getUser()
+        public function getIdKeeperBook()
         {
-                return $this->user;
+                return $this->idKeeperBook;
         }
 
-        /**
-         * Set the value of User
-         *
-         * @return  self
-         */ 
-        public function setUser(User $user)
+        public function setIdKeeperBook($idKeeperBook)
         {
-                $this->user = $user;
+                $this->idKeeperBook = $idKeeperBook;
 
                 return $this;
         }
 
-        /**
-         * Get the value of countDays
-         */ 
-        public function getCountDays()
+        public function getDateStart()
         {
-                return $this->countDays;
+                return $this->dateStart;
         }
 
-        /**
-         * Set the value of countDays
-         *
-         * @return  self
-         */ 
-        public function setCountDays($countDays)
+        public function setDateStart($dateStart)
         {
-                $this->countDays = $countDays;
+                $this->dateStart = $dateStart;
+
+                return $this;
+        }
+        
+        public function getDateEnd()
+        {
+                return $this->dateEnd;
+        }
+
+        public function setDateEnd($dateEnd)
+        {
+                $this->dateEnd = $dateEnd;
 
                 return $this;
         }
 
-        /**
-         * Get the value of amount
-         */ 
-        public function getAmount()
+        public function getBookPrice()
         {
-                return $this->amount;
+                return $this->bookPrice;
         }
 
-        /**
-         * Set the value of amount
-         *
-         * @return  self
-         */ 
-        public function setAmount($amount)
+        public function setBookPrice($bookPrice)
         {
-                $this->amount = $amount;
+                $this->bookPrice = $bookPrice;
 
                 return $this;
         }
 
-        /**
-         * Get the value of status
-         */ 
         public function getStatus()
         {
                 return $this->status;
         }
 
-        /**
-         * Set the value of status
-         *
-         * @return  self
-         */ 
         public function setStatus($status)
         {
                 $this->status = $status;
 
                 return $this;
         }
-    }
+}
 ?>
