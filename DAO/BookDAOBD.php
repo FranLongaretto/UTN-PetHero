@@ -58,6 +58,37 @@
             }
         }
 
+        public function GetBookByOwner($idOwner) {
+            try {
+                $bookList = array();
+                $bookListFront = array();
+
+                $query = "SELECT dateStart, dateEnd, bookPrice, status FROM ". $this->tableName. " bo INNER JOIN ". $this->tableNameUser. " u ON u.id = bo.idOwner WHERE '".$idOwner."'=u.id";
+
+                // $parameters['idOwner'] = $idOwner;
+                $this->connection = Connection::GetInstance();
+
+                //$resultSet = $this->connection->Execute($query, $parameters);
+
+                // $bookList = $this->connection->Execute($query, $parameters);
+                $bookList = $this->connection->Execute($query);
+
+                foreach ($bookList as $row) {         
+                    $book = new Book();
+
+                    $book->setDateStart($row["dateStart"]);
+                    $book->setDateEnd($row["dateEnd"]);
+                    $book->setBookPrice($row["bookPrice"]);
+                    $book->setStatus($row["status"]);
+                
+                    array_push($bookListFront, $book);
+                }
+                return $bookListFront;
+            } catch(\PDOException $ex) {
+                throw $ex;
+            }
+        }
+
         public function GetBookByKeeper($idKeeper) {
             try {
                 $bookList = array();
@@ -71,24 +102,24 @@
                 // var_dump("book: ",$bookList);
                 // var_dump("bookList: ",$bookList[0][0]);
                 foreach ($bookList as $row) {         
-                    $book['id'] = $row['id'];
-                    $book['idKeeper'] = $row["idKeeper"];
-                    $book['idOwner'] = $row["idOwner"];
-                    $book['idKeeperBook'] = $row["idKeeperBook"];
-                    $book['dateStart'] = $row["dateStart"];
-                    $book['dateEnd'] = $row["dateEnd"];
-                    $book['bookPrice'] = $row["bookPrice"];
-                    $book['status'] = $row["status"];
+                    // $book['id'] = $row['id'];
+                    // $book['idKeeper'] = $row["idKeeper"];
+                    // $book['idOwner'] = $row["idOwner"];
+                    // $book['idKeeperBook'] = $row["idKeeperBook"];
+                    // $book['dateStart'] = $row["dateStart"];
+                    // $book['dateEnd'] = $row["dateEnd"];
+                    // $book['bookPrice'] = $row["bookPrice"];
+                    // $book['status'] = $row["status"];
 
-                    // $book = new Book();
-                    // $book->setId($row["id"]);
-                    // $book->setIdKeeper($row["idKeeper"]);
-                    // $book->setIdOwner($row["idOwner"]);
-                    // $book->setIdKeeperBook($row["idKeeperBook"]);
-                    // $book->setDateStart($row["dateStart"]);
-                    // $book->setDateEnd($row["dateEnd"]);
-                    // $book->setBookPrice($row["bookPrice"]);
-                    // $book->setStatus($row["status"]);
+                    $book = new Book();
+                    $book->setId($row["id"]);
+                    $book->setIdKeeper($row["idKeeper"]);
+                    $book->setIdOwner($row["idOwner"]);
+                    $book->setIdKeeperBook($row["idKeeperBook"]);
+                    $book->setDateStart($row["dateStart"]);
+                    $book->setDateEnd($row["dateEnd"]);
+                    $book->setBookPrice($row["bookPrice"]);
+                    $book->setStatus($row["status"]);
                 
                     array_push($bookList, $book);
                 }

@@ -112,35 +112,44 @@
         public function ShowListView($message = "")
         {
             $frontMessage = $message;
-            //$bookList = $this->bookDAO->getAll();
-            $bookList = $this->bookDAOBD->GetAllPDO();
+            $bookListFront = array();
+            $loggedUserId = $_SESSION["loggedUser"]->getId();
+            $loggedUserRole = $_SESSION["loggedUser"]->getRole();
 
-            foreach($bookList as $book)
-            {
-                if($book->getStatus() =="confirmed")
-                {
-                    $userId = $book->getUser()->getId();
-                    $user = $this->userDAOBD->GetById($userId);
-                    //var_dump($user);
-    
-                    $keeperId = $book->getKeeper()->getId();
-                    $keeper = $this->keeperDAOBD->GetById($keeperId);
-    
-                    $book->setUser($user);
-                    $book->setKeeper($keeper);
-    
-                    $countDays = $this->CountDays($keeper);
-                    $book->setCountDays($countDays);
-                    
-                    $amount = $this->GetAmount($keeper, $countDays);
-                    $book->setAmount($amount);  
-                  
-                }/*else{
-                    $this->HomeKeeper("You don't have confirmed book");
-                }*/
-                
-                
+            if($loggedUserRole == "Owner"){
+                $bookListFront = $this->bookDAOBD->GetBookByOwner($loggedUserId);
+            }else{
+                $bookListFront = $this->bookDAOBD->GetBookByKeeper($loggedUserId);
             }
+
+            // foreach($bookListFront as $book)
+            // {
+            //     var_dump($book);
+            //     // if($book->getStatus() =="confirmed")
+            //     // {
+            //     //     $userId = $book->getUser()->getId();
+            //     //     $user = $this->userDAOBD->GetById($userId);
+            //     //     //var_dump($user);
+    
+            //     //     $keeperId = $book->getKeeper()->getId();
+            //     //     $keeper = $this->keeperDAOBD->GetById($keeperId);
+    
+            //     //     $book->setUser($user);
+            //     //     $book->setKeeper($keeper);
+    
+            //     //     $countDays = $this->CountDays($keeper);
+            //     //     $book->setCountDays($countDays);
+                    
+            //     //     $amount = $this->GetAmount($keeper, $countDays);
+            //     //     $book->setAmount($amount);  
+                  
+            //     // }
+            //     /*else{
+            //         $this->HomeKeeper("You don't have confirmed book");
+            //     }*/
+                
+                
+            // }
             require_once(VIEWS_PATH."book-list.php");
         }
 

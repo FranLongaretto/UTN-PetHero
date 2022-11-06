@@ -20,45 +20,22 @@
                 <table style="text-align:center;">
                     <thead style="color:white">
                         <tr> 
-                            <th>ID BOOK</th>
-                            <th>SIZE PET</th>
-                            <th>DATE START</th>
-                            <th>DATE END</th>
-                            <th>OWNER NAME</th>
-                            <th>OWNER LAST NAME</th>
-                            <th>Total Days</th>
-                            <th>Total $</th>
+                            <th>Date Start</th>
+                            <th>Date End</th>
+                            <th>Book Price</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php 
-                    foreach($bookList as $book) {
-                        
-                        if($_SESSION["loggedUser"]->id == $book->getUser()->getId() && ($book->getStatus()=="confirmed")){
-
-                            ?>
-                            <tr>
-                                <td><?php echo $book->getId() ?></td>
-                                <td><?php echo $book->getKeeper()->getSize() ?></td>
-                                <td><?php echo $book->getKeeper()->getDateStart() ?></td>
-                                <td><?php echo $book->getKeeper()->getDateEnd() ?></td>
-                                <td><?php echo $book->getUser()->getFirstName()?></td>
-                                <td><?php echo $book->getUser()->getLastName() ?></td>
-                                <td><?php echo $book->getCountDays()?></td>   
-                                <td><?php echo $book->getAmount()?></td>   
-                            </tr>
-                    <?php }elseif($_SESSION["loggedUser"]->getRole()=="Keeper" && ($book->getStatus()=="confirmed")){?>
+                    foreach($bookListFront as $book) {?>
                         <tr>
-                            <td><?php echo $book->getId() ?></td>
-                            <td><?php echo $book->getKeeper()->getSize() ?></td>
-                            <td><?php echo $book->getKeeper()->getDateStart() ?></td>
-                            <td><?php echo $book->getKeeper()->getDateEnd() ?></td>
-                            <td><?php echo $book->getUser()->getFirstName()?></td>
-                            <td><?php echo $book->getUser()->getLastName() ?></td>
-                            <td><?php echo $book->getCountDays()?></td>   
-                            <td><?php echo $book->getAmount()?></td>   
+                            <td><?php echo $book->getDateStart() ?></td>
+                            <td><?php echo $book->getDateEnd() ?></td>
+                            <td><?php echo $book->getBookPrice() ?></td>
+                            <td><?php echo $book->getStatus() ?></td>
                         </tr>
-                        <?php }}?>
+                    <?php }?>
                     </tbody>
                 </table>
             </div>
