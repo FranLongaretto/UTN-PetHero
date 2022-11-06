@@ -24,6 +24,8 @@
                 foreach($resultSet as $row) {
                     $keeper = new Keeper();
                     $keeper->setId($row["id"]);
+                    $keeper->setIdKeeper($row["idKeeper"]);
+                    $keeper->setTypePet($row["typePet"]);
                     $keeper->setSize($row["size"]);
                     $keeper->setSalary($row["salary"]);
                     $keeper->setAvailable($row["available"]);
@@ -39,10 +41,56 @@
             }
         }
 
-        public function GetAllFilterPDO($dateStart, $dateEnd) {
+        public function GetAllFilterByPetSizePDO($typePet, $size) {
             try {
                 $keeperList = array();
-                $query = "SELECT * FROM ".$this->tableName." k WHERE '".$dateStart."'>=k.dateStart AND '".$dateEnd."'<=k.dateEnd;";
+
+                $queryTypePet = $typePet == "Cat" ? "cat" : "dog";
+                
+                if($size == "small"){
+                    $query = "SELECT * FROM " . $this->tableName . " k WHERE k.typePet='" . $queryTypePet . "' ;";
+                }else if($size == "medium"){
+                    $query = "SELECT * FROM " . $this->tableName . " k WHERE k.typePet='" . $queryTypePet . "' AND (k.size='medium' OR k.size='big') ;";
+                }else{
+                    $query = "SELECT * FROM " . $this->tableName . " k WHERE k.typePet='" . $queryTypePet . "' AND k.size='big' ;";
+                }
+
+                $this->connection = Connection::getInstance();
+                $resultSet = $this->connection->Execute($query);
+                foreach($resultSet as $row) {
+                    $keeper = new Keeper();
+                    $keeper->setId($row["id"]);
+                    $keeper->setIdKeeper($row["idKeeper"]);
+                    $keeper->setTypePet($row["typePet"]);
+                    $keeper->setSize($row["size"]);
+                    $keeper->setSalary($row["salary"]);
+                    $keeper->setAvailable($row["available"]);
+                    $keeper->setDateStart($row["dateStart"]);
+                    $keeper->setDateEnd($row["dateEnd"]);
+
+                    array_push($keeperList, $keeper);
+                }
+                return $keeperList;
+            } catch(Exception $ex) {
+                throw $ex;
+            }
+        }
+
+        public function GetAllFilterPDO($dateStart, $dateEnd, $size, $type) {
+            try {
+                $keeperList = array();
+
+                $queryTypePet = $type == "Cat" ? "cat" : "dog";
+
+                if($size == "small"){
+                    $queryPet = "AND k.typePet='" . $queryTypePet . "' ;";
+                }else if($size == "medium"){
+                    $queryPet = "AND k.typePet='" . $queryTypePet . "' AND (k.size='medium' OR k.size='big') ;";
+                }else{
+                    $queryPet = "AND k.typePet='" . $queryTypePet . "' AND k.size='big' ;";
+                }
+
+                $query = "SELECT * FROM ".$this->tableName." k WHERE '".$dateStart."'>=k.dateStart AND '".$dateEnd."'<=k.dateEnd ". $queryPet .";";
                 $this->connection = Connection::getInstance();
                 // $resultSet = $this->connection->Execute($query, $parameters);
                 $resultSet = $this->connection->Execute($query);
@@ -50,6 +98,8 @@
                 foreach($resultSet as $row) {
                     $keeper = new Keeper();
                     $keeper->setId($row["id"]);
+                    $keeper->setIdKeeper($row["idKeeper"]);
+                    $keeper->setTypePet($row["typePet"]);
                     $keeper->setSize($row["size"]);
                     $keeper->setSalary($row["salary"]);
                     $keeper->setAvailable($row["available"]);
@@ -83,6 +133,8 @@
 
                     $keeper = new Keeper();
                     $keeper->setId($row["id"]);
+                    $keeper->setIdKeeper($row["idKeeper"]);
+                    $keeper->setTypePet($row["typePet"]);
                     $keeper->setSize($row["size"]);
                     $keeper->setSalary($row["salary"]);
                     $keeper->setAvailable($row["available"]);
@@ -103,10 +155,11 @@
         {
             try
             {
-    
-                $query = "INSERT INTO ".$this->tableName." (id,size, salary, available, dateStart, dateEnd) VALUES (:id, :size, :salary, :available, :dateStart, :dateEnd);";
+                $query = "INSERT INTO ".$this->tableName." (id, idKeeper, typePet, size, salary, available, dateStart, dateEnd) VALUES (:id, :idKeeper, :typePet, :size, :salary, :available, :dateStart, :dateEnd);";
                 
                 $parameters["id"] = $keeper->getId();
+                $parameters["idKeeper"] = $_SESSION["loggedUser"]->getId();
+                $parameters["typePet"] = $keeper->getTypePet();
                 $parameters["size"] = $keeper->getSize();
                 $parameters["salary"] = $keeper->getSalary();
                 $parameters["available"] = $keeper->getAvailable();
@@ -122,6 +175,5 @@
                 throw $ex;
             }
         }
-       
     }
 ?>

@@ -29,7 +29,7 @@
                                 <td><?php echo $pet->getType() ?></td>
                                 <td><?php echo $pet->getSize() ?></td>
                                 <td><?php echo $pet->getDescription() ?></td>
-                                <td><img src="<?php echo FRONT_ROOT.IMG_PATH."pets/".$pet->getImage() ?>" alt="Pet"></td>
+                                <td><img src="<?php echo FRONT_ROOT.IMG_PATH."pets/".$pet->getImage() ?>" alt="Pet" style="max-width: 100px;max-height: 100px;"></td>
                                 <td>
                                     <input type="checkbox" class="mainForm__form--submit fadeIn third" name="petsId[]" value="<?php echo $pet->getId() ?>">
                                 </td>

@@ -2,6 +2,7 @@
     namespace Controllers;
 
     use Controllers\KeeperController as KeeperController;
+    use Controllers\OwnerController as OwnerController;
     use DAO\UserDAO as UserDAO;
     use DAO\UserDAOBD as UserDAOBD;
     use DAO\BookDAO as BookDAO;
@@ -23,6 +24,7 @@
         private $userDAOBD;
         private $petDAOBD;
         private $keeperController;
+        private $ownerController;
 
         public function __construct()
         {
@@ -33,6 +35,7 @@
             $this->userDAOBD = new UserDAOBD();
             $this->petDAOBD = new PetDAOBD();
             $this->keeperController = new KeeperController();
+            $this->ownerController = new OwnerController();
         }
 
         public function Index($message = "")
@@ -55,6 +58,12 @@
             $frontMessage = $message;
             require_once(VIEWS_PATH."home-keeper.php");
         }
+
+        public function BookConfirm($message = "")
+        {
+            $frontMessage = $message;
+            require_once(VIEWS_PATH."add-book.php");
+        }
         
         public function ShowStartBooking($message = "")
         {
@@ -68,6 +77,10 @@
             $arrayPets = [];
             $catTrue = false;
             $dogTrue = false;
+            $sizeTrue = false;
+            // $firstId = $petsId[array_key_first($petsId)];
+            // $sizeType = $this->petDAOBD->GetById($firstId)->getSize();
+            $sizeType = 'small';
             if($petsId != null){
                 foreach ($petsId as $key => $value) {
                     $pet = $this->petDAOBD->GetById($value);
@@ -76,12 +89,19 @@
                     }else{
                         $dogTrue = true;
                     }
+                    if($pet && $pet->getSize() == "medium" && $sizeType != "big"){
+                        $sizeType = "medium";
+                    }
+                    if ($pet && $pet->getSize() == "big") {
+                        $sizeType = "big";
+                    }
                     array_push($arrayPets, $pet);
                 }
+
                 if($catTrue && $dogTrue){
                     $this->ShowStartBooking("Debe seleccionar mascotas del mismo tipo");
                 }else{
-                    // $_SESSION["arrayPetsForBooking"] = $arrayPets;
+                    $_SESSION["arrayPetsForBooking"] = $arrayPets;
                     $this->keeperController->ShowListView();
                 }
             }else{
@@ -151,16 +171,21 @@
             
         }
 
-
-        public function Reservation($keeperId){
+        public function Reservation($bookDateStart, $bookDateEnd, $bookPrice, $keeperBookId){
             //$keeper = $this->keeperDAO->GetById($keeperId);
-            $keeper = $this->keeperDAOBD->GetById($keeperId);
+            $keeper = $this->keeperDAOBD->GetById($keeperBookId);
             
-            if($keeper!=NULL){
-                $_SESSION["keeperAvailable"]= $keeper;
-
+            if($keeper != NULL){
+                $frontBookPets = $_SESSION["arrayPetsForBooking"];
+                $frontKeeperBook = $keeperBookId;
+                $frontOwnerBook = $_SESSION["loggedUser"];
+                $frontKeeper = $this->userDAOBD->GetById($keeper->getIdKeeper());
+                $frontDateStart = $bookDateStart;
+                $frontDateEnd = $bookDateEnd;
+                $frontPrice = $bookPrice;
                 require_once(VIEWS_PATH."add-book.php");
-                //$this->keeperController->ShowListView("Keeper has to accept the reservation");
+            }else{
+                $this->ownerController->HomeOwner("Error on book the Keeper");
             }
         }
 
@@ -169,7 +194,7 @@
             $book = $this->bookDAOBD->GetBookByKeeper($idKeeper);
             $keeper = $this->keeperDAOBD->GetById($idKeeper);
             //var_dump($idKeeper);
-           
+
             //var_dump("book: ",$book[0][0]);
             if($book!=NULL){
                 $_SESSION["bookAvailable"]= $book;
@@ -184,38 +209,38 @@
                 
             }    
         }
-       
 
-        public function Add($idKeeper)
+        public function Add($idKeeper, $idOwner, $idKeeperBook, $dateStart, $dateEnd, $bookPrice)
         {
             $book = new Book();
-            //$book->setId($id);
+            $book->setIdKeeper($idKeeper);
+            $book->setIdOwner($idOwner);
+            $book->setIdKeeperBook($idKeeperBook);
+            $book->setDateStart($dateStart);
+            $book->setDateEnd($dateEnd);
+            $book->setBookPrice($bookPrice);
 
-            $keeper= new Keeper();
-            $keeper->setId($idKeeper);
+            // $book->setId($id);
 
-            $book->setKeeper($keeper);
-            //$idOwner = $_SESSION["loggedUser"]->getId();
+            // $book->setKeeper($keeper);
+            // $idOwner = $_SESSION["loggedUser"]->getId();
 
-            $user = new User();
-            $idUser = $_SESSION["loggedUser"]->getId();
-            $user->setId($idUser);
+            // $user = new User();
+            // $idUser = $_SESSION["loggedUser"]->getId();
+            // $user->setId($idUser);
             
-            $book->setUser($user);
+            // $book->setUser($user);
             
-           //$book->setDateBook($dateBook);
-            if($book !=null){
+            // $book->setDateBook($dateBook);
+
+            if($book != null){
                 //$this->bookDAO->Add($book);
                 $this->bookDAOBD->Add($book);
                 $this->HomeOwner("&#x2705; Book created correctly");  
             }else{
-                $errorMessage = "";
-                $this->HomeOwner($errorMessage);
+                $this->HomeOwner("Book error, please try again");
             }
             
         }
-
-        
-
     }        
 ?>
