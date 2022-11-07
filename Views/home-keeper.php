@@ -6,7 +6,7 @@
 <div class="homeUser"> 
   <div class="homeUser__header">
     <h1 class="homeUser__title">PET HERO</h1>
-    <p class="homeUser__subtitle">welcome keeper!!!</p>
+    <p class="homeUser__subtitle">Welcome keeper!!!</p>
   </div>
 
   <div class="homeUser__menu">
@@ -14,11 +14,11 @@
       <a href="<?php echo FRONT_ROOT?>Keeper/RegistrationKeeper">Add Keeper</a>
     </div>
     <div class="homeUser__menu--item">
-      <a  href="<?php echo FRONT_ROOT."Book/ShowListViewKeeper" ?>">Book´s Pending</a>
+      <a  href="<?php echo FRONT_ROOT."Book/ShowListViewKeeper" ?>">Pending Bookings</a>
     </div>
 
     <div class="homeUser__menu--item">
-      <a href="<?php echo FRONT_ROOT?>Book/ShowListView">Show My Book`s</a>
+      <a href="<?php echo FRONT_ROOT?>Book/ShowListView">Show My Bookings</a>
     </div>
   
     <?php if($frontMessage){?>
