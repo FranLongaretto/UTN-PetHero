@@ -230,6 +230,8 @@
         public function ConfirmReservation($idBook)
         {
             $book = $this->bookDAOBD->GetById($idBook);
+            $idKeeper =$book->getIdKeeper();
+           // var_dump($this->bookDAOBD->GetBookByKeeper($idKeeper));
 
             if($book)
             {
@@ -279,8 +281,26 @@
         public function UpdateBook($idBook)
         {
             if($idBook != null){
-                $this->bookDAOBD->UpdateBook($idBook);
-                $this->HomeKeeper("&#x2705; Book confirmed correctly");  
+                $book = $this->bookDAOBD->GetById($idBook);
+                $idKeeper =$book->getIdKeeper();
+                $idByBook= $this->bookDAOBD->GetBookByKeeper($idKeeper);
+                $bookDateStart= $book->getDateStart();
+                $bookDateEnd= $book->getDateEnd();
+
+                foreach ($idByBook as $key => $value) {
+                    $dateStart = $value->getDateStart();
+                    $dateEnd = $value->getDateEnd();
+
+                    if($idKeeper != $value && ($bookDateStart >$dateEnd))
+                    {
+                        $this->bookDAOBD->UpdateBook($idBook);
+                        $this->HomeKeeper("&#x2705; Book confirm correctly");  
+                    }else{
+                        $this->HomeKeeper("&#10060; Keeper already has a reservation for that date");  
+                    }
+                    
+                }
+               
             }else{
                 $this->HomeKeeper("Confirm error, please try again");
             }

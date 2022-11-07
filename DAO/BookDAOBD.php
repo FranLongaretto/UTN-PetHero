@@ -92,7 +92,7 @@
                 $bookList = array();
                 $bookListFront = array();
 
-                $query = "SELECT bo.id, idOwner, idKeeperBook, dateStart, dateEnd, bookPrice, status FROM ". $this->tableName. " bo INNER JOIN ". $this->tableNameUser. " u on u.id = bo.idKeeper WHERE '".$idKeeper."'=u.id";
+                $query = "SELECT bo.id, idKeeper, idOwner, idKeeperBook, dateStart, dateEnd, bookPrice, status FROM ". $this->tableName. " bo INNER JOIN ". $this->tableNameUser. " u on u.id = bo.idKeeper WHERE '".$idKeeper."'=u.id";
 
                 // $parameters['idKeeper'] = $idKeeper;
                 $this->connection = Connection::GetInstance();
@@ -111,6 +111,7 @@
 
                     $book = new Book();
                     $book->setId($row["id"]);
+                    $book->setIdKeeper($row["idKeeper"]);
                     $book->setIdOwner($row["idOwner"]);
                     $book->setIdKeeperBook($row["idKeeperBook"]);
                     $book->setDateStart($row["dateStart"]);
@@ -201,6 +202,9 @@
 
         public function UpdateBook($idBook)
         {
+            $queryBook= $this->GetById($idBook);
+            //$query = "SELECT bo.id, bo.dateStart, bo.dateEnd, bo.idKeeper".$this->tableName." bo WHERE bo.id=". $idBook ." AND status='pending';";
+
             try
             {
                 $query = "UPDATE ".$this->tableName." bo SET status=:status WHERE bo.id=". $idBook ." AND status='pending';";
