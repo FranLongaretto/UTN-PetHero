@@ -15,7 +15,7 @@
     </div>
   
     <div class="homeUser__menu--item">
-      <a href="<?php echo FRONT_ROOT?>Pet/ShowListView">Show Pet's List</a>
+      <a href="<?php echo FRONT_ROOT?>Pet/ShowListView">Show Pets List</a>
     </div>
   
     <!-- <div class="homeUser__menu--item">

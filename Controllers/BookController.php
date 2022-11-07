@@ -194,7 +194,7 @@
                 $frontPrice = $bookPrice;
                 require_once(VIEWS_PATH."add-book.php");
             }else{
-                $this->ownerController->HomeOwner("Error on book the Keeper");
+                $this->ownerController->HomeOwner("Error booking the Keeper");
             }
         }
 
@@ -223,7 +223,7 @@
                 // }
                 require_once(VIEWS_PATH."book-list.php");
             }else{
-                $this->HomeKeeper("You don't have pending's book");
+                $this->HomeKeeper("You don't have pending books");
             }  
         }
 
@@ -241,7 +241,7 @@
                 $frontPrice = $book->getBookPrice();
                 require_once(VIEWS_PATH."confirm-book-keeper.php");
             }else{
-                $this->HomeKeeper("You don't have pending's book");
+                $this->HomeKeeper("You don't have pending books");
             }
         }
 
@@ -273,7 +273,7 @@
                 $this->bookDAOBD->Add($book);
                 $this->HomeOwner("&#x2705; Book created correctly");  
             }else{
-                $this->HomeOwner("Book error, please try again");
+                $this->HomeOwner("Booking error, please try again");
             }
             
         }
