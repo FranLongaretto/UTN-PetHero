@@ -17,10 +17,6 @@
     <div class="homeUser__menu--item">
       <a href="<?php echo FRONT_ROOT?>Pet/ShowListView">Show Pets List</a>
     </div>
-  
-    <!-- <div class="homeUser__menu--item">
-      <a href="<?php echo FRONT_ROOT?>Owner/ShowListKeeperView">Show Keeper's List</a>
-    </div> -->
 
     <div class="homeUser__menu--item">
       <a href="<?php echo FRONT_ROOT?>Owner/StartBooking">Start Booking</a>

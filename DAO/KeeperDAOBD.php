@@ -48,11 +48,11 @@
                 $queryTypePet = $typePet == "Cat" ? "cat" : "dog";
                 
                 if($size == "small"){
-                    $query = "SELECT * FROM " . $this->tableName . " k WHERE k.typePet='" . $queryTypePet . "' ;";
+                    $query = "SELECT * FROM " . $this->tableName . " k WHERE k.available='true' AND k.typePet='" . $queryTypePet . "' ;";
                 }else if($size == "medium"){
-                    $query = "SELECT * FROM " . $this->tableName . " k WHERE k.typePet='" . $queryTypePet . "' AND (k.size='medium' OR k.size='big') ;";
+                    $query = "SELECT * FROM " . $this->tableName . " k WHERE k.available='true' AND k.typePet='" . $queryTypePet . "' AND (k.size='medium' OR k.size='big') ;";
                 }else{
-                    $query = "SELECT * FROM " . $this->tableName . " k WHERE k.typePet='" . $queryTypePet . "' AND k.size='big' ;";
+                    $query = "SELECT * FROM " . $this->tableName . " k WHERE k.available='true' AND k.typePet='" . $queryTypePet . "' AND k.size='big' ;";
                 }
 
                 $this->connection = Connection::getInstance();
@@ -150,7 +150,24 @@
             {
                 throw $ex;
             }
-        }    
+        }
+
+        public function UpdateKeeperBook($idKeeperBook) 
+        {
+            try
+            {
+                $query = "UPDATE ".$this->tableName." k SET available='false' WHERE k.id=". $idKeeperBook .";";
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
         public function Add(Keeper $keeper)
         {
             try

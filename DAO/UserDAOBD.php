@@ -78,7 +78,32 @@ class UserDAOBD implements IUserDAOBD{
         {
             throw $ex;
         }
-    }    
+    }  
+    
+    public function GetByEmailRepeatPDO($email)
+    {
+        try
+        {
+            $findUser = false;
+
+            $query = "SELECT * FROM ".$this->tableName." WHERE (email = :email);";
+
+            $parameters['email'] = $email;
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query, $parameters);
+            
+            if($resultSet){
+                $findUser = true;
+            }
+
+            return $findUser;
+        }catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+    }  
 
     public function GetById($id) 
     {

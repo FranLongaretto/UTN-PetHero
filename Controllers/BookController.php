@@ -239,6 +239,7 @@
                 $frontDateStart = $book->getDateStart();
                 $frontDateEnd = $book->getDateEnd();
                 $frontPrice = $book->getBookPrice();
+                $frontIdKeeperBook = $book->getIdKeeperBook();
                 require_once(VIEWS_PATH."confirm-book-keeper.php");
             }else{
                 $this->HomeKeeper("You don't have pending books");
@@ -278,7 +279,7 @@
             
         }
 
-        public function UpdateBook($idBook)
+        public function UpdateBook($idBook,$idKeeperBook)
         {
             if($idBook != null){
                 $book = $this->bookDAOBD->GetById($idBook);
@@ -294,6 +295,7 @@
                     if($idKeeper != $value && ($bookDateStart >$dateEnd))
                     {
                         $this->bookDAOBD->UpdateBook($idBook);
+                        $this->keeperDAOBD->UpdateKeeperBook($idKeeperBook);
                         $this->HomeKeeper("&#x2705; Book confirm correctly");  
                     }else{
                         $this->HomeKeeper("&#10060; Keeper already has a reservation for that date");  
