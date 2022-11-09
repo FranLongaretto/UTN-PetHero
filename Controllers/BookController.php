@@ -237,6 +237,7 @@
                 $frontDateStart = $book->getDateStart();
                 $frontDateEnd = $book->getDateEnd();
                 $frontPrice = $book->getBookPrice();
+                $frontIdKeeperBook = $book->getIdKeeperBook();
                 require_once(VIEWS_PATH."confirm-book-keeper.php");
             }else{
                 $this->HomeKeeper("You don't have pending's book");
@@ -276,10 +277,11 @@
             
         }
 
-        public function UpdateBook($idBook)
+        public function UpdateBook($idBook,$idKeeperBook)
         {
             if($idBook != null){
                 $this->bookDAOBD->UpdateBook($idBook);
+                $this->keeperDAOBD->UpdateKeeperBook($idKeeperBook);
                 $this->HomeKeeper("&#x2705; Book confirm correctly");  
             }else{
                 $this->HomeKeeper("Confirm error, please try again");

@@ -27,6 +27,7 @@
             </div>
 
             <input type="number" name="idBook" id="idBook" value="<?php echo $book->getId() ?>" hidden>
+            <input type="number" name="idKeeperBook" id="idKeeperBook" value="<?php echo $frontIdKeeperBook ?>" hidden>
             <input type="submit" class="mainForm__form--submit fadeIn second" value="Confirm">
 
             <?php if($_SESSION["loggedUser"]->getRole()=="Owner"){ ?>
