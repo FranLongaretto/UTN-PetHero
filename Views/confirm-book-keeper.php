@@ -11,16 +11,16 @@
 
             <div class="form-confirmBook">
                 <div class="confirmBook-keeper">
-                    <p>Keeper Name: </p>
+                    <h5 style="color:#39ace7">Keeper Name</h5>
                     <p class="confirmBook-keeper-item"><?php echo $frontKeeper->getFirstName()." ". $frontKeeper->getLastName() ?></p>
                 </div>
                 <div class="confirmBook-book">
                     <div class="confirmBook-book-date">
-                        <p>Date range: </p>
+                        <h5 style="color:#39ace7">Date range </h5>
                         <p class="confirmBook-book-date-item"><?php echo $frontDateStart . " / " . $frontDateEnd ?></p>
                     </div>
                     <div class="confirmBook-book-price">
-                        <p>Price: </p>
+                        <h5 style="color:#39ace7">Price  $ </h5>
                         <p class="confirmBook-book-price-item"><?php echo $frontPrice ?></p>
                     </div>
                 </div>

@@ -194,7 +194,7 @@
                 $frontPrice = $bookPrice;
                 require_once(VIEWS_PATH."add-book.php");
             }else{
-                $this->ownerController->HomeOwner("Error on book the Keeper");
+                $this->ownerController->HomeOwner("Error booking the Keeper");
             }
         }
 
@@ -223,13 +223,15 @@
                 // }
                 require_once(VIEWS_PATH."book-list.php");
             }else{
-                $this->HomeKeeper("You don't have pending's book");
+                $this->HomeKeeper("You don't have pending books");
             }  
         }
 
         public function ConfirmReservation($idBook)
         {
             $book = $this->bookDAOBD->GetById($idBook);
+            $idKeeper =$book->getIdKeeper();
+           // var_dump($this->bookDAOBD->GetBookByKeeper($idKeeper));
 
             if($book)
             {
@@ -240,7 +242,7 @@
                 $frontIdKeeperBook = $book->getIdKeeperBook();
                 require_once(VIEWS_PATH."confirm-book-keeper.php");
             }else{
-                $this->HomeKeeper("You don't have pending's book");
+                $this->HomeKeeper("You don't have pending books");
             }
         }
 
@@ -272,7 +274,7 @@
                 $this->bookDAOBD->Add($book);
                 $this->HomeOwner("&#x2705; Book created correctly");  
             }else{
-                $this->HomeOwner("Book error, please try again");
+                $this->HomeOwner("Booking error, please try again");
             }
             
         }
@@ -280,9 +282,27 @@
         public function UpdateBook($idBook,$idKeeperBook)
         {
             if($idBook != null){
-                $this->bookDAOBD->UpdateBook($idBook);
-                $this->keeperDAOBD->UpdateKeeperBook($idKeeperBook);
-                $this->HomeKeeper("&#x2705; Book confirm correctly");  
+                $book = $this->bookDAOBD->GetById($idBook);
+                $idKeeper =$book->getIdKeeper();
+                $idByBook= $this->bookDAOBD->GetBookByKeeper($idKeeper);
+                $bookDateStart= $book->getDateStart();
+                $bookDateEnd= $book->getDateEnd();
+
+                foreach ($idByBook as $key => $value) {
+                    $dateStart = $value->getDateStart();
+                    $dateEnd = $value->getDateEnd();
+
+                    if($idKeeper != $value && ($bookDateStart >$dateEnd))
+                    {
+                        $this->bookDAOBD->UpdateBook($idBook);
+                        $this->keeperDAOBD->UpdateKeeperBook($idKeeperBook);
+                        $this->HomeKeeper("&#x2705; Book confirm correctly");  
+                    }else{
+                        $this->HomeKeeper("&#10060; Keeper already has a reservation for that date");  
+                    }
+                    
+                }
+               
             }else{
                 $this->HomeKeeper("Confirm error, please try again");
             }
