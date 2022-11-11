@@ -6,6 +6,7 @@
 <div class="mainForm fadeInDown">
   <div class="mainForm__container">
     <!-- Form -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <form action="<?php echo FRONT_ROOT?>Book/Add" method="POST" class="mainForm__form">
       <h2 class="mainForm__form--title">CONFIRM BOOK</h2>
 
@@ -13,14 +14,17 @@
         <div class="confirmBook-keeper">
           <p>Keeper Name: </p>
           <p class="confirmBook-keeper-item"><?php echo $frontKeeper->getFirstName()." ". $frontKeeper->getLastName() ?></p>
+          <input type="string" name="nameKeeper" id="nameKeeper" value="<?php echo $frontKeeper->getFirstName()." ". $frontKeeper->getLastName() ?>" hidden>
           <input type="number" name="idKeeper" id="idKeeper" value="<?php echo $frontKeeper->getId() ?>" hidden>
           <input type="number" name="idOwner" id="idOwner" value="<?php echo $frontOwnerBook->getId() ?>" hidden>
+          <input type="string" name="emailOwner" id="emailOwner" value="<?php echo $frontOwnerBook->getId() ?>" hidden>
           <input type="number" name="idKeeperBook" id="idKeeperBook" value="<?php echo $frontKeeperBook ?>" hidden>
         </div>
         <?php foreach ($frontBookPets as $key => $value) {?>
         <div class="confirmBook-pets">
           <p>Pet: </p>
           <p class="confirmBook-pets-item"><?php echo $value->getType() ?> / <?php echo $value->getRace() ?></p>
+          <input type="string" name="pet" id="pet" value="<?php echo $value->getRace() ?>" hidden>
         </div>
         <?php } ?>
         <div class="confirmBook-book">
@@ -45,6 +49,31 @@
       <?php }else{ ?>
         <a href="<?php echo FRONT_ROOT ?>User/HomeKeeper" class="btn btn-outline-primary">Cancel</a>
       <?php } ?>
+      <input type="button" class="mainForm__form--submit fadeIn second" value="Send Email" onclick="sendEmail()">
     </form>
   </div>
 </div>
+<script>
+  bookPrice = "Total Price: $"+document.getElementById('bookPrice').value
+  nameKeeper = "Keeper Name:"+document.getElementById('nameKeeper').value
+  idOwner = "Owner Id:"+document.getElementById('idOwner').value
+  pet= "Pet: "+document.getElementById('pet').value
+  dateStart= "Date Start: "+document.getElementById('dateStart').value
+  dateEnd= "Date End: "+document.getElementById('dateEnd').value
+  body= bookPrice+"," +nameKeeper+"," + idOwner+"," +pet+"," +dateStart+"," +dateEnd
+  console.log(body)
+  function sendEmail(){
+    Email.send({
+    Host : "smtp.elasticemail.com",
+    Username : "german_oyarzo@hotmail.com",
+    Password : "F6679CF7D87562C8DE6D167735C67681B57C",
+    To : 'germanoyarzo94@gmail.com',
+    From : "german_oyarzo@hotmail.com",
+    Subject : "Book Details",
+    Body : body
+    }).then(
+      (message) => {alert( "The email has been sent correctly" );
+    });
+  }
+  
+</script>
