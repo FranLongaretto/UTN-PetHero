@@ -8,7 +8,7 @@
     <div class="mainForm__container">
         <div class="mainForm__form">
             <div align="center">
-                <h2 class="mainForm__form--title">KEEPER´S AVAILABILITY</h2>
+                <h2 class="mainForm__form--title">KEEPERS AVAILABLE</h2>
             </div>
             <?php if(!$keeperListFilter) { ?>
             <div class="warningKeeper">

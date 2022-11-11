@@ -194,7 +194,7 @@
                 $frontPrice = $bookPrice;
                 require_once(VIEWS_PATH."add-book.php");
             }else{
-                $this->ownerController->HomeOwner("Error on book the Keeper");
+                $this->ownerController->HomeOwner("Error booking the Keeper");
             }
         }
 
@@ -223,7 +223,7 @@
                 // }
                 require_once(VIEWS_PATH."book-list.php");
             }else{
-                $this->HomeKeeper("You don't have pending's book");
+                $this->HomeKeeper("You don't have pending books");
             }  
         }
 
@@ -239,9 +239,10 @@
                 $frontDateStart = $book->getDateStart();
                 $frontDateEnd = $book->getDateEnd();
                 $frontPrice = $book->getBookPrice();
+                $frontIdKeeperBook = $book->getIdKeeperBook();
                 require_once(VIEWS_PATH."confirm-book-keeper.php");
             }else{
-                $this->HomeKeeper("You don't have pending's book");
+                $this->HomeKeeper("You don't have pending books");
             }
         }
 
@@ -273,12 +274,12 @@
                 $this->bookDAOBD->Add($book);
                 $this->HomeOwner("&#x2705; Book created correctly");  
             }else{
-                $this->HomeOwner("Book error, please try again");
+                $this->HomeOwner("Booking error, please try again");
             }
             
         }
 
-        public function UpdateBook($idBook)
+        public function UpdateBook($idBook,$idKeeperBook)
         {
             if($idBook != null){
                 $book = $this->bookDAOBD->GetById($idBook);
@@ -294,6 +295,7 @@
                     if($idKeeper != $value && ($bookDateStart >$dateEnd))
                     {
                         $this->bookDAOBD->UpdateBook($idBook);
+                        $this->keeperDAOBD->UpdateKeeperBook($idKeeperBook);
                         $this->HomeKeeper("&#x2705; Book confirm correctly");  
                     }else{
                         $this->HomeKeeper("&#10060; Keeper already has a reservation for that date");  
