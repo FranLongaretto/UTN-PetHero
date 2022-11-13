@@ -25,6 +25,14 @@
     <div class="homeUser__menu--item">
       <a href="<?php echo FRONT_ROOT?>Book/ShowListView">Show My Books</a>
     </div>
+    
+    <div class="homeUser__menu--item">
+      <a href="<?php echo FRONT_ROOT?>Message/Add">Start Chat</a>
+    </div>
+    
+    <div class="homeUser__menu--item">
+      <a href="<?php echo FRONT_ROOT?>Chat/ShowMyChats">Show My Chats</a>
+    </div>
   
     <?php if($frontMessage){?>
       <div class="homeUser__menu--message">

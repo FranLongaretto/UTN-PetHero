@@ -6,8 +6,6 @@
     }else{
         include('navKeeper.php');
     }
-    use DAO\UserDAOBD as UserDAOBD;
-    use DAO\KeeperDAOBD as KeeperDAOBD;
 ?>
 
 <div class="mainForm mainFormKeeper fadeInDown">

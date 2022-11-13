@@ -1,0 +1,86 @@
+<?php 
+namespace DAO;
+
+use DAO\IChatDAOBD as IChatDAOBD;
+use Models\Chat as Chat;
+use \Exception as Exception;
+use DAO\Connection as Connection;
+
+class ChatDAOBD implements IChatDAOBD{
+    private $chatList = array();
+    private $connection;
+    private $tableName = "chat";
+
+    public function GetAllPDO() {
+        try {
+            $chatList = array();
+            $query = "SELECT * FROM " . $this->tableName;
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->Execute($query);
+            foreach($resultSet as $row) {
+                $chat = new Chat();
+                $chat->setId($row["id"]);
+                $chat->setOwner($row["owner"]);
+                $chat->setKeeper($row["keeper"]);
+                $chat->setMessages_owner($row["messages_owner"]);
+                $chat->setMessages_keeper($row["messages_keeper"]);
+
+                array_push($chatList, $chat);
+            }
+            return $chatList;
+        } catch(Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function GetById($id) {
+        try{
+            $chatList = array();
+
+            $query = "SELECT * FROM ".$this->tableName." WHERE (id = :id);";
+
+            $parameters['id'] = $id;
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query, $parameters);
+            
+            foreach ($resultSet as $row)
+            {      
+                $chat = new Chat();
+                $chat->setId($row["id"]);
+                $chat->setOwner($row["owner"]);
+                $chat->setKeeper($row["keeper"]);
+                $chat->setMessages_owner($row["messages_owner"]);
+                $chat->setMessages_keeper($row["messages_keeper"]);
+
+                array_push($chatList, $chat);
+            }
+
+            return (count($chatList) > 0) ? $chatList[0] : null;
+
+        }catch (\PDOException $ex){
+            throw $ex;
+        }
+    }
+
+    public function Add(Chat $chat)
+    {
+        try{
+            $query = "INSERT INTO ".$this->tableName." (id, owner, keeper, messages_owner, messages_keeper) VALUES (:id, :owner, :keeper, :messages_owner, :messages_keeper);";
+            
+            $parameters["id"] = $chat->getId();
+            $parameters["owner"] = $chat->getOwner();
+            $parameters["keeper"] = $chat->getKeeper();
+            $parameters["messages_owner"] = $chat->getMessages_owner();
+            $parameters["messages_keeper"] = $chat->getMessages_keeper();
+
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($query, $parameters);
+        }catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+}
+?>
