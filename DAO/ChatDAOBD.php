@@ -22,8 +22,6 @@ class ChatDAOBD implements IChatDAOBD{
                 $chat->setId($row["id"]);
                 $chat->setOwner($row["owner"]);
                 $chat->setKeeper($row["keeper"]);
-                $chat->setMessages_owner($row["messages_owner"]);
-                $chat->setMessages_keeper($row["messages_keeper"]);
 
                 array_push($chatList, $chat);
             }
@@ -51,8 +49,6 @@ class ChatDAOBD implements IChatDAOBD{
                 $chat->setId($row["id"]);
                 $chat->setOwner($row["owner"]);
                 $chat->setKeeper($row["keeper"]);
-                $chat->setMessages_owner($row["messages_owner"]);
-                $chat->setMessages_keeper($row["messages_keeper"]);
 
                 array_push($chatList, $chat);
             }
@@ -67,13 +63,11 @@ class ChatDAOBD implements IChatDAOBD{
     public function Add(Chat $chat)
     {
         try{
-            $query = "INSERT INTO ".$this->tableName." (id, owner, keeper, messages_owner, messages_keeper) VALUES (:id, :owner, :keeper, :messages_owner, :messages_keeper);";
+            $query = "INSERT INTO ".$this->tableName." (id, owner, keeper) VALUES (:id, :owner, :keeper);";
             
             $parameters["id"] = $chat->getId();
             $parameters["owner"] = $chat->getOwner();
             $parameters["keeper"] = $chat->getKeeper();
-            $parameters["messages_owner"] = $chat->getMessages_owner();
-            $parameters["messages_keeper"] = $chat->getMessages_keeper();
 
             $this->connection = Connection::GetInstance();
 

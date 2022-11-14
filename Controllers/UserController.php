@@ -179,5 +179,12 @@
             echo "<script>window.location = '../index.php';
                 </script>";
         }
+
+        public function ShowAllKeepersAvailables($message = ""){
+            $keeperList = $this->userDAOBD->GetKeepersAvailablePDO();
+            if(!$keeperList) $message = "Keepers are not available";
+            $frontMessage = $message;
+            require_once(VIEWS_PATH."keepersForChat.php");
+        }
     }        
 ?>

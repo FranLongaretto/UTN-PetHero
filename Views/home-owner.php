@@ -27,7 +27,7 @@
     </div>
     
     <div class="homeUser__menu--item">
-      <a href="<?php echo FRONT_ROOT?>Message/Add">Start Chat</a>
+      <a href="<?php echo FRONT_ROOT?>Chat/ShowKeeperList">Start new Chat</a>
     </div>
     
     <div class="homeUser__menu--item">
