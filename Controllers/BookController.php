@@ -183,7 +183,7 @@
         public function Reservation($bookDateStart, $bookDateEnd, $bookPrice, $keeperBookId){
             //$keeper = $this->keeperDAO->GetById($keeperId);
             $keeper = $this->keeperDAOBD->GetById($keeperBookId);
-            
+
             if($keeper != NULL){
                 $frontBookPets = $_SESSION["arrayPetsForBooking"];
                 $frontKeeperBook = $keeperBookId;
@@ -231,10 +231,14 @@
         {
             $book = $this->bookDAOBD->GetById($idBook);
             $idKeeper =$book->getIdKeeper();
-           // var_dump($this->bookDAOBD->GetBookByKeeper($idKeeper));
+            $keeper = $this->keeperDAOBD->GetById($idKeeper);
+            $idKeeperBook= $this->keeperDAOBD->GetById($book->getIdKeeperBook());
 
             if($book)
             {
+                
+                $pet= $idKeeperBook->getTypePet();
+                $frontOwnerBook = $book->getIdOwner();
                 $frontKeeper = $_SESSION["loggedUser"];
                 $frontDateStart = $book->getDateStart();
                 $frontDateEnd = $book->getDateEnd();
@@ -283,7 +287,9 @@
         {
             if($idBook != null){
                 $book = $this->bookDAOBD->GetById($idBook);
+                
                 $idKeeper =$book->getIdKeeper();
+               
                 $idByBook= $this->bookDAOBD->GetBookByKeeper($idKeeper);
                 $bookDateStart= $book->getDateStart();
                 $bookDateEnd= $book->getDateEnd();
