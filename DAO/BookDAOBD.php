@@ -44,6 +44,8 @@
                     $book->setIdKeeper($row["idKeeper"]);
                     $book->setIdOwner($row["idOwner"]);
                     $book->setIdKeeperBook($row["idKeeperBook"]);
+                    $book->setPetType($row["petType"]);
+                    $book->setPetSize($row["petSize"]);
                     $book->setDateStart($row["dateStart"]);
                     $book->setDateEnd($row["dateEnd"]);
                     $book->setBookPrice($row["bookPrice"]);
@@ -92,7 +94,7 @@
                 $bookList = array();
                 $bookListFront = array();
 
-                $query = "SELECT bo.id, idKeeper, idOwner, idKeeperBook, dateStart, dateEnd, bookPrice, status FROM ". $this->tableName. " bo INNER JOIN ". $this->tableNameUser. " u on u.id = bo.idKeeper WHERE '".$idKeeper."'=u.id";
+                $query = "SELECT bo.id, idKeeper, idOwner, idKeeperBook, petType, petSize, dateStart, dateEnd, bookPrice, status FROM ". $this->tableName. " bo INNER JOIN ". $this->tableNameUser. " u on u.id = bo.idKeeper WHERE '".$idKeeper."'=u.id";
 
                 // $parameters['idKeeper'] = $idKeeper;
                 $this->connection = Connection::GetInstance();
@@ -114,6 +116,8 @@
                     $book->setIdKeeper($row["idKeeper"]);
                     $book->setIdOwner($row["idOwner"]);
                     $book->setIdKeeperBook($row["idKeeperBook"]);
+                    $book->setPetType($row["petType"]);
+                    $book->setPetSize($row["petSize"]);
                     $book->setDateStart($row["dateStart"]);
                     $book->setDateEnd($row["dateEnd"]);
                     $book->setBookPrice($row["bookPrice"]);
@@ -149,6 +153,8 @@
                     $book->setIdKeeper($row["idKeeper"]);
                     $book->setIdOwner($row["idOwner"]);
                     $book->setIdKeeperBook($row["idKeeperBook"]);
+                    $book->setPetType($row["petType"]);
+                    $book->setPetSize($row["petSize"]);
                     $book->setDateStart($row["dateStart"]);
                     $book->setDateEnd($row["dateEnd"]);
                     $book->setBookPrice($row["bookPrice"]);
@@ -171,12 +177,14 @@
             {
                 if($_SESSION["loggedUser"]->getRole() == "Owner")
                 {
-                    $query = "INSERT INTO ".$this->tableName." (id, idKeeper, idOwner, idKeeperBook, dateStart, dateEnd, bookPrice, status) VALUES (:id, :idKeeper, :idOwner, :idKeeperBook, :dateStart, :dateEnd, :bookPrice, :status);";
+                    $query = "INSERT INTO ".$this->tableName." (id, idKeeper, idOwner, idKeeperBook,petType, petSize, dateStart, dateEnd, bookPrice, status) VALUES (:id, :idKeeper, :idOwner, :idKeeperBook, :petType, :petSize, :dateStart, :dateEnd, :bookPrice, :status);";
                     
                     $parameters["id"] = $book->getId();
                     $parameters["idKeeper"] = $book->getIdKeeper();
                     $parameters["idOwner"] = $book->getIdOwner();
                     $parameters["idKeeperBook"] = $book->getIdKeeperBook();
+                    $parameters["petType"] = $book->getPetType();
+                    $parameters["petSize"] = $book->getPetSize();
                     $parameters["dateStart"] = $book->getDateStart();
                     $parameters["dateEnd"] = $book->getDateEnd();
                     $parameters["bookPrice"] = $book->getBookPrice();

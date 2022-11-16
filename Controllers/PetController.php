@@ -136,6 +136,7 @@
         {
             //var_dump($vaccinationImg["name"]);
             $pet = new Pet();
+            $pet->setIdUser($_SESSION["loggedUser"]->id);
             $pet->setType($type);
             $pet->setRace($race);
             $pet->setSize($size);
@@ -145,7 +146,7 @@
             
             //$pet->setImage($petImage); //JSON
             $pet->setImage($petImage["name"]);
-            $pet->setIdUser($_SESSION["loggedUser"]->id);
+            
 
             if($pet != null){
                 //$this->PetDAO->Add($pet);

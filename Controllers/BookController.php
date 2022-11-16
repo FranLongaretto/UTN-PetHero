@@ -183,7 +183,6 @@
         public function Reservation($bookDateStart, $bookDateEnd, $bookPrice, $keeperBookId){
             //$keeper = $this->keeperDAO->GetById($keeperId);
             $keeper = $this->keeperDAOBD->GetById($keeperBookId);
-
             if($keeper != NULL){
                 $frontBookPets = $_SESSION["arrayPetsForBooking"];
                 $frontKeeperBook = $keeperBookId;
@@ -192,6 +191,8 @@
                 $frontDateStart = $bookDateStart;
                 $frontDateEnd = $bookDateEnd;
                 $frontPrice = $bookPrice;
+                $petType= $keeper->getTypePet();
+                $petSize= $keeper->getSize();
                 require_once(VIEWS_PATH."add-book.php");
             }else{
                 $this->ownerController->HomeOwner("Error booking the Keeper");
@@ -209,6 +210,7 @@
             if($bookList != NULL){
                 // $_SESSION["bookAvailable"] = $book;
                 foreach ($bookList as $book) {
+
                     if($book->getStatus() != "confirmed"){
                         array_push($bookListFront, $book);
                     }
@@ -250,12 +252,14 @@
             }
         }
 
-        public function Add($idKeeper, $idOwner, $idKeeperBook, $dateStart, $dateEnd, $bookPrice)
+        public function Add($idKeeper, $idOwner, $idKeeperBook, $petType, $petSize, $dateStart, $dateEnd, $bookPrice)
         {
             $book = new Book();
             $book->setIdKeeper($idKeeper);
             $book->setIdOwner($idOwner);
             $book->setIdKeeperBook($idKeeperBook);
+            $book->setPetType($petType);
+            $book->setPetSize($petSize);
             $book->setDateStart($dateStart);
             $book->setDateEnd($dateEnd);
             $book->setBookPrice($bookPrice);

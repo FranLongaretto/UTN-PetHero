@@ -6,6 +6,8 @@ class Book{
         private $idKeeper;
         private $idOwner;
         private $idKeeperBook;
+        private $petType;
+        private $petSize;
         public $dateStart;
         public $dateEnd; 
         public $bookPrice;
@@ -102,6 +104,47 @@ class Book{
         public function setStatus($status)
         {
                 $this->status = $status;
+
+                return $this;
+        }
+
+
+        /**
+         * Get the value of petSize
+         */ 
+        public function getPetSize()
+        {
+                return $this->petSize;
+        }
+
+        /**
+         * Set the value of petSize
+         *
+         * @return  self
+         */ 
+        public function setPetSize($petSize)
+        {
+                $this->petSize = $petSize;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of petType
+         */ 
+        public function getPetType()
+        {
+                return $this->petType;
+        }
+
+        /**
+         * Set the value of petType
+         *
+         * @return  self
+         */ 
+        public function setPetType($petType)
+        {
+                $this->petType = $petType;
 
                 return $this;
         }
