@@ -28,6 +28,8 @@
                             <?php }else{?>
                             <th>ID Owner</th>
                             <th>ID Keeper</th>
+                            <th>Pet Type</th>
+                            <th>Pet Size</th>
                             <th>Date Start</th>
                             <th>Date End</th>
                             <th>Book Price</th>
@@ -52,6 +54,8 @@
                         <tr>
                             <td><?php echo $book->getIdOwner() ?></td>
                             <td><?php echo $book->getIdKeeperBook() ?></td>
+                            <td><?php echo $book->getPetType() ?></td>
+                            <td><?php echo $book->getPetSize() ?></td>
                             <td><?php echo $book->getDateStart() ?></td>
                             <td><?php echo $book->getDateEnd() ?></td>
                             <td><?php echo $book->getBookPrice() ?></td>

@@ -26,6 +26,8 @@
         </div>
         <?php } ?>
         <div class="confirmBook-book">
+          <input type="text" name="petType" id="petType" value="<?php echo $petType ?>" hidden>
+          <input type="text" name="petSize" id="petSize" value="<?php echo $petSize ?>" hidden>
           <div class="confirmBook-book-date">
             <h5 style="color:#39ace7">Date range: </h5>
             <p class="confirmBook-book-date-item"><?php echo $frontDateStart . " / " . $frontDateEnd ?></p>
@@ -39,7 +41,9 @@
           </div>
         </div>
       </div>
-
+ 
+      <input type="email" name="emailOwner" id="emailOwner" value="<?php echo $frontOwnerBook->getEmail() ?>" hidden>
+    
       <input type="submit" class="mainForm__form--submit fadeIn second" value="Confirm">
 
       <?php if($_SESSION["loggedUser"]->getRole()=="Owner"){ ?>
@@ -56,6 +60,8 @@
   bookPrice = "Total Price: $".bold()+document.getElementById('bookPrice').value
   nameKeeper = "Keeper Name: ".bold()+document.getElementById('nameKeeper').innerHTML
   idOwner = "Owner Id:".bold()+document.getElementById('idOwner').value
+ /*  emailOwner = "Owner email:"+document.getElementById('emailOwner').value
+  console.log(emailOwner) */
   pet= "Pet: ".bold()+document.getElementById('pet').innerHTML
   dateStart= "Date Start: ".bold()+document.getElementById('dateStart').value
   dateEnd= "Date End: ".bold()+document.getElementById('dateEnd').value
@@ -66,7 +72,7 @@
     Host : "smtp.elasticemail.com",
     Username : "german_oyarzo@hotmail.com",
     Password : "F6679CF7D87562C8DE6D167735C67681B57C",
-    To : 'germanoyarzo94@gmail.com',
+    To : "germanoyarzo94@gmail.com",
     From : "german_oyarzo@hotmail.com",
     Subject : "Book Details",
     Body : body

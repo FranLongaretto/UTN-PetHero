@@ -7,7 +7,7 @@
 
       <!-- Login Form -->
       <form action="<?php echo FRONT_ROOT?>User/Add" method="POST">
-        <h2>REGISTRATION</h2>
+        <h2 style="color:#39ace7">REGISTRATION</h2>
         <input type="email" id="email" class="fadeIn second" name="email" placeholder="email" required>
         <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" required>
         <select id="role" class="fadeIn third" name="role" required>
