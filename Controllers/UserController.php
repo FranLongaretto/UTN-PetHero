@@ -186,5 +186,10 @@
             $frontMessage = $message;
             require_once(VIEWS_PATH."keepersForChat.php");
         }
+
+        public function GetUserById($id){
+            $user = $this->userDAOBD->GetById($id);            
+            return $user;
+        }
     }        
 ?>

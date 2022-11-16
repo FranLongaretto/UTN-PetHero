@@ -1,8 +1,6 @@
 <?php
     namespace Controllers;
 
-    use Controllers\KeeperController as KeeperController;
-    use Controllers\OwnerController as OwnerController;
     use Controllers\UserController as UserController;
     use DAO\ChatDAOBD as ChatDAOBD;
     use Models\Chat as Chat;
@@ -37,23 +35,50 @@
 
         public function ShowMyChats($message = "")
         {
+            $userId = $_SESSION["loggedUser"]->getId();
+            $userRole = $_SESSION["loggedUser"]->getRole();
+
+            $chatListFront = $this->chatDAOBD->GetAllByUserPDO($userId);
+
+            $usersRecipient = [];
+            $searchUser = null;
+            
+            if($chatListFront) {
+                foreach ($chatListFront as $key => $value) {
+                    if($userRole == "Owner"){
+                        $searchUser = $this->keeperController->GetUserById($value->getKeeper());
+                    }else{
+                        $searchUser = $this->keeperController->GetUserById($value->getOwner());
+                    }
+                    array_push($usersRecipient, $searchUser);
+                }
+            }else{
+                $message = "Couldn't find Chats";
+            }
+
             $frontMessage = $message;
             require_once(VIEWS_PATH."chats-list.php");
         }
 
         public function Add($keeperId)
         {
-            if($keeperId){
-                $ownerId = $_SESSION["loggedUser"]->getId();
-                
-                $chat = new Chat();
-                $chat->setOwner($ownerId);
-                $chat->setKeeper($keeperId);
+            $ownerId = $_SESSION["loggedUser"]->getId();
+            $validateChat = false;
 
-                $this->chatDAOBD->Add($chat);
-                $this->ShowChat();
+            if($keeperId){
+                $validateChat = $this->chatDAOBD->ValidateChat($ownerId, $keeperId);
+                if($validateChat){
+                    $chat = new Chat();
+                    $chat->setOwner($ownerId);
+                    $chat->setKeeper($keeperId);
+        
+                    $this->chatDAOBD->Add($chat);
+                    $this->ShowChat();
+                }else{
+                    $this->HomeOwner("Chat with keeper is Active\nGo to 'Show My Chats'");
+                }
             }else{
-                $this->HomeOwner("Error al buscar el Keeper \nIntente nuevamente");
+                $this->HomeOwner("Error finding Keeper\nTry Again");
             }
         }
 

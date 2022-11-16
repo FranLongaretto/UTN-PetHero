@@ -5,8 +5,6 @@
         private $id;
         private $owner;
         private $keeper;
-        private $messages_owner;
-        private $messages_keeper;
 
         public function getId()
         {
@@ -38,28 +36,6 @@
         public function setKeeper($keeper)
         {
             $this->keeper = $keeper;
-            return $this;
-        }
-
-        public function getMessages_owner()
-        {
-            return $this->messages_owner;
-        }
-
-        public function setMessages_owner($messages_owner)
-        {
-            $this->messages_owner = $messages_owner;
-            return $this;
-        }
-        
-        public function getMessages_keeper()
-        {
-            return $this->messages_keeper;
-        }
-        
-        public function setMessages_keeper($messages_keeper)
-        {
-            $this->messages_keeper = $messages_keeper;
             return $this;
         }
     }
