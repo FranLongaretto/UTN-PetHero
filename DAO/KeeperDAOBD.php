@@ -119,7 +119,7 @@
             try
             {
                 $keeperList = array();
-    
+
                 $query = "SELECT * FROM ".$this->tableName." WHERE (id = :id);";
     
                 $parameters['id'] = $id;
@@ -127,7 +127,7 @@
                 $this->connection = Connection::GetInstance();
     
                 $resultSet = $this->connection->Execute($query, $parameters);
-                
+
                 foreach ($resultSet as $row)
                 {      
 
@@ -140,7 +140,7 @@
                     $keeper->setAvailable($row["available"]);
                     $keeper->setDateStart($row["dateStart"]);
                     $keeper->setDateEnd($row["dateEnd"]);
-                    
+
                     array_push($keeperList, $keeper);
                 }
     
