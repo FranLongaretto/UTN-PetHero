@@ -177,5 +177,24 @@ class UserDAOBD implements IUserDAOBD{
             throw $ex;
         }
     }
+
+    public function Change($email, $password) {
+        try {
+            $query = "UPDATE ".$this->tableName." SET email=:email, password=:password WHERE email=:email;";
+            
+            $pass = $_POST["password"];
+            $password_crypt= password_hash($pass, PASSWORD_DEFAULT);
+
+            $parameters['email'] = $email;
+            $parameters["password"] = $password_crypt;
+            
+    
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters);
+           
+        } catch(Exception $ex) {
+            return "Ha ocurrido un error, usuario o palabra clave incorrectos:( " . $ex->getMessage();     
+        }
+    }    
 }
 ?>

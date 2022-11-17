@@ -144,10 +144,10 @@
                         $this->HomeOwner();
                     }
                 }else{
-                    $this->Index("Datos Incorrectos!");
+                    $this->Index("Information incorrect!");
                 }
             }else{
-                $this->Index("Email incorrecto!");
+                $this->Index("Email incorrect!");
             }
             
             // if($user != null && $verify){
@@ -178,6 +178,26 @@
             //use javascript to redirect to index to show the icon.
             echo "<script>window.location = '../index.php';
                 </script>";
+        }
+
+        public function ShowUserRecovery() {
+            require_once(VIEWS_PATH."recover.php");
+        }
+        
+        public function PasswordChange($email,$password) {
+
+            $userList = $this->userDAOBD->GetAllPDO();
+            $user = null;
+            foreach ($userList as $key => $value) {
+                if($email === $value->getEmail()){
+                    $user = $this->userDAOBD->Change($email, $password);
+                    $this->Index("Password changed correctly");
+                    //require_once(VIEWS_PATH."index.php");
+                } else {
+                    $this->Index("Something Wrong!");
+                    //require_once(VIEWS_PATH."index.php");
+                }                
+            }
         }
     }        
 ?>
