@@ -30,7 +30,6 @@
             $frontMessage = $message;
             require_once(VIEWS_PATH."home-keeper.php");
         }
-
         
         public function ShowAddView()
         {
