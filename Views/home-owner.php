@@ -25,10 +25,20 @@
     <div class="homeUser__menu--item">
       <a href="<?php echo FRONT_ROOT?>Book/ShowListView">Show My Books</a>
     </div>
+    
+    <div class="homeUser__menu--item">
+      <a href="<?php echo FRONT_ROOT?>Chat/ShowKeeperList">Start new Chat</a>
+    </div>
+    
+    <div class="homeUser__menu--item">
+      <a href="<?php echo FRONT_ROOT?>Chat/ShowMyChats">Show My Chats</a>
+    </div>
   
     <?php if($frontMessage){?>
       <div class="homeUser__menu--message">
-        <p class="check__message"><?php echo $frontMessage?></p>
+        <p class="check__message" <?php if(str_contains($frontMessage, 'is Active')){ ?> style="color:red;" <?php } ?> >
+          <?php echo $frontMessage?>
+        </p>
       </div>
     <?php }?>
   </div>

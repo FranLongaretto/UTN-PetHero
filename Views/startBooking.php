@@ -44,7 +44,7 @@
                 <a href="<?php echo FRONT_ROOT ?>User/HomeOwner" class="formSend__cancel">Cancel</a>
             </div>
             <?php if($frontMessage){?>
-                <p class="error__message"><?php echo $frontMessage?></p>
+                <p class="error__message" style="width: 100%;margin: 15px auto"><?php echo $frontMessage?></p>
             <?php }?>
         </form>
     </div>

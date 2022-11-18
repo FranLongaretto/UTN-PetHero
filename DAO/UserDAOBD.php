@@ -9,6 +9,7 @@ class UserDAOBD implements IUserDAOBD{
     private $userList = array();
     private $connection;
     private $tableName = "user";
+    private $keepersTableName = "keeper";
 
     public function GetAllPDO() {
         try {
@@ -147,7 +148,8 @@ class UserDAOBD implements IUserDAOBD{
         {
             throw $ex;
         }
-    }    
+    }   
+
     public function Add(User $user)
     {
         
@@ -174,6 +176,29 @@ class UserDAOBD implements IUserDAOBD{
         }
         catch(Exception $ex)
         {
+            throw $ex;
+        }
+    }
+
+    public function GetKeepersAvailablePDO() {
+        try {
+            $keeperList = array();
+            $query = "SELECT DISTINCT u.id, u.firstName, u.lastName, u.email, u.dni, u.phoneNumber FROM " . $this->tableName . " u JOIN ". $this->keepersTableName ." k ON u.id=k.idKeeper WHERE u.role='keeper';";
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->Execute($query);
+            foreach($resultSet as $row) {
+                $user = new User();
+                $user->setId($row["id"]);
+                $user->setFirstName($row["firstName"]);
+                $user->setLastName($row["lastName"]);
+                $user->setEmail($row["email"]);
+                $user->setDni($row["dni"]);
+                $user->setPhoneNumber($row["phoneNumber"]);
+
+                array_push($keeperList, $user);
+            }
+            return $keeperList;
+        } catch(Exception $ex) {
             throw $ex;
         }
     }
