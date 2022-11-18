@@ -60,8 +60,8 @@
   bookPrice = "Total Price: $".bold()+document.getElementById('bookPrice').value
   nameKeeper = "Keeper Name: ".bold()+document.getElementById('nameKeeper').innerHTML
   idOwner = "Owner Id:".bold()+document.getElementById('idOwner').value
- /*  emailOwner = "Owner email:"+document.getElementById('emailOwner').value
-  console.log(emailOwner) */
+  emailOwner = document.getElementById('emailOwner').value
+  console.log(emailOwner) 
   pet= "Pet: ".bold()+document.getElementById('pet').innerHTML
   dateStart= "Date Start: ".bold()+document.getElementById('dateStart').value
   dateEnd= "Date End: ".bold()+document.getElementById('dateEnd').value
@@ -71,14 +71,15 @@
     Email.send({
     Host : "smtp.elasticemail.com",
     Username : "german_oyarzo@hotmail.com",
-    Password : "F6679CF7D87562C8DE6D167735C67681B57C",
-    To : "germanoyarzo94@gmail.com",
+    Password : "EF462AA83096FAEFB0D13D181F2942C011CB",
+    To :emailOwner,
     From : "german_oyarzo@hotmail.com",
     Subject : "Book Details",
     Body : body
     }).then(
       (message) => {alert( "The email has been sent correctly" );
     });
+   
   }
   
 </script>
