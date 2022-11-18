@@ -180,7 +180,6 @@
                 </script>";
         }
 
-<<<<<<< HEAD
         public function ShowUserRecovery() {
             require_once(VIEWS_PATH."recover.php");
         }
@@ -199,7 +198,6 @@
                     //require_once(VIEWS_PATH."index.php");
                 }                
             }
-=======
         public function ShowAllKeepersAvailables($message = ""){
             $keeperList = $this->userDAOBD->GetKeepersAvailablePDO();
             if(!$keeperList) $message = "Keepers are not available";
@@ -210,7 +208,6 @@
         public function GetUserById($id){
             $user = $this->userDAOBD->GetById($id);            
             return $user;
->>>>>>> 95a9ae560fa79e325edc507b26bd7a8740a565d4
         }
     }        
 ?>
