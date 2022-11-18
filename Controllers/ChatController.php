@@ -39,8 +39,6 @@
         public function ShowChatById($idChat)
         {
             $messageList = $this->messageController->GetAllMessageByChatId($idChat);
-            $messageOwner = [];
-            $messageKeeper = [];
             $frontMessage = null;
             
             $chat = $this->chatDAOBD->GetById($idChat);
@@ -51,17 +49,8 @@
 
             $chatEmi = $_SESSION["loggedUser"]->getId() == $idOwner ? $ownerChat : $keeperChat;
             $chatDest = $_SESSION["loggedUser"]->getId() == $idOwner ? $keeperChat : $ownerChat;
-            if($messageList){
-                foreach ($messageList as $key => $message) {
-                    $messageUserId = $message->getUser();
-                    $messageUser = $this->userController->GetUserById($messageUserId);
-                    if($messageUser->getRole() == "Owner"){
-                        array_push($messageOwner, $message);
-                    }else{
-                        array_push($messageKeeper, $message);
-                    }
-                }
-            }else{
+            
+            if(!$messageList){
                 $frontMessage = "Empiece la conversación";
             }
 
@@ -119,11 +108,11 @@
             }
         }
 
-        public function UpdateChat($owner, $keeper)
-        {
-            $chat = new Chat();
-            $chat->setOwner($owner);
-            $chat->setKeeper($keeper);
-        }
+        // public function UpdateChat($owner, $keeper)
+        // {
+        //     $chat = new Chat();
+        //     $chat->setOwner($owner);
+        //     $chat->setKeeper($keeper);
+        // }
     }
 ?>

@@ -11,8 +11,22 @@
     <section class="chat">
         <header class="chat-header">
             <div class="chat-header-title">
-                <p style="font-size: 16px;"><?php echo $chatDest->getFirstName()." ".$chatDest->getLastName() ?></p>
-                <p style="font-weight: 400;color: #333; font-size: 14px;"><?php echo $chatDest->getPhoneNumber() ?></p>
+                <p style="font-size: 16px;">
+                    <?php if($_SESSION["loggedUser"]->getId() == $chatDest->getId()){ 
+                            echo $chatEmi->getFirstName()." ".$chatEmi->getLastName(); 
+                        }else{ 
+                            echo $chatDest->getFirstName()." ".$chatDest->getLastName();
+                        };
+                    ?>
+                </p>
+                <p style="font-weight: 400;color: #333; font-size: 14px;">
+                    <?php if($_SESSION["loggedUser"]->getId() == $chatDest->getId()){ 
+                            echo $chatEmi->getPhoneNumber(); 
+                        }else{ 
+                            echo $chatDest->getPhoneNumber();
+                        };
+                    ?>
+                </p>
             </div>
             <div class="chat-header-options">
                 <span><i class="fas fa-cog"></i></span>
@@ -25,17 +39,18 @@
                 <p class="chat-welcome__message-item"><?php echo $frontMessage?></p>
             </div>
             <?php }else{?>
-            <div class="chat-msg left-msg">
-                
-                <?php 
-                    if($_SESSION["loggedUser"]->getRole() == "Owner"){
-                        foreach ($messageOwner as $key => $message) { 
-                ?>
+            <?php 
+                foreach ($messageList as $key => $message) { 
+            ?>
+            <div class="chat-msg <?php 
+                if($_SESSION["loggedUser"]->getId() == $message->getUser()){ echo "right-msg"; }else{ echo "left-msg";};
+            ?>">
                 <?php if($message->getMessage() != null) {?>
                 <div class="chat-msg-bubble">
-                    <!-- <div class="chat-msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"></div> -->
                     <div class="chat-msg-info">
-                        <div class="chat-msg-info-name"><?php echo $chatDest->getFirstName()?></div>
+                        <div class="chat-msg-info-name">
+                            <?php if($_SESSION["loggedUser"]->getId() == $message->getUser()){ echo $chatEmi->getFirstName(); }else{ echo $chatDest->getFirstName();};?>
+                        </div>
                         <div class="chat-msg-info-time"><?php echo $message->getDate() ?></div>
                     </div>
 
@@ -44,67 +59,11 @@
                     </div>
                 </div>
                 <?php } ?>
-                <?php 
-                    }}else{
-                    foreach ($messageKeeper as $key => $message) { 
-                ?>
-                <?php if($message->getMessage() != null) {?>
-                <div class="chat-msg-bubble">
-                    <div class="chat-msg-info">
-                        <div class="chat-msg-info-name"><?php echo $chatDest->getFirstName()?></div>
-                        <div class="chat-msg-info-time"><?php echo $message->getDate()?></div>
-                    </div>
-
-                    <div class="chat-msg-text">
-                        <p><?php echo $message->getMessage()?></p>
-                    </div>
-                </div>
-                <?php } ?>
-                <?php 
-                    }} 
-                ?>
             </div>
-
-            <div class="chat-msg right-msg">
-                
-                <?php 
-                    if($_SESSION["loggedUser"]->getRole() == "Owner"){
-                        foreach ($messageOwner as $key => $message) { 
-                ?>
-                <?php if($message->getMessage() != null) {?>
-                <div class="chat-msg-bubble">
-                    <!-- <div class="chat-msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"></div> -->
-                    <div class="chat-msg-info">
-                        <div class="chat-msg-info-name"><?php echo $chatEmi->getFirstName()?></div>
-                        <div class="chat-msg-info-time"><?php echo $message->getDate()?></div>
-                    </div>
-
-                    <div class="chat-msg-text">
-                        <p><?php echo $message->getMessage()?></p>
-                    </div>
-                </div>
-                <?php } ?>
-                <?php 
-                    }}else{
-                    foreach ($messageKeeper as $key => $message) { 
-                ?>
-                <?php if($message->getMessage() != null) {?>
-                <div class="chat-msg-bubble">
-                    <div class="chat-msg-info">
-                        <div class="chat-msg-info-name"><?php echo $chatEmi->getFirstName()?></div>
-                        <div class="chat-msg-info-time"><?php echo $message->getDate()?></div>
-                    </div>
-
-                    <div class="chat-msg-text">
-                        <p><?php echo $message->getMessage()?></p>
-                    </div>
-                </div>
-                <?php } ?>
-                <?php 
-                    }} 
-                ?>
-            </div>
-            <?php }?>
+            <?php 
+                } //foreach Messages
+            } //if userRole
+            ?>
         </main>
 
         <form action="<?php echo FRONT_ROOT."Message/Add"?>" method="POST" class="chat-inputarea">

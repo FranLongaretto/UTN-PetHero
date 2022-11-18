@@ -46,7 +46,7 @@ class MessageDAOBD implements IMessageDAOBD{
         try{
             $messageList = array();
 
-            $query = "SELECT * FROM ".$this->tableName." m WHERE m.id IS NOT NULL AND m.id_chat = '". $idChat ."';";
+            $query = "SELECT * FROM ".$this->tableName." m WHERE m.id IS NOT NULL AND m.id_chat = '". $idChat ."' ORDER BY m.date;";
 
             $this->connection = Connection::GetInstance();
 
