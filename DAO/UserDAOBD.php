@@ -9,6 +9,7 @@ class UserDAOBD implements IUserDAOBD{
     private $userList = array();
     private $connection;
     private $tableName = "user";
+    private $keepersTableName = "keeper";
 
     public function GetAllPDO() {
         try {
@@ -147,7 +148,8 @@ class UserDAOBD implements IUserDAOBD{
         {
             throw $ex;
         }
-    }    
+    }   
+
     public function Add(User $user)
     {
         
@@ -178,6 +180,7 @@ class UserDAOBD implements IUserDAOBD{
         }
     }
 
+<<<<<<< HEAD
     public function Change($email, $password) {
         try {
             $query = "UPDATE ".$this->tableName." SET email=:email, password=:password WHERE email=:email;";
@@ -196,5 +199,29 @@ class UserDAOBD implements IUserDAOBD{
             return "Ha ocurrido un error, usuario o palabra clave incorrectos:( " . $ex->getMessage();     
         }
     }    
+=======
+    public function GetKeepersAvailablePDO() {
+        try {
+            $keeperList = array();
+            $query = "SELECT DISTINCT u.id, u.firstName, u.lastName, u.email, u.dni, u.phoneNumber FROM " . $this->tableName . " u JOIN ". $this->keepersTableName ." k ON u.id=k.idKeeper WHERE u.role='keeper';";
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->Execute($query);
+            foreach($resultSet as $row) {
+                $user = new User();
+                $user->setId($row["id"]);
+                $user->setFirstName($row["firstName"]);
+                $user->setLastName($row["lastName"]);
+                $user->setEmail($row["email"]);
+                $user->setDni($row["dni"]);
+                $user->setPhoneNumber($row["phoneNumber"]);
+
+                array_push($keeperList, $user);
+            }
+            return $keeperList;
+        } catch(Exception $ex) {
+            throw $ex;
+        }
+    }
+>>>>>>> 95a9ae560fa79e325edc507b26bd7a8740a565d4
 }
 ?>
