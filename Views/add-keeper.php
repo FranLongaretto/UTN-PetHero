@@ -9,11 +9,13 @@
     <form action="<?php echo FRONT_ROOT?>Keeper/Add" method="POST" enctype="multipart/form-data" class="mainForm__form">
       <h2 class="mainForm__form--title">ADD KEEPER</h2>
 
-      <select class="mainForm__form--select fadeIn second" name="typePet" id="typePet" required>
+      <!-- <select class="mainForm__form--select fadeIn second" name="typePet" id="typePet" required>
         <option disabled selected>Select Pet type</option>
         <option value="cat">Cat</option>
         <option value="dog">Dog</option>
-      </select>
+      </select> -->
+      <p class="mainForm__form--select fadeIn second" name="typePet" id="typePet"> </p>
+      <input type="text" name="typePet" id="typePet" value="All" hidden>
 
       <select class="mainForm__form--select fadeIn second" name="size" id="size" required>
         <option disabled selected>Select Size</option>

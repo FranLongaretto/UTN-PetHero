@@ -26,7 +26,7 @@
         </div>
         <?php } ?>
         <div class="confirmBook-book">
-          <input type="text" name="petType" id="petType" value="<?php echo $petType ?>" hidden>
+          <input type="text" name="petType" id="petType" value="<?php echo $value->getType() ?>" hidden>
           <input type="text" name="petSize" id="petSize" value="<?php echo $petSize ?>" hidden>
           <div class="confirmBook-book-date">
             <h5 style="color:#39ace7">Date range: </h5>

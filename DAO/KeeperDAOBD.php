@@ -45,14 +45,14 @@
             try {
                 $keeperList = array();
 
-                $queryTypePet = $typePet == "Cat" ? "cat" : "dog";
+                //$queryTypePet = $typePet == "Cat" ? "cat" : "dog" : "All"; select query typePet All
                 
                 if($size == "small"){
-                    $query = "SELECT * FROM " . $this->tableName . " k WHERE k.available='true' AND k.typePet='" . $queryTypePet . "' ;";
+                    $query = "SELECT * FROM " . $this->tableName . " k WHERE k.available='true' AND (k.typePet='" . $typePet . "' OR k.typePet='All') ;";
                 }else if($size == "medium"){
-                    $query = "SELECT * FROM " . $this->tableName . " k WHERE k.available='true' AND k.typePet='" . $queryTypePet . "' AND (k.size='medium' OR k.size='big') ;";
+                    $query = "SELECT * FROM " . $this->tableName . " k WHERE k.available='true' AND (k.typePet='" . $typePet . "' OR k.typePet='All') AND (k.size='medium' OR k.size='big') ;";
                 }else{
-                    $query = "SELECT * FROM " . $this->tableName . " k WHERE k.available='true' AND k.typePet='" . $queryTypePet . "' AND k.size='big' ;";
+                    $query = "SELECT * FROM " . $this->tableName . " k WHERE k.available='true' AND (k.typePet='" . $typePet . "' OR k.typePet='All') AND k.size='big' ;";
                 }
 
                 $this->connection = Connection::getInstance();
@@ -80,14 +80,14 @@
             try {
                 $keeperList = array();
 
-                $queryTypePet = $type == "Cat" ? "cat" : "dog";
+                //$queryTypePet = $type == "Cat" ? "cat" : "dog";
 
                 if($size == "small"){
-                    $queryPet = "AND k.typePet='" . $queryTypePet . "' ;";
+                    $queryPet = "AND (k.typePet='" . $type . "' OR k.typePet='All') ;";
                 }else if($size == "medium"){
-                    $queryPet = "AND k.typePet='" . $queryTypePet . "' AND (k.size='medium' OR k.size='big') ;";
+                    $queryPet = "AND (k.typePet='" . $type . "' OR k.typePet='All') AND (k.size='medium' OR k.size='big') ;";
                 }else{
-                    $queryPet = "AND k.typePet='" . $queryTypePet . "' AND k.size='big' ;";
+                    $queryPet = "AND (k.typePet='" . $type . "' OR k.typePet='All') AND k.size='big' ;";
                 }
 
                 $query = "SELECT * FROM ".$this->tableName." k WHERE '".$dateStart."'>=k.dateStart AND '".$dateEnd."'<=k.dateEnd ". $queryPet .";";
