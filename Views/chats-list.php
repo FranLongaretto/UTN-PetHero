@@ -29,12 +29,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach($chatListFront as $chat) { ?>
+                    <?php foreach($chatListFront as $key => $value) { ?>
                         <tr>
-                            <td><?php echo $user->getFirstName()." ".$user->getLastName() ?></td>
-                            <td><?php echo $user->getEmail() ?></td>
-                            <td><?php echo $user->getPhone() ?></td>
-                            <td>Open</td>
+                            <td><?php echo $value["user"]->getFirstName()." ".$value["user"]->getLastName() ?></td>
+                            <td style="text-transform: lowercase;"><?php echo $value["user"]->getEmail() ?></td>
+                            <td><?php echo $value["user"]->getPhoneNumber() ?></td>
+                            <td>
+                                <form action="<?php echo FRONT_ROOT."Chat/ShowChatById"?>" method="POST">
+                                    <input type="text" id="idChat" name="idChat" value="<?php echo $value["chat"] ?>" hidden>
+                                    <input type="submit" class="mainForm__form--submit fadeIn third" value="Open">
+                                </form>
+                            </td>
                         </tr>
                     <?php } ?>
                     </tbody>

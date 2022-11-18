@@ -2,11 +2,11 @@
     namespace Models;
 
     class Message{
-        private $id;
-        private $id_chat;
-        private $user;
-        private $message;
-        private $date;
+        public $id;
+        public $id_chat;
+        public $user;
+        public $message;
+        public $date;
 
         public function getId()
         {

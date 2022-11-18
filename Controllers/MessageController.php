@@ -9,13 +9,11 @@
     class MessageController
     {
         private $messageDAOBD;
-        private $chatController;
         private $userController;
 
         public function __construct()
         {
             $this->messageDAOBD = new MessageDAOBD();
-            $this->chatController = new ChatController();
             $this->userController = new UserController();
         }
 
@@ -25,15 +23,28 @@
             require_once(VIEWS_PATH."new-message.php");
         }
 
-        public function Add($message, $id_chat)
+        public function GetAllMessageByChatId($chatId)
+        {
+            $messageList = $this->messageDAOBD->GetAllByChatId($chatId);
+            return $messageList;
+        }
+
+        public function Add($messageText, $idChat)
         {
             $loggedUserId = $_SESSION["loggedUser"]->getId();
 
             $message = new Message();
-            $message->setIdChat($id_chat);
+            $message->setIdChat($idChat);
             $message->setUser($loggedUserId);
-            $message->setMessage($message);
+            $message->setMessage($messageText);
             $message->setDate(date("Y-m-d H:i:s"));
+
+            if($message != null){
+                $this->messageDAOBD->Add($message);
+            }
+
+            $chatController = new ChatController();
+            $chatController->ShowChatById($idChat);
         }
     }
 ?>

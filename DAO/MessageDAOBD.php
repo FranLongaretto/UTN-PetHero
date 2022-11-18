@@ -42,11 +42,40 @@ class MessageDAOBD implements IMessageDAOBD{
         }
     }
 
+    public function GetAllByChatId($idChat) {
+        try{
+            $messageList = array();
+
+            $query = "SELECT * FROM ".$this->tableName." m WHERE m.id IS NOT NULL AND m.id_chat = '". $idChat ."';";
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+            
+            foreach ($resultSet as $row)
+            {      
+                $message = new Message();
+                $message->setId($row["id"]);
+                $message->setIdChat($row["id_chat"]);
+                $message->setUser($row["user"]);
+                $message->setMessage($row["message"]);
+                $message->setDate($row["date"]);
+
+                array_push($messageList, $message);
+            }
+
+            return (count($messageList) > 0) ? $messageList : null;
+
+        }catch (\PDOException $ex){
+            throw $ex;
+        }
+    }
+
     public function Add(Message $message)
     {
         try{
             $query = "INSERT INTO ".$this->tableName." (id, id_chat, user, message, date) VALUES (:id, :id_chat, :user, :message, :date);";
-            
+
             $parameters["id"] = $message->getId();
             $parameters["id_chat"] = $message->getIdChat();
             $parameters["user"] = $message->getUser();

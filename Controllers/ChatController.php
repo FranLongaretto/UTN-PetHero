@@ -2,6 +2,7 @@
     namespace Controllers;
 
     use Controllers\UserController as UserController;
+    use Controllers\MessageController as MessageController;
     use DAO\ChatDAOBD as ChatDAOBD;
     use Models\Chat as Chat;
 
@@ -9,11 +10,13 @@
     {
         private $chatDAOBD;
         private $userController;
+        private $messageController;
 
         public function __construct()
         {
             $this->chatDAOBD = new ChatDAOBD();
             $this->userController = new UserController();
+            $this->messageController = new MessageController();
         }
 
         public function HomeOwner($message = "")
@@ -33,24 +36,58 @@
             require_once(VIEWS_PATH."chat.php");
         }
 
+        public function ShowChatById($idChat)
+        {
+            $messageList = $this->messageController->GetAllMessageByChatId($idChat);
+            $messageOwner = [];
+            $messageKeeper = [];
+            $frontMessage = null;
+            
+            $chat = $this->chatDAOBD->GetById($idChat);
+            $idOwner = $chat->getOwner();
+            $idKeeper = $chat->getKeeper();
+            $ownerChat = $this->userController->GetUserById($idOwner);
+            $keeperChat = $this->userController->GetUserById($idKeeper);
+
+            $chatEmi = $_SESSION["loggedUser"]->getId() == $idOwner ? $ownerChat : $keeperChat;
+            $chatDest = $_SESSION["loggedUser"]->getId() == $idOwner ? $keeperChat : $ownerChat;
+            if($messageList){
+                foreach ($messageList as $key => $message) {
+                    $messageUserId = $message->getUser();
+                    $messageUser = $this->userController->GetUserById($messageUserId);
+                    if($messageUser->getRole() == "Owner"){
+                        array_push($messageOwner, $message);
+                    }else{
+                        array_push($messageKeeper, $message);
+                    }
+                }
+            }else{
+                $frontMessage = "Empiece la conversación";
+            }
+
+            require_once(VIEWS_PATH."chat.php");
+        }
+
         public function ShowMyChats($message = "")
         {
             $userId = $_SESSION["loggedUser"]->getId();
             $userRole = $_SESSION["loggedUser"]->getRole();
 
-            $chatListFront = $this->chatDAOBD->GetAllByUserPDO($userId);
+            $userList = $this->chatDAOBD->GetAllByUserPDO($userId);
 
-            $usersRecipient = [];
+            $chatListFront = [];
             $searchUser = null;
             
-            if($chatListFront) {
-                foreach ($chatListFront as $key => $value) {
+            if($userList) {
+                foreach ($userList as $key => $value) {
                     if($userRole == "Owner"){
-                        $searchUser = $this->keeperController->GetUserById($value->getKeeper());
+                        $searchUser["user"] = $this->userController->GetUserById($value->getKeeper());
+                        $searchUser["chat"] = $value->getId();
                     }else{
-                        $searchUser = $this->keeperController->GetUserById($value->getOwner());
+                        $searchUser["user"] = $this->userController->GetUserById($value->getOwner());
+                        $searchUser["chat"] = $value->getId();
                     }
-                    array_push($usersRecipient, $searchUser);
+                    array_push($chatListFront, $searchUser);
                 }
             }else{
                 $message = "Couldn't find Chats";

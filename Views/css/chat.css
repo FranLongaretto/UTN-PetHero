@@ -139,15 +139,47 @@
     background: #ddd;
 }
 
-.chat-inputarea__send {
-    margin-left: 10px;
-    background: rgb(0, 196, 65);
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.23s;
+.msger-inputarea__send:hover {
+    background: rgb(0, 180, 50);
 }
 
-.msger-inputarea__send:hover {
+.chat-welcome__message{
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.chat-welcome__message-item{
+    margin: 20px auto;
+    font-size: 30px;
+    font-weight: bold;
+    color: #3a4bc1;
+    text-align: center;
+    letter-spacing: 2px;
+    text-shadow: 5px 5px 4px rgb(150 206 233 / 80%);
+}
+
+.chat-header-title{
+    text-transform: capitalize;
+    font-weight: bold;
+    color: #3a4bc1;
+}
+
+.chat-inputarea .mainForm__form--submit{
+    padding: 15px 8px;
+    margin: 5px;
+    width: fit-content;
+    height: fit-content;
+    font-weight: bold;
+    letter-spacing: 0.9px;
+    background: rgb(0, 180, 50);
+}
+
+.chat-inputarea input[type="text"]{
+    padding: 11px 20px;
+    color: #39ace7;
+    font-weight: bold;
+}
+
+.chat-inputarea .mainForm__form--submit:hover {
     background: rgb(0, 180, 50);
 }
