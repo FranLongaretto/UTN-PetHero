@@ -180,7 +180,6 @@ class UserDAOBD implements IUserDAOBD{
         }
     }
 
-<<<<<<< HEAD
     public function Change($email, $password) {
         try {
             $query = "UPDATE ".$this->tableName." SET email=:email, password=:password WHERE email=:email;";
@@ -199,7 +198,6 @@ class UserDAOBD implements IUserDAOBD{
             return "Ha ocurrido un error, usuario o palabra clave incorrectos:( " . $ex->getMessage();     
         }
     }    
-=======
     public function GetKeepersAvailablePDO() {
         try {
             $keeperList = array();
@@ -222,6 +220,5 @@ class UserDAOBD implements IUserDAOBD{
             throw $ex;
         }
     }
->>>>>>> 95a9ae560fa79e325edc507b26bd7a8740a565d4
 }
 ?>

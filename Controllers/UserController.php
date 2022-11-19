@@ -198,6 +198,7 @@
                     //require_once(VIEWS_PATH."index.php");
                 }                
             }
+        }    
         public function ShowAllKeepersAvailables($message = ""){
             $keeperList = $this->userDAOBD->GetKeepersAvailablePDO();
             if(!$keeperList) $message = "Keepers are not available";
