@@ -3,7 +3,6 @@
   require_once("validate-session.php");
 
 ?>
-
 <div class="mainForm fadeInDown">
   <div class="mainForm__container">
     <!-- Form -->
@@ -51,35 +50,7 @@
       <?php }else{ ?>
         <a href="<?php echo FRONT_ROOT ?>User/HomeKeeper" class="btn btn-outline-primary">Cancel</a>
       <?php } ?>
-      <input type="button" class="mainForm__form--submit fadeIn second" value="Send Email" onclick="sendEmail()">
+     
     </form>
   </div>
 </div>
-
-<script>
-  bookPrice = "Total Price: $".bold()+document.getElementById('bookPrice').value
-  nameKeeper = "Keeper Name: ".bold()+document.getElementById('nameKeeper').innerHTML
-  idOwner = "Owner Id:".bold()+document.getElementById('idOwner').value
-  emailOwner = document.getElementById('emailOwner').value
-  console.log(emailOwner) 
-  pet= "Pet: ".bold()+document.getElementById('pet').innerHTML
-  dateStart= "Date Start: ".bold()+document.getElementById('dateStart').value
-  dateEnd= "Date End: ".bold()+document.getElementById('dateEnd').value
-  body= bookPrice+"," +nameKeeper+"," + idOwner+"," +pet+"," +dateStart+"," +dateEnd
-  console.log(body)
-  function sendEmail(){
-    Email.send({
-    Host : "smtp.elasticemail.com",
-    Username : "german_oyarzo@hotmail.com",
-    Password : "EF462AA83096FAEFB0D13D181F2942C011CB",
-    To :emailOwner,
-    From : "german_oyarzo@hotmail.com",
-    Subject : "Book Details",
-    Body : body
-    }).then(
-      (message) => {alert( "The email has been sent correctly" );
-    });
-   
-  }
-  
-</script>

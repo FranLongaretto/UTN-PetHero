@@ -238,15 +238,40 @@
 
             if($book)
             {
-                
                 $pet= $idKeeperBook->getTypePet();
                 $frontOwnerBook = $book->getIdOwner();
+                $userEmail= $this->userDAOBD->GetById($frontOwnerBook)->getEmail();
                 $frontKeeper = $_SESSION["loggedUser"];
                 $frontDateStart = $book->getDateStart();
                 $frontDateEnd = $book->getDateEnd();
                 $frontPrice = $book->getBookPrice();
                 $frontIdKeeperBook = $book->getIdKeeperBook();
                 require_once(VIEWS_PATH."confirm-book-keeper.php");
+            }else{
+                $this->HomeKeeper("You don't have pending books");
+            }
+        }
+
+        public function PaymentReservation($idBook)
+        {
+            //var_dump($idBook);
+            $book = $this->bookDAOBD->GetById($idBook);
+            $idKeeper =$book->getIdKeeper();
+            $keeper = $this->keeperDAOBD->GetById($idKeeper);
+            $idKeeperBook= $this->keeperDAOBD->GetById($book->getIdKeeperBook());
+
+            if($book)
+            {
+                
+                $pet= $idKeeperBook->getTypePet();
+                $frontOwnerBook = $book->getIdOwner();
+                $userEmail= $this->userDAOBD->GetById($frontOwnerBook)->getEmail();
+                $frontKeeper = $_SESSION["loggedUser"];
+                $frontDateStart = $book->getDateStart();
+                $frontDateEnd = $book->getDateEnd();
+                $frontPrice = $book->getBookPrice();
+                $frontIdKeeperBook = $book->getIdKeeperBook();
+                require_once(VIEWS_PATH."payment.php");
             }else{
                 $this->HomeKeeper("You don't have pending books");
             }
@@ -263,6 +288,7 @@
             $book->setDateStart($dateStart);
             $book->setDateEnd($dateEnd);
             $book->setBookPrice($bookPrice);
+            $book->setPayed("notpayed");
 
             // $book->setId($id);
 
@@ -316,6 +342,15 @@
             }else{
                 $this->HomeKeeper("Confirm error, please try again");
             }
+        }
+        public function ConfirmPayment($idBook)
+        {
+            
+            if($idBook != null){
+                $book = $this->bookDAOBD->GetById($idBook);
+                $this->bookDAOBD->PaymentBook($idBook);
+                $this->HomeKeeper("&#x2705; Book confirm correctly");  
+            }    
         }
     }        
 ?>

@@ -50,6 +50,7 @@
                     $book->setDateEnd($row["dateEnd"]);
                     $book->setBookPrice($row["bookPrice"]);
                     $book->setStatus($row["status"]);
+                    $book->setPayed($row["payed"]);
 
                     array_push($bookList, $book);
                     
@@ -65,7 +66,7 @@
                 $bookList = array();
                 $bookListFront = array();
 
-                $query = "SELECT dateStart, dateEnd, bookPrice, status FROM ". $this->tableName. " bo INNER JOIN ". $this->tableNameUser. " u ON u.id = bo.idOwner WHERE '".$idOwner."'=u.id";
+                $query = "SELECT bo.id,dateStart, dateEnd, bookPrice, status, payed FROM ". $this->tableName. " bo INNER JOIN ". $this->tableNameUser. " u ON u.id = bo.idOwner WHERE '".$idOwner."'=u.id";
 
                 // $parameters['idOwner'] = $idOwner;
                 $this->connection = Connection::GetInstance();
@@ -75,11 +76,12 @@
 
                 foreach ($bookList as $row) {         
                     $book = new Book();
-
+                    $book->setId($row["id"]);
                     $book->setDateStart($row["dateStart"]);
                     $book->setDateEnd($row["dateEnd"]);
                     $book->setBookPrice($row["bookPrice"]);
                     $book->setStatus($row["status"]);
+                    $book->setPayed($row["payed"]);
                 
                     array_push($bookListFront, $book);
                 }
@@ -94,7 +96,7 @@
                 $bookList = array();
                 $bookListFront = array();
 
-                $query = "SELECT bo.id, idKeeper, idOwner, idKeeperBook, petType, petSize, dateStart, dateEnd, bookPrice, status FROM ". $this->tableName. " bo INNER JOIN ". $this->tableNameUser. " u on u.id = bo.idKeeper WHERE '".$idKeeper."'=u.id";
+                $query = "SELECT bo.id, idKeeper, idOwner, idKeeperBook, petType, petSize, dateStart, dateEnd, bookPrice, status, payed FROM ". $this->tableName. " bo INNER JOIN ". $this->tableNameUser. " u on u.id = bo.idKeeper WHERE '".$idKeeper."'=u.id";
 
                 // $parameters['idKeeper'] = $idKeeper;
                 $this->connection = Connection::GetInstance();
@@ -122,8 +124,10 @@
                     $book->setDateEnd($row["dateEnd"]);
                     $book->setBookPrice($row["bookPrice"]);
                     $book->setStatus($row["status"]);
-                
+                    $book->setPayed($row["payed"]);
+
                     array_push($bookListFront, $book);
+
                 }
                 return $bookListFront;
             } catch(\PDOException $ex) {
@@ -159,6 +163,7 @@
                     $book->setDateEnd($row["dateEnd"]);
                     $book->setBookPrice($row["bookPrice"]);
                     $book->setStatus($row["status"]);
+                    $book->setPayed($row["payed"]);
                     
                     array_push($bookList, $book);
                 }
@@ -177,7 +182,7 @@
             {
                 if($_SESSION["loggedUser"]->getRole() == "Owner")
                 {
-                    $query = "INSERT INTO ".$this->tableName." (id, idKeeper, idOwner, idKeeperBook,petType, petSize, dateStart, dateEnd, bookPrice, status) VALUES (:id, :idKeeper, :idOwner, :idKeeperBook, :petType, :petSize, :dateStart, :dateEnd, :bookPrice, :status);";
+                    $query = "INSERT INTO ".$this->tableName." (id, idKeeper, idOwner, idKeeperBook,petType, petSize, dateStart, dateEnd, bookPrice, status, payed) VALUES (:id, :idKeeper, :idOwner, :idKeeperBook, :petType, :petSize, :dateStart, :dateEnd, :bookPrice, :status, :payed);";
                     
                     $parameters["id"] = $book->getId();
                     $parameters["idKeeper"] = $book->getIdKeeper();
@@ -189,6 +194,7 @@
                     $parameters["dateEnd"] = $book->getDateEnd();
                     $parameters["bookPrice"] = $book->getBookPrice();
                     $parameters["status"] = "pending";
+                    $parameters["payed"] = "notpayed";
 
                     $this->connection = Connection::GetInstance();
                     $this->connection->ExecuteNonQuery($query, $parameters);
@@ -218,6 +224,26 @@
                 $query = "UPDATE ".$this->tableName." bo SET status=:status WHERE bo.id=". $idBook ." AND status='pending';";
 
                 $parameters["status"] = "confirmed";
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function PaymentBook($idBook)
+        {
+            $queryBook= $this->GetById($idBook);
+            //$query = "SELECT bo.id, bo.dateStart, bo.dateEnd, bo.idKeeper".$this->tableName." bo WHERE bo.id=". $idBook ." AND status='pending';";
+
+            try
+            {
+                $query = "UPDATE ".$this->tableName." bo SET payed=:payed WHERE bo.id=". $idBook ." AND payed='notpayed';";
+
+                $parameters["payed"] = "payed";
                 $this->connection = Connection::GetInstance();
 
                 $this->connection->ExecuteNonQuery($query, $parameters);

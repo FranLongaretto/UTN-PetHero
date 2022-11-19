@@ -12,6 +12,7 @@ class Book{
         public $dateEnd; 
         public $bookPrice;
         public $status;
+        public $payed;
 
         public function getId()
         {
@@ -145,6 +146,26 @@ class Book{
         public function setPetType($petType)
         {
                 $this->petType = $petType;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of payed
+         */ 
+        public function getPayed()
+        {
+                return $this->payed;
+        }
+
+        /**
+         * Set the value of payed
+         *
+         * @return  self
+         */ 
+        public function setPayed($payed)
+        {
+                $this->payed = $payed;
 
                 return $this;
         }
