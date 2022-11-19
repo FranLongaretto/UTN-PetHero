@@ -1,8 +1,7 @@
 <?php
-  include_once('navOwner.php'); 
+  include_once('navKeeper.php'); 
   require_once("validate-session.php");
 ?>
-
 <div class="mainForm fadeInDown">
     <div class="mainForm__container">
         <!-- Form -->
@@ -36,6 +35,8 @@
                     </div>
                 </div>
             </div>
+            <input type="email" name="emailKeeper" id="emailKeeper" value="<?php echo $frontKeeper->getEmail() ?>" hidden>
+ 
             <input type="submit" class="mainForm__form--submit fadeIn second" value="Confirm">
 
             <?php if($_SESSION["loggedUser"]->getRole()=="Owner"){ ?>
@@ -45,11 +46,13 @@
             <?php } ?>
             <input type="button" class="mainForm__form--submit fadeIn second" value="Send Email" onclick="sendEmail()">
         </form>
+        
     </div>
 </div>
 <script>
   bookPrice = "Total Price: $".bold()+document.getElementById('price').innerHTML
   nameKeeper = "Keeper Name: ".bold()+document.getElementById('nameKeeper').innerHTML
+  emailKeeper = document.getElementById('emailKeeper').value
   dateStart= "Date Start: ".bold()+document.getElementById('dateStart').value
   dateEnd= "Date End: ".bold()+document.getElementById('dateEnd').value
   idOwner = "Owner Id: ".bold()+document.getElementById('idOwner').value
@@ -61,8 +64,8 @@
     Email.send({
     Host : "smtp.elasticemail.com",
     Username : "german_oyarzo@hotmail.com",
-    Password : "F6679CF7D87562C8DE6D167735C67681B57C",
-    To : 'germanoyarzo94@gmail.com',
+    Password : "EF462AA83096FAEFB0D13D181F2942C011CB",
+    To : emailKeeper,
     From : "german_oyarzo@hotmail.com",
     Subject : "Book Details",
     Body : body
