@@ -23,6 +23,8 @@
                             <th>Date End</th>
                             <th>Book Price</th>
                             <th>Status</th>
+                            <th>Payed</th>
+                            <th>Action</th>
                             <?php }else{?>
                             <th>ID Owner</th>
                             <th>ID Keeper</th>
@@ -32,6 +34,7 @@
                             <th>Date End</th>
                             <th>Book Price</th>
                             <th>Status</th>
+                            <th>Payed</th>
                             <th>Accept Book</th>
                             <?php }?>
                         </tr>
@@ -45,6 +48,12 @@
                             <td><?php echo $book->getDateEnd() ?></td>
                             <td><?php echo $book->getBookPrice() ?></td>
                             <td><?php echo $book->getStatus() ?></td>
+                            <td><?php echo $book->getPayed() ?></td>
+                            <?php if($book->getPayed() != "payed"){?>
+                            <td><a  href="<?php echo FRONT_ROOT."Book/PaymentReservation/".$book->getId() ?>">Pay</a></td>
+                            <?php }else{ ?>
+                                <td style="color: #0eb30e;font-weight: bold;">Confirmed</td>
+                            <?php } ?>
                         </tr>
                     <?php }}else{
                         foreach($bookListFront as $book) {
@@ -58,6 +67,7 @@
                             <td><?php echo $book->getDateEnd() ?></td>
                             <td><?php echo $book->getBookPrice() ?></td>
                             <td><?php echo $book->getStatus() ?></td>
+                            <td><?php echo $book->getPayed() ?></td>
                             <?php if($book->getStatus() != "confirmed"){?>
                             <td><a  href="<?php echo FRONT_ROOT."Book/ConfirmReservation/".$book->getId() ?>">Confirm</a></td>
                             <?php }else{ ?>
