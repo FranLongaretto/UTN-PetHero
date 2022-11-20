@@ -210,5 +210,10 @@
             $user = $this->userDAOBD->GetById($id);            
             return $user;
         }
+
+        public function Contact(){
+            
+            require_once(VIEWS_PATH."contact.php");
+        }
     }        
 ?>
