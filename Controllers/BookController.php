@@ -307,7 +307,6 @@
                         $this->bookDAOBD->UpdateBook($idBook);
                         $idKeeperBook = $book->getIdKeeperBook();
                         $petType = $book->getPetType();
-                        //var_dump($petType);
                         $this->keeperDAOBD->UpdateKeeperBook($idKeeperBook, $petType);
                         // set keeper petType
                         $this->HomeKeeper("&#x2705; Book confirm correctly");  
