@@ -287,7 +287,7 @@
             
         }
 
-        public function UpdateBook($idBook,$idKeeperBook,$typePet)
+        public function UpdateBook($idBook)
         {
             if($idBook != null){
                 $book = $this->bookDAOBD->GetById($idBook);
@@ -305,7 +305,10 @@
                     if($idKeeper != $value && ($bookDateStart >$dateEnd))
                     {
                         $this->bookDAOBD->UpdateBook($idBook);
-                        $this->keeperDAOBD->UpdateKeeperBook($idKeeperBook);
+                        $idKeeperBook = $book->getIdKeeperBook();
+                        $petType = $book->getPetType();
+                        var_dump($petType);
+                        $this->keeperDAOBD->UpdateKeeperBook($idKeeperBook, $petType);
                         // set keeper petType
                         $this->HomeKeeper("&#x2705; Book confirm correctly");  
                     }else{

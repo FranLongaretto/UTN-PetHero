@@ -16,6 +16,7 @@
                     <input type="number" name="idBook" id="idBook" value="<?php echo $book->getId() ?>" hidden>
                     <input type="number" name="idKeeper" id="idKeeper" value="<?php echo $idKeeper ?>" hidden>
                     <input type="number" name="idOwner" id="idOwner" value="<?php echo $frontOwnerBook?>" hidden>
+                    <input type="text" name="petType" id="petType" value="<?php echo $book->getPetType() ?>" hidden>
                     <p id="nameKeeper" class="confirmBook-keeper-item"><?php echo $frontKeeper->getFirstName()." ". $frontKeeper->getLastName() ?></p>   
                   
                 </div>
