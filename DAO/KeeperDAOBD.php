@@ -157,9 +157,10 @@
             try
             {
                 var_dump($petType);
-                $query = "UPDATE ".$this->tableName." k SET petType='" . $petType . "' WHERE k.id='". $idKeeperBook . "';";
+                var_dump($idKeeperBook);
+                $query = "UPDATE ".$this->tableName." k SET typePet='" . $petType . "' WHERE k.id='". $idKeeperBook ."';";
 
-                $query = "UPDATE ".$this->tableName." k SET available='false' WHERE k.id='". $idKeeperBook ."';";
+                //$query = "UPDATE ".$this->tableName." k SET available='false' WHERE k.id='". $idKeeperBook ."';";
 
                 $this->connection = Connection::GetInstance();
 
