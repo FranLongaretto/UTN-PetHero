@@ -313,7 +313,7 @@
             
         }
 
-        public function UpdateBook($idBook,$idKeeperBook)
+        public function UpdateBook($idBook)
         {
             if($idBook != null){
                 $book = $this->bookDAOBD->GetById($idBook);
@@ -331,7 +331,10 @@
                     if($idKeeper != $value && ($bookDateStart >$dateEnd))
                     {
                         $this->bookDAOBD->UpdateBook($idBook);
-                        $this->keeperDAOBD->UpdateKeeperBook($idKeeperBook);
+                        $idKeeperBook = $book->getIdKeeperBook();
+                        $petType = $book->getPetType();
+                        $this->keeperDAOBD->UpdateKeeperBook($idKeeperBook, $petType);
+                        // set keeper petType
                         $this->HomeKeeper("&#x2705; Book confirm correctly");  
                     }else{
                         $this->HomeKeeper("&#10060; Keeper already has a reservation for that date");  

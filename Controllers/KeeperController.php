@@ -92,11 +92,11 @@
             require_once(VIEWS_PATH."add-keeper.php");
         }
 
-        public function Add($size, $typePet, $salary, $available, $dateStart, $dateEnd)
+        public function Add($typePet, $size, $salary, $available, $dateStart, $dateEnd)
         {
             $keeper = new Keeper();
-            $keeper->setSize($size);
             $keeper->setTypePet($typePet);
+            $keeper->setSize($size);
             $keeper->setSalary($salary);
             $keeper->setAvailable($available);
             $keeper->setDateStart($dateStart);
