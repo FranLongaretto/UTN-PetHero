@@ -62,7 +62,7 @@
             require_once(VIEWS_PATH."add-user.php");
         }
 
-        public function Add($email, $password, $role, $firstName, $lastName, $dni, $phoneNumber)
+        public function Add($email, $password, $role, $firstName, $lastName, $dni, $phoneNumber,$keyword)
         {
             /*JSON/
            // $emailCheck= $this->userDAO->GetByEmail($email);
@@ -78,6 +78,7 @@
                 $user->setLastName($lastName);
                 $user->setDni($dni);
                 $user->setPhoneNumber($phoneNumber);
+                $user->setKeyword($keyword);
 
                 $this->userDAOBD->Add($user);
                 $validationUser = ($user != null) && ($user->getPassword() === $password);
@@ -184,13 +185,13 @@
             require_once(VIEWS_PATH."recover.php");
         }
         
-        public function PasswordChange($email,$password) {
+        public function PasswordChange($email,$password, $keyword) {
 
             $userList = $this->userDAOBD->GetAllPDO();
             $user = null;
             foreach ($userList as $key => $value) {
-                if($email === $value->getEmail()){
-                    $user = $this->userDAOBD->Change($email, $password);
+                if($email === $value->getEmail() && $value->getKeyword() == $keyword){
+                    $user = $this->userDAOBD->Change($email, $password, $keyword);
                     $this->Index("Password changed correctly");
                     //require_once(VIEWS_PATH."index.php");
                 } else {
