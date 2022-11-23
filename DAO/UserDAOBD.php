@@ -27,6 +27,7 @@ class UserDAOBD implements IUserDAOBD{
                 $user->setLastName($row["lastName"]);
                 $user->setDni($row["dni"]);
                 $user->setPhoneNumber($row["phoneNumber"]);
+                $user->setKeyword($row["keyword"]);
 
 
                 array_push($userList, $user);
@@ -67,6 +68,7 @@ class UserDAOBD implements IUserDAOBD{
                     $user->setLastName($row["lastName"]);
                     $user->setDni($row["dni"]);
                     $user->setPhoneNumber($row["phoneNumber"]);
+                    $user->setKeyword($row["keyword"]);
 
                     array_push($userList, $user);
                 }
@@ -136,6 +138,7 @@ class UserDAOBD implements IUserDAOBD{
                     $user->setLastName($row["lastName"]);
                     $user->setDni($row["dni"]);
                     $user->setPhoneNumber($row["phoneNumber"]);
+                    $user->setKeyword($row["keyword"]);
 
                     array_push($userList, $user);
                 
@@ -159,7 +162,7 @@ class UserDAOBD implements IUserDAOBD{
             $pass = $_POST["password"];
             $password_crypt= password_hash($pass, PASSWORD_DEFAULT);
 
-            $query = "INSERT INTO ".$this->tableName." (id,email, password, role, firstName, lastName, dni, phoneNumber) VALUES (:id, :email, :password, :role, :firstName, :lastName, :dni, :phoneNumber);";
+            $query = "INSERT INTO ".$this->tableName." (id,email, password, role, firstName, lastName, dni, phoneNumber, keyword) VALUES (:id, :email, :password, :role, :firstName, :lastName, :dni, :phoneNumber, :keyword);";
             
             $parameters["id"] = $user->getId();
             $parameters["email"] = $user->getEmail();
@@ -169,6 +172,7 @@ class UserDAOBD implements IUserDAOBD{
             $parameters["lastName"] = $user->getLastName();
             $parameters["dni"] = $user->getDni();
             $parameters["phoneNumber"] = $user->getPhoneNumber();
+            $parameters["keyword"] = $user->getKeyword();
 
             $this->connection = Connection::GetInstance();
 
@@ -180,15 +184,16 @@ class UserDAOBD implements IUserDAOBD{
         }
     }
 
-    public function Change($email, $password) {
+    public function Change($email, $password, $keyword) {
         try {
-            $query = "UPDATE ".$this->tableName." SET email=:email, password=:password WHERE email=:email;";
+            $query = "UPDATE ".$this->tableName." SET email=:email, password=:password, keyword=:keyword WHERE email=:email;";
             
             $pass = $_POST["password"];
             $password_crypt= password_hash($pass, PASSWORD_DEFAULT);
 
             $parameters['email'] = $email;
             $parameters["password"] = $password_crypt;
+            $parameters['keyword'] = $keyword;
             
     
             $this->connection = Connection::GetInstance();

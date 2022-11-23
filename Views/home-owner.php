@@ -36,7 +36,7 @@
   
     <?php if($frontMessage){?>
       <div class="homeUser__menu--message">
-        <p class="check__message" <?php if(str_contains($frontMessage, 'is Active')){ ?> style="color:red;" <?php } ?> >
+        <p class="check__message" <?php if(strstr($frontMessage, 'is')){ ?> style="color:red;" <?php } ?> >
           <?php echo $frontMessage?>
         </p>
       </div>

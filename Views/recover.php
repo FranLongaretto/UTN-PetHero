@@ -9,8 +9,12 @@
                 <input type="email" name="email" value="" class="mainForm__form--input fadeIn second" placeholder="email" required>
 
                 <input type="password" name="password" value="" class="form-control" placeholder="email" required>
+                
+                <input type="text" name="keyword" value="" class="form-control" placeholder="keyword" required>
 
                 <input type="submit" class="mainForm__form--submit fadeIn second" value="Change Pass">
+                
+                
 
                 <a href="<?php echo FRONT_ROOT ?>User/Index" class="fadeIn third">Cancel</a>
             </form>

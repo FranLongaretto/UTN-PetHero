@@ -18,6 +18,7 @@
         <input type="text" id="lastName" class="fadeIn third" name="lastName" placeholder="last name" required>
         <input type="text" id="dni" class="fadeIn third" name="dni" placeholder="dni" required>
         <input type="text" id="phoneNumber" class="fadeIn third" name="phoneNumber" placeholder="phone number" required>
+        <input type="text" id="keyword" name="keyword" value="" class="form-control" placeholder="keyword" required>
         <input type="submit" class="fadeIn fourth" value="Sign Up">
         <a href="<?php echo FRONT_ROOT ?>User/Index" class="fadeIn third">Cancel</a>
         <div>
