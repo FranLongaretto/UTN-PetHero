@@ -45,8 +45,8 @@
             <?php }else{ ?>
                 <a href="<?php echo FRONT_ROOT ?>User/HomeKeeper" class="btn btn-outline-primary">Cancel</a>
             <?php } ?>
-            <input type="button" class="mainForm__form--submit fadeIn second" value="Send Email" onclick="sendEmail()">
         </form>
+        <input type="button" class="mainForm__form--submit fadeIn second" value="Send Email" onclick="sendEmail()">
         
     </div>
 </div>

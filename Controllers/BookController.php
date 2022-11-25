@@ -42,6 +42,7 @@
         {
             require_once(VIEWS_PATH."index.php");
         }
+        
         public function Home($message = "")
         {
             require_once(VIEWS_PATH."home.php");
@@ -72,7 +73,7 @@
             require_once(VIEWS_PATH."startBooking.php");
         }
 
-        public function StartBooking($petsId)
+        public function StartBooking($petsId = null)
         {
             $arrayPets = [];
             $catTrue = false;
@@ -81,6 +82,7 @@
             // $firstId = $petsId[array_key_first($petsId)];
             // $sizeType = $this->petDAOBD->GetById($firstId)->getSize();
             $sizeType = 'small';
+
             if($petsId != null){
                 foreach ($petsId as $key => $value) {
                     $pet = $this->petDAOBD->GetById($value);
@@ -105,7 +107,7 @@
                     $this->keeperController->ShowListView();
                 }
             }else{
-                require_once(VIEWS_PATH."home-keeper.php");
+                $this->ShowStartBooking("Debe seleccionar al menos una mascota");
             }
         }
 
@@ -256,14 +258,19 @@
         {
             //var_dump($idBook);
             $book = $this->bookDAOBD->GetById($idBook);
-            $idKeeper =$book->getIdKeeper();
-            $keeper = $this->keeperDAOBD->GetById($idKeeper);
-            $idKeeperBook= $this->keeperDAOBD->GetById($book->getIdKeeperBook());
+            // $idKeeper = $book->getIdKeeper();
+            // $keeper = $this->userDAOBD->GetById($idKeeper); 
+
+            //Ger te comente las dos lineas de arriba porque veo que no estas usando ninguna de las dos:
+            //Ademas en la linea 261 habias puesto "keeperDAOBD" y tendria que ser "userDAOBD" porque
+            //le estas pasando el id del User keeper, no de la disponibilidad del keeper.
+
+            $idKeeperBook = $this->keeperDAOBD->GetById($book->getIdKeeperBook());
 
             if($book)
             {
-                
-                $pet= $idKeeperBook->getTypePet();
+                $petType = $idKeeperBook->getTypePet();
+                $petSize = $idKeeperBook->getsize();
                 $frontOwnerBook = $book->getIdOwner();
                 $userEmail= $this->userDAOBD->GetById($frontOwnerBook)->getEmail();
                 $frontKeeper = $_SESSION["loggedUser"];
@@ -277,7 +284,7 @@
             }
         }
 
-        public function Add($idKeeper, $idOwner, $idKeeperBook, $petType, $petSize, $dateStart, $dateEnd, $bookPrice)
+        public function Add($idKeeper, $idOwner, $idKeeperBook, $petType, $petSize, $dateStart, $dateEnd, $bookPrice, $emailOwner)
         {
             $book = new Book();
             $book->setIdKeeper($idKeeper);
@@ -313,13 +320,17 @@
             
         }
 
-        public function UpdateBook($idBook)
+        public function UpdateBook($idBook, $idKeeper, $idOwner, $petType, $dateStart, $dateEnd, $emailOwner)
         {
             if($idBook != null){
                 $book = $this->bookDAOBD->GetById($idBook);
                 
-                $idKeeper =$book->getIdKeeper();
-               
+                // $idKeeper =$book->getIdKeeper();
+
+                //Ger te comente la linea de arriba porque ya lo estas trayendo del form (llega por parametros.)
+                //Todos los input que tengas dentro de un form van a viajar por post(en este caso a esta funcion UpdateBook)
+                //Vi que quisite poner inputs con "id" para que con JS los captures con getElementById().
+
                 $idByBook= $this->bookDAOBD->GetBookByKeeper($idKeeper);
                 $bookDateStart= $book->getDateStart();
                 $bookDateEnd= $book->getDateEnd();
@@ -332,7 +343,7 @@
                     {
                         $this->bookDAOBD->UpdateBook($idBook);
                         $idKeeperBook = $book->getIdKeeperBook();
-                        $petType = $book->getPetType();
+                        // $petType = $book->getPetType();
                         $this->keeperDAOBD->UpdateKeeperBook($idKeeperBook, $petType);
                         // set keeper petType
                         $this->HomeKeeper("&#x2705; Book confirm correctly");  
@@ -346,9 +357,9 @@
                 $this->HomeKeeper("Confirm error, please try again");
             }
         }
-        public function ConfirmPayment($idBook)
+
+        public function ConfirmPayment($idBook, $idKeeper, $idOwner, $idKeeperBook, $petType, $petSize , $dateStart, $dateEnd, $bookPrice)
         {
-            
             if($idBook != null){
                 $book = $this->bookDAOBD->GetById($idBook);
                 $this->bookDAOBD->PaymentBook($idBook);

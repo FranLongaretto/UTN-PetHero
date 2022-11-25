@@ -63,7 +63,7 @@
             $userRole = $_SESSION["loggedUser"]->getRole();
 
             $userList = $this->chatDAOBD->GetAllByUserPDO($userId);
-
+            
             $chatListFront = [];
             $searchUser = null;
             

@@ -52,9 +52,8 @@
                                         $difference = $datetime2 - $datetime1;
                                         // 1 day = 24 hours
                                         // 24 * 60 * 60 = 86400 seconds
-                                        $result = abs(round($difference / 86400));
+                                        $result = abs(round($difference / 86400)) + 1; //Más un dia porque si la diferencia es cero (un dia) te pone 0 y no hay costo
                                         echo $result;
-                                        
                                     ?>
                                 </td>    
                                 <td>
