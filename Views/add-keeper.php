@@ -7,7 +7,7 @@
   <div class="mainForm__container">
     <!-- Form -->
     <form action="<?php echo FRONT_ROOT?>Keeper/Add" method="POST" enctype="multipart/form-data" class="mainForm__form">
-      <h2 class="mainForm__form--title">ADD KEEPER</h2>
+      <h2 class="mainForm__form--title">ADD AVAILABILITY</h2>
 
       <!-- <select class="mainForm__form--select fadeIn second" name="typePet" id="typePet" required>
         <option disabled selected>Select Pet type</option>
@@ -27,7 +27,7 @@
       <input type="number" id="salary" class="mainForm__form--input fadeIn second" name="salary" placeholder="Salary per day $" min="0" oninput="validity.valid||(value='');" required>
       
       <select class="mainForm__form--input fadeIn third" name="available" id="available" required>
-        <option disabled selected>Select Availability</option>
+        <option disabled selected>Select Status</option>
         <option value="true">Available</option>
         <option value="false">Not Available</option>
       </select>
@@ -42,7 +42,7 @@
       </div>
 
       <div class="formSend">
-        <input type="submit"  class="mainForm__form--submit fadeIn third" value="Add Keeper">
+        <input type="submit"  class="mainForm__form--submit fadeIn third" value="Add availability">
         <a href="<?php echo FRONT_ROOT ?>User/HomeKeeper" class="fadeIn third">Cancel</a>
       </div>
       </form>

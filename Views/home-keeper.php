@@ -11,7 +11,7 @@
 
   <div class="homeUser__menu">
     <div class="homeUser__menu--item">
-      <a href="<?php echo FRONT_ROOT?>Keeper/RegistrationKeeper">Add Keeper</a>
+      <a href="<?php echo FRONT_ROOT?>Keeper/RegistrationKeeper">Add availability</a>
     </div>
     <div class="homeUser__menu--item">
       <a  href="<?php echo FRONT_ROOT."Book/ShowListViewKeeper" ?>">Pending Bookings</a>

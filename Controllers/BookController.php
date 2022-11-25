@@ -314,13 +314,17 @@
             
         }
 
-        public function UpdateBook($idBook)
+        public function UpdateBook($idBook, $idKeeper, $idOwner, $petType, $dateStart, $dateEnd, $emailOwner)
         {
             if($idBook != null){
                 $book = $this->bookDAOBD->GetById($idBook);
                 
-                $idKeeper =$book->getIdKeeper();
-                //Ger te dejo un comment aca porque creo que rompe el $idKeeper de arriba (creo que porque es null)
+                // $idKeeper =$book->getIdKeeper();
+
+                //Ger te comente la linea de arriba porque ya lo estas trayendo del form (llega por parametros.)
+                //Todos los input que tengas dentro de un form van a viajar por post(en este caso a esta funcion UpdateBook)
+                //Vi que quisite poner inputs con "id" para que con JS los captures con getElementById().
+
                 $idByBook= $this->bookDAOBD->GetBookByKeeper($idKeeper);
                 $bookDateStart= $book->getDateStart();
                 $bookDateEnd= $book->getDateEnd();
@@ -333,7 +337,7 @@
                     {
                         $this->bookDAOBD->UpdateBook($idBook);
                         $idKeeperBook = $book->getIdKeeperBook();
-                        $petType = $book->getPetType();
+                        // $petType = $book->getPetType();
                         $this->keeperDAOBD->UpdateKeeperBook($idKeeperBook, $petType);
                         // set keeper petType
                         $this->HomeKeeper("&#x2705; Book confirm correctly");  
