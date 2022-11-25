@@ -225,5 +225,28 @@ class UserDAOBD implements IUserDAOBD{
             throw $ex;
         }
     }
+
+
+    public function Modify($id,$email, $password, $role, $firstName, $lastName, $dni, $phoneNumber,$keyword) {
+        try {
+
+            $query = "UPDATE ".$this->tableName." SET email=:email, password=:password,role=:role, firstName=:firstName , lastName=:lastName, dni=:dni, phoneNumber=:phoneNumber, keyword=:keyword WHERE id=:id;";
+            $parameters['id'] = $id;
+            $parameters['email'] = $email;
+            $password_crypt= password_hash($password, PASSWORD_DEFAULT);
+            $parameters['password'] = $password_crypt;
+            $parameters['role'] = $role;
+            $parameters['firstName'] = $firstName;
+            $parameters['lastName'] = $lastName;
+            $parameters['dni'] = $dni;
+            $parameters['phoneNumber'] = $phoneNumber;
+            $parameters['keyword'] = $keyword;
+
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters);
+        } catch(Exception $ex) {
+            throw $ex;
+        }
+    }
 }
 ?>

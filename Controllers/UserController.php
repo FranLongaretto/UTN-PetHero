@@ -52,8 +52,9 @@
             require_once(VIEWS_PATH."user-list.php");
         }
 
-        public function ShowModifyView($id) {
-            $user = $this->userDAO->GetById($id);
+        public function ShowModifyView($message = "") {
+            $frontMessage = $message;
+            //$user = $this->userDAOBD->GetById($id);
             require_once(VIEWS_PATH."modify-user.php");
         }
 
@@ -101,18 +102,30 @@
 
         }
 
-        public function Modify($email, $password, $id)
+        public function Modify($email, $password, $role, $firstName, $lastName, $dni, $phoneNumber,$keyword)
         {
-            require_once(VIEWS_PATH."validate-session.php");
-
             $user = new User();
-            $user->setId($id);
             $user->setEmail($email);
             $user->setPassword($password);
+            $user->setRole($role);
+            $user->setFirstName($firstName);
+            $user->setLastName($lastName);
+            $user->setDni($dni);
+            $user->setPhoneNumber($phoneNumber);
+            $user->setKeyword($keyword);
+           
+            $id=$_SESSION["loggedUser"]->getId();
+            $this->userDAOBD->Modify($id,$email, $password, $role, $firstName, $lastName, $dni, $phoneNumber,$keyword);
 
-            $this->userDAO->Modify($user);
+            //$validationUser = ($user != null) && ($user->getPassword() === $password);
+            $validationRolKeeper= ($user->getRole() === "Keeper");
+            $validationRolOwner= ($user->getRole() === "Owner");
 
-            $this->ShowListView();
+            if($validationRolKeeper){
+                $this->HomeKeeper("&#x2705; User edit correctly");
+            }else if($validationRolOwner){
+                $this->HomeOwner("&#x2705; User edit correctly");
+            }
         }
 
         public function Delete($id)
@@ -135,7 +148,6 @@
                 // descryp password
                 // $hash = $user->getPassword();
                 // $verify = password_verify($password, $hash);
-
                 if($user != null){
                     $validationRolKeeper = ($user->getRole() === "Keeper");
                     $_SESSION["loggedUser"] = $user;
