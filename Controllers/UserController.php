@@ -203,20 +203,24 @@
             require_once(VIEWS_PATH."recover.php");
         }
         
-        public function PasswordChange($email,$password, $keyword) {
+        public function PasswordChange($email, $password, $keyword) {
 
             $userList = $this->userDAOBD->GetAllPDO();
             $user = null;
+            $flag = false;
+            $message = '';
             foreach ($userList as $key => $value) {
                 if($email === $value->getEmail() && $value->getKeyword() == $keyword){
                     $user = $this->userDAOBD->Change($email, $password, $keyword);
-                    $this->Index("Password changed correctly");
-                    //require_once(VIEWS_PATH."index.php");
+
+                    $flag = true;
+                    $message = "Password changed correctly";
+                    break;
                 } else {
-                    $this->Index("Something Wrong!");
-                    //require_once(VIEWS_PATH."index.php");
+                    $message = "Something Wrong!";
                 }                
             }
+            $this->Index($message);
         }    
         public function ShowAllKeepersAvailables($message = ""){
             $keeperList = $this->userDAOBD->GetKeepersAvailablePDO();
