@@ -257,14 +257,19 @@
         {
             //var_dump($idBook);
             $book = $this->bookDAOBD->GetById($idBook);
-            $idKeeper =$book->getIdKeeper();
-            $keeper = $this->keeperDAOBD->GetById($idKeeper);
-            $idKeeperBook= $this->keeperDAOBD->GetById($book->getIdKeeperBook());
+            // $idKeeper = $book->getIdKeeper();
+            // $keeper = $this->userDAOBD->GetById($idKeeper); 
+
+            //Ger te comente las dos lineas de arriba porque veo que no estas usando ninguna de las dos:
+            //Ademas en la linea 261 habias puesto "keeperDAOBD" y tendria que ser "userDAOBD" porque
+            //le estas pasando el id del User keeper, no de la disponibilidad del keeper.
+
+            $idKeeperBook = $this->keeperDAOBD->GetById($book->getIdKeeperBook());
 
             if($book)
             {
-                
-                $pet= $idKeeperBook->getTypePet();
+                $petType = $idKeeperBook->getTypePet();
+                $petSize = $idKeeperBook->getsize();
                 $frontOwnerBook = $book->getIdOwner();
                 $userEmail= $this->userDAOBD->GetById($frontOwnerBook)->getEmail();
                 $frontKeeper = $_SESSION["loggedUser"];
@@ -351,9 +356,8 @@
                 $this->HomeKeeper("Confirm error, please try again");
             }
         }
-        public function ConfirmPayment($idBook)
+        public function ConfirmPayment($idBook, $idKeeper, $idOwner, $idKeeperBook, $petType, $petSize , $dateStart, $dateEnd, $bookPrice)
         {
-            
             if($idBook != null){
                 $book = $this->bookDAOBD->GetById($idBook);
                 $this->bookDAOBD->PaymentBook($idBook);
