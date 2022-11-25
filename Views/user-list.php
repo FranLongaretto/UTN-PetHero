@@ -28,7 +28,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><?php echo strtolower($user->getEmail()) ?></td>
+                            <td style="text-transform: lowercase;" ><?php echo strtolower($user->getEmail()) ?></td>
                             <td><?php echo $user->getRole() ?></td>
                             <td><?php echo $user->getFirstName() ?></td>
                             <td><?php echo $user->getLastName() ?></td>
