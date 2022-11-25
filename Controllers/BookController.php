@@ -72,7 +72,7 @@
             require_once(VIEWS_PATH."startBooking.php");
         }
 
-        public function StartBooking($petsId)
+        public function StartBooking($petsId = null)
         {
             $arrayPets = [];
             $catTrue = false;
@@ -81,6 +81,7 @@
             // $firstId = $petsId[array_key_first($petsId)];
             // $sizeType = $this->petDAOBD->GetById($firstId)->getSize();
             $sizeType = 'small';
+
             if($petsId != null){
                 foreach ($petsId as $key => $value) {
                     $pet = $this->petDAOBD->GetById($value);
@@ -105,7 +106,7 @@
                     $this->keeperController->ShowListView();
                 }
             }else{
-                require_once(VIEWS_PATH."home-keeper.php");
+                $this->ShowStartBooking("Debe seleccionar al menos una mascota");
             }
         }
 
@@ -277,7 +278,7 @@
             }
         }
 
-        public function Add($idKeeper, $idOwner, $idKeeperBook, $petType, $petSize, $dateStart, $dateEnd, $bookPrice)
+        public function Add($idKeeper, $idOwner, $idKeeperBook, $petType, $petSize, $dateStart, $dateEnd, $bookPrice, $emailOwner)
         {
             $book = new Book();
             $book->setIdKeeper($idKeeper);
@@ -319,7 +320,7 @@
                 $book = $this->bookDAOBD->GetById($idBook);
                 
                 $idKeeper =$book->getIdKeeper();
-               
+                //Ger te dejo un comment aca porque creo que rompe el $idKeeper de arriba (creo que porque es null)
                 $idByBook= $this->bookDAOBD->GetBookByKeeper($idKeeper);
                 $bookDateStart= $book->getDateStart();
                 $bookDateEnd= $book->getDateEnd();
