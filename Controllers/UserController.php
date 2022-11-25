@@ -52,6 +52,12 @@
             require_once(VIEWS_PATH."user-list.php");
         }
 
+        public function ShowMyListView($id)
+        {
+            $user = $this->userDAOBD->GetById($id);
+            require_once(VIEWS_PATH."user-list.php");
+        }
+
         public function ShowModifyView($message = "") {
             $frontMessage = $message;
             //$user = $this->userDAOBD->GetById($id);
