@@ -68,5 +68,15 @@
         "lastName": "lopez",
         "dni": "34344343",
         "phoneNumber": "2223322"
+    },
+    {
+        "id": null,
+        "email": "fran@gmail.com",
+        "password": "123456",
+        "role": "Keeper",
+        "firstName": "franco",
+        "lastName": "logaretto",
+        "dni": "12345678",
+        "phoneNumber": "111212"
     }
 ]
