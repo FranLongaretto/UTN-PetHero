@@ -42,6 +42,7 @@
         {
             require_once(VIEWS_PATH."index.php");
         }
+        
         public function Home($message = "")
         {
             require_once(VIEWS_PATH."home.php");
@@ -356,6 +357,7 @@
                 $this->HomeKeeper("Confirm error, please try again");
             }
         }
+
         public function ConfirmPayment($idBook, $idKeeper, $idOwner, $idKeeperBook, $petType, $petSize , $dateStart, $dateEnd, $bookPrice)
         {
             if($idBook != null){
