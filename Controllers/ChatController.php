@@ -90,16 +90,35 @@
         {
             $ownerId = $_SESSION["loggedUser"]->getId();
             $validateChat = false;
+            $int_value = intval( $keeperId );
 
-            if($keeperId){
-                $validateChat = $this->chatDAOBD->ValidateChat($ownerId, $keeperId);
+            if($int_value){
+                $validateChat = $this->chatDAOBD->ValidateChat($ownerId, $int_value);
                 if($validateChat){
                     $chat = new Chat();
                     $chat->setOwner($ownerId);
                     $chat->setKeeper($keeperId);
         
                     $this->chatDAOBD->Add($chat);
-                    $this->ShowChat();
+
+                    $chat = $this->chatDAOBD->getChatOwnerKeeper($ownerId, $int_value);
+
+                    $messageList = $this->messageController->GetAllMessageByChatId($chat->getId());
+                    $frontMessage = null;
+                    
+                    $idOwner = $chat->getOwner();
+                    $idKeeper = $chat->getKeeper();
+                    $ownerChat = $this->userController->GetUserById($idOwner);
+                    $keeperChat = $this->userController->GetUserById($idKeeper);
+
+                    $chatEmi = $_SESSION["loggedUser"]->getId() == $idOwner ? $ownerChat : $keeperChat;
+                    $chatDest = $_SESSION["loggedUser"]->getId() == $idOwner ? $keeperChat : $ownerChat;
+                    
+                    if(!$messageList){
+                        $frontMessage = "Empiece la conversación";
+                    }
+
+                    require_once(VIEWS_PATH."chat.php");
                 }else{
                     $this->HomeOwner("Chat with keeper is Active\nGo to 'Show My Chats'");
                 }

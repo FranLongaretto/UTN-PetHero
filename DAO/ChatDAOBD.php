@@ -84,14 +84,11 @@ class ChatDAOBD implements IChatDAOBD{
         try{
             $chatList = array();
 
-            $query = "SELECT * FROM ".$this->tableName." c WHERE c.owner=:owner AND c.keeper=:keeper;";
-
-            $parameters['owner'] = $owner;
-            $parameters['keeper'] = $keeper;
+            $query = "SELECT * FROM ".$this->tableName." c WHERE c.owner='".$owner."' AND c.keeper='".$keeper."';";
 
             $this->connection = Connection::GetInstance();
 
-            $resultSet = $this->connection->Execute($query, $parameters);
+            $resultSet = $this->connection->Execute($query);
             
             foreach ($resultSet as $row)
             {      
@@ -102,8 +99,35 @@ class ChatDAOBD implements IChatDAOBD{
 
                 array_push($chatList, $chat);
             }
+            
+            return (count($chatList) > 0) ? false : true;
 
-            return (count($chatList) > 0) ? true : false;
+        }catch (\PDOException $ex){
+            throw $ex;
+        }
+    }
+
+    public function getChatOwnerKeeper($owner, $keeper) {
+        try{
+            $chatList = array();
+
+            $query = "SELECT * FROM ".$this->tableName." c WHERE c.owner='".$owner."' AND c.keeper='".$keeper."';";
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+            
+            foreach ($resultSet as $row)
+            {      
+                $chat = new Chat();
+                $chat->setId($row["id"]);
+                $chat->setOwner($row["owner"]);
+                $chat->setKeeper($row["keeper"]);
+
+                array_push($chatList, $chat);
+            }
+            
+            return (count($chatList) > 0) ? $chatList[0] : null;
 
         }catch (\PDOException $ex){
             throw $ex;
