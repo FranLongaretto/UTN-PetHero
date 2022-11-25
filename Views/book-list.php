@@ -50,8 +50,11 @@
                             <td><?php echo $book->getStatus() ?></td>
                             <td><?php echo $book->getPayed() ?></td>
                             <?php if($book->getPayed() != "payed"){?>
+                            <?php if($book->getStatus() != "pending"){?>
                             <td><a  href="<?php echo FRONT_ROOT."Book/PaymentReservation/".$book->getId() ?>">Pay</a></td>
                             <?php }else{ ?>
+                            <td style="color: #ff5959;font-weight: 500;">Wait confirmation</td>
+                            <?php }}else{ ?>
                                 <td style="color: #0eb30e;font-weight: bold;">Confirmed</td>
                             <?php } ?>
                         </tr>
